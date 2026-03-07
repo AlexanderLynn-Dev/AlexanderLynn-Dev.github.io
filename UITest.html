@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander Lynn - UI Test Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('Portfolio.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #374151;
+            overflow-y: scroll;
+        }
+
+        .project-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 1.20rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-down {
+            animation: fadeInDown 1s ease-out forwards;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            border-bottom-left-radius: 1.25rem;
+            border-bottom-right-radius: 1.25rem;
+        }
+        .navbar-link {
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 1.35rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .navbar-link:hover {
+            background-color: #e2e8f0;
+            color: #2d3748;
+            font-size: 1.35rem;
+        }
+        .navbar-link.active {
+            background: linear-gradient(to right, #4649ff, #3352ff);
+            color: white;
+            font-size: 1.35rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-table {
+            width: 100%;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border-collapse: separate;
+            border-spacing: 0 1rem;
+        }
+        .info-table td {
+            padding: 1rem 0;
+        }
+        .info-label {
+            font-weight: 700;
+            color: #1f2937;
+            width: 30%;
+            font-size: 1.3rem;
+        }
+        .info-value {
+            color: #374151;
+            font-weight: 500;
+            width: 70%;
+            font-size: 1.3rem;
+        }
+
+        /* Fullscreen Overlay Styles */
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 5000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fullscreen-content {
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fullscreen-content img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100vh;
+            object-fit: contain;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 5001;
+            padding: 10px;
+            line-height: 1;
+        }
+
+        .ui-carousel-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background-color: #000;
+        }
+
+        .ui-carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            background-color: #000;
+        }
+        .ui-carousel-slide.active {
+            display: block;
+            opacity: 1;
+        }
+        .ui-carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 0.75rem;
+            cursor: pointer;
+        }
+
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.75rem 0.5rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 10;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .carousel-nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .carousel-nav-btn.prev {
+            left: 0.5rem;
+        }
+        .carousel-nav-btn.next {
+            right: 0.5rem;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .carousel-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen()">
+        <span class="close-btn" onclick="closeFullscreen()">&times;</span>
+        <div id="fullscreenContent" class="fullscreen-content">
+            <img id="fullscreenImage" src="" alt="Full Screen Image">
+        </div>
+    </div>
+
+    <div class="min-h-screen flex flex-col items-center py-24 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
+
+        <nav class="navbar w-full py-4 px-6 flex justify-center">
+            <div class="flex space-x-6">
+                <a href="index.html" class="navbar-link active">Work</a>
+                <a href="about.html" class="navbar-link">About</a>
+            </div>
+        </nav>
+
+        <header class="w-full flex flex-col items-center">
+            <div class="text-center mb-12 w-full max-w-4xl animate-fade-in-down mt-32">
+                <h1 class="text-5xl font-extrabold text-gray-900 mb-4">UI Test Project</h1>
+            </div>
+
+            <div class="w-full mb-24 max-w-4xl">
+                <img src="UI test/Live_Main_Menu_Background.webp" alt="UI Test Project" class="w-full h-auto rounded-xl shadow-lg cursor-pointer" onclick="openFullscreen(this.src)">
+            </div>
+
+            <div class="w-full max-w-2xl mx-auto mb-32 project-card p-10">
+                <table class="info-table">
+                    <tr>
+                        <td class="info-label">Role:</td>
+                        <td class="info-value">UI Designer, Programmer</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Duration:</td>
+                        <td class="info-value">5 Hours (Iteration 1)</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Engine:</td>
+                        <td class="info-value">Unreal Engine 5 (CommonUI)</td>
+                    </tr>
+                </table>
+
+                <p class="text-xl text-gray-700 leading-relaxed mx-auto text-left mb-8">
+                    This is the first iteration of my UI Test Project, in which I will be learning more about CommonUI in Unreal Engine 5, creating a dynamic user interface for my game. Here is what I accomplished in my first 5 hours:
+                </p>
+                <ul class="list-disc list-inside space-y-2 text-lg text-gray-700 leading-relaxed mb-8 ml-4">
+                    <li>Live Main Menu Background</li>
+                    <li>Pause Menu</li>
+                    <li>Quit Game pop up with back input action functionality</li>
+                    <li>Credits Menu</li>
+                    <li>Dynamic context menu banner that switches button icons based on current input</li>
+                    <li>KBM and Controller compatibility</li>
+                    <li>Custom Mouse Cursor Design</li>
+                    <li>Dynamic Menu transitions</li>
+                    <li>Custom Button Designs with Animations</li>
+                    <li>Appropriate UI SFX for selection</li>
+                </ul>
+                <p class="text-xl text-gray-700 leading-relaxed mx-auto text-left">
+                    Next iteration will have a number of updates, including tab switching and a working settings menu. Stay tuned for more.
+                </p>
+            </div>
+
+            <div class="w-full max-w-4xl mx-auto mb-32">
+                <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">UI Test Showcase</h3>
+                <div class="relative pt-[56.25%] w-full h-0">
+                    <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
+                        src="https://www.youtube.com/embed/zPIzrqLsuKs?si=ug_tmp0LCE_hrotr" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+        </header>
+
+        <main class="w-full max-w-5xl">
+            <section id="ui-gallery-section" class="mb-32">
+                <div class="project-card p-12 flex flex-col items-center">
+                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">UI Gallery</h2>
+                    
+                    <div class="w-full max-w-4xl mx-auto mb-12">
+                        <div id="ui-carousel" class="ui-carousel-container mx-auto">
+                            <div class="ui-carousel-slide active" data-index="0" data-caption="Live Main Menu Background">
+                                <img src="UI test/Live_Main_Menu_Background.webp" alt="Live Main Menu Background" onclick="openFullscreen(this.src)">
+                            </div>
+                            <div class="ui-carousel-slide" data-index="1" data-caption="Pause Menu">
+                                <img src="UI test/Pause_Menu.webp" alt="Pause Menu" onclick="openFullscreen(this.src)">
+                            </div>
+                            <div class="ui-carousel-slide" data-index="2" data-caption="Quit Game Pop Up">
+                                <img src="UI test/Quit_Game_Pop_Up.webp" alt="Quit Game Pop Up" onclick="openFullscreen(this.src)">
+                            </div>
+                            <div class="ui-carousel-slide" data-index="3" data-caption="Credits Menu">
+                                <img src="UI test/Credits_menu.webp" alt="Credits Menu" onclick="openFullscreen(this.src)">
+                            </div>
+                            <div class="ui-carousel-slide" data-index="4" data-caption="KBM Banner">
+                                <img src="UI test/KBM_Banner.webp" alt="KBM Banner" onclick="openFullscreen(this.src)">
+                            </div>
+                            <div class="ui-carousel-slide" data-index="5" data-caption="Xbox Banner">
+                                <img src="UI test/Xbox_Banner.webp" alt="Xbox Banner" onclick="openFullscreen(this.src)">
+                            </div>
+                            <div class="ui-carousel-slide" data-index="6" data-caption="Custom Mouse Cursor">
+                                <img src="UI test/Custom_Mouse_Cursor.webp" alt="Custom Mouse Cursor" onclick="openFullscreen(this.src)">
+                            </div>
+                            <div class="ui-carousel-slide" data-index="7" data-caption="Common Button Bases">
+                                <img src="UI test/Common_Button_Bases.webp" alt="Common Button Bases" onclick="openFullscreen(this.src)">
+                            </div>
+                            <button class="carousel-nav-btn prev" onclick="prevSlide('ui-carousel')">&#10094;</button>
+                            <button class="carousel-nav-btn next" onclick="nextSlide('ui-carousel')">&#10095;</button>
+                            <div class="carousel-dots" id="ui-dots">
+                                <span class="carousel-dot active" onclick="currentSlide('ui-carousel', 0)"></span>
+                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 1)"></span>
+                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 2)"></span>
+                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 3)"></span>
+                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 4)"></span>
+                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 5)"></span>
+                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 6)"></span>
+                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 7)"></span>
+                            </div>
+                        </div>
+                        <div id="ui-carousel-caption" class="text-center mt-4 text-2xl font-bold text-gray-800">
+                            Live Main Menu Background
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-24 text-center text-gray-600 text-sm" style="color:rgba(0, 0, 0, 1)">
+            <p>&copy; 2025 Alexander Lynn. All rights reserved.</p>
+            <p>Technical Designer, University of Central Florida</p>
+        </footer>
+    </div>
+
+    <script>
+        const slideIndices = {
+            'ui-carousel': 0
+        };
+
+        function showSlide(carouselId, n) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+
+            const slides = carousel.getElementsByClassName('ui-carousel-slide');
+            const dotContainerId = carouselId.replace('-carousel', '-dots');
+            const dotContainer = document.getElementById(dotContainerId);
+            const dots = dotContainer ? dotContainer.getElementsByClassName('carousel-dot') : [];
+            const totalSlides = slides.length;
+
+            if (totalSlides === 0) return;
+
+            if (n >= totalSlides) {
+                slideIndices[carouselId] = 0;
+            } else if (n < 0) {
+                slideIndices[carouselId] = totalSlides - 1;
+            } else {
+                slideIndices[carouselId] = n;
+            }
+
+            for (let i = 0; i < totalSlides; i++) {
+                slides[i].classList.remove('active');
+                if (dots.length > i) {
+                    dots[i].classList.remove('active');
+                }
+            }
+
+            slides[slideIndices[carouselId]].classList.add('active');
+            if (dots.length > slideIndices[carouselId]) {
+                dots[slideIndices[carouselId]].classList.add('active');
+            }
+
+            // Update caption
+            const caption = document.getElementById('ui-carousel-caption');
+            if (caption) {
+                const currentSlide = slides[slideIndices[carouselId]];
+                caption.innerText = currentSlide.getAttribute('data-caption');
+            }
+        }
+
+        function nextSlide(carouselId) {
+            showSlide(carouselId, slideIndices[carouselId] + 1);
+        }
+
+        function prevSlide(carouselId) {
+            showSlide(carouselId, slideIndices[carouselId] - 1);
+        }
+
+        function currentSlide(carouselId, n) {
+            showSlide(carouselId, n);
+        }
+
+        function openFullscreen(imageSrc) {
+            document.getElementById('fullscreenImage').src = imageSrc;
+            document.getElementById('fullscreenOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFullscreen() {
+            document.getElementById('fullscreenOverlay').style.display = 'none';
+            document.body.style.overflow = 'scroll';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                closeFullscreen();
+            }
+        });
+
+        window.onload = function() {
+            showSlide('ui-carousel', 0);
+        };
+    </script>
+</body>
+</html>
