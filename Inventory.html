@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander Lynn - Inventory System Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('Portfolio.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #374151;
+            overflow-y: scroll;
+        }
+
+        .project-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 1.2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            border-bottom-left-radius: 1.25rem;
+            border-bottom-right-radius: 1.25rem;
+        }
+        .navbar-link {
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 1.35rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .navbar-link:hover {
+            background-color: #e2e8f0;
+            color: #2d3748;
+        }
+        .navbar-link.active {
+            background: linear-gradient(to right, #4649ff, #3352ff);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-table {
+            width: 100%;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            border-collapse: separate;
+            border-spacing: 0 0.85rem;
+        }
+        .info-table td {
+            padding: 0.65rem 0;
+            vertical-align: top;
+        }
+        .info-label {
+            font-weight: 700;
+            color: #1f2937;
+            width: 30%;
+            font-size: 1.2rem;
+        }
+        .info-value {
+            color: #374151;
+            font-weight: 500;
+            width: 70%;
+            font-size: 1.2rem;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.75rem 0.6rem;
+            cursor: pointer;
+            font-size: 1.4rem;
+            z-index: 10;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease;
+        }
+        .carousel-nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .carousel-nav-btn.prev {
+            left: 0.75rem;
+        }
+        .carousel-nav-btn.next {
+            right: 0.75rem;
+        }
+
+        .carousel-caption {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 5000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .fullscreen-content {
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fullscreen-content img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100vh;
+            object-fit: contain;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 5001;
+            padding: 10px;
+            line-height: 1;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+    <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen()">
+        <span class="close-btn" onclick="closeFullscreen()">&times;</span>
+        <div class="fullscreen-content">
+            <img id="fullscreenImage" src="" alt="Full Screen Image">
+        </div>
+    </div>
+
+    <div class="min-h-screen flex flex-col items-center py-24 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
+        <nav class="navbar w-full py-4 px-6 flex justify-center">
+            <div class="flex space-x-6">
+                <a href="index.html" class="navbar-link active">Work</a>
+                <a href="about.html" class="navbar-link">About</a>
+            </div>
+        </nav>
+
+        <header class="w-full flex flex-col items-center mt-20">
+            <div class="w-full mb-12 max-w-4xl">
+                <img src="Inventory/4Item_Hover_Descriptions.webp" alt="Item Hover Descriptions screenshot" class="w-full h-auto rounded-xl shadow-lg cursor-pointer" onclick="openFullscreen(this.src)">
+            </div>
+
+            <div class="w-full max-w-3xl mx-auto mb-20 project-card p-8 sm:p-10">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">Inventory System Project</h1>
+                <table class="info-table">
+                    <tr>
+                        <td class="info-label">Role:</td>
+                        <td class="info-value">Solo Developer</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Engine:</td>
+                        <td class="info-value">Unreal Engine 5</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Focus:</td>
+                        <td class="info-value">RPG-style inventory systems and in-game UI design</td>
+                    </tr>
+                </table>
+
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    For this project, I wanted to learn more about RPG-style inventory systems in Unreal Engine and how to showcase my UI design skills during gameplay, and it ended up being a lot of fun to make. Here is a collection of the systems I have made so far:
+                </p>
+
+                <ul class="list-disc list-inside space-y-2 text-lg text-gray-700 leading-relaxed ml-2">
+                    <li>Player item HUD: Displays player health, stamina, and items.</li>
+                    <li>Interaction system: An interactable widget that enables players to pick up items, open chests, and more.</li>
+                    <li>Pulling up inventory in game: Player can open inventory at any point in game.</li>
+                    <li>Equipping armor, consumables, and ammo: Equipped items show up on player and update in game HUD.</li>
+                    <li>Item hover descriptions: Lists stats for items such as durability, weight, value, and more.</li>
+                    <li>Sorting items: Players can sort items in inventory by either weight or value.</li>
+                    <li>Chest system: Players can open chests and add items to inventory.</li>
+                    <li>Dropping items: Players can remove items from inventory by dropping them.</li>
+                    <li>Reusable button shader material: Made for dynamic button interface for standard, hover, click, and disabled states.</li>
+                    <li>Campfire rest system: A restore point that refills health and creates a checkpoint.</li>
+                    <li>Potion equip and healing: Potions can be equipped and used in game to restore player health.</li>
+                    <li>Bow and arrow system: Players can launch arrows at enemies and deal damage. Headshots are an automatic kill.</li>
+                    <li>Player weight becomes heavier when too many items are in inventory.</li>
+                    <li>Icon design and implementation.</li>
+                    <li>Weapons and items synced with player locomotion.</li>
+                    <li>Archer Enemy AI.</li>
+                </ul>
+            </div>
+
+            <div class="w-full max-w-4xl mx-auto mb-20">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Inventory System Showcase</h2>
+                <div class="relative pt-[56.25%] w-full h-0">
+                    <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl"
+                        src="https://www.youtube.com/embed/toTz3hfITIU?si=cujzI1sSE-EQiagK"
+                        title="Inventory System Showcase"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </header>
+
+        <main class="w-full max-w-5xl">
+            <section class="mb-16">
+                <div class="project-card p-8 sm:p-10">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-indigo-700 mb-8 text-center">Project Gallery</h2>
+                    <div class="carousel-container">
+                        <img id="galleryImage" class="gallery-image" src="Inventory/1In_Game_HUD.webp" alt="In Game HUD" onclick="openFullscreen(this.src)">
+                        <button class="carousel-nav-btn prev" onclick="prevGalleryImage()" aria-label="Previous image">&#10094;</button>
+                        <button class="carousel-nav-btn next" onclick="nextGalleryImage()" aria-label="Next image">&#10095;</button>
+                    </div>
+                    <p id="galleryCaption" class="carousel-caption">In Game HUD</p>
+                    <p id="galleryCounter" class="text-center mt-2 text-gray-600">1 / 12</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-12 text-center text-gray-600 text-sm" style="color: rgba(0, 0, 0, 1)">
+            <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
+            <p>Technical Designer, University of Central Florida</p>
+        </footer>
+    </div>
+
+    <script>
+        const inventoryGallery = [
+            { src: 'Inventory/1In_Game_HUD.webp', label: 'In Game HUD' },
+            { src: 'Inventory/2Interaction_System.webp', label: 'Interaction System' },
+            { src: 'Inventory/3Inventory_Empty.webp', label: 'Inventory Empty' },
+            { src: 'Inventory/4Item_Hover_Descriptions.webp', label: 'Item Hover Descriptions' },
+            { src: 'Inventory/5Armor_Section.webp', label: 'Armor Section' },
+            { src: 'Inventory/6Consumables_Section.webp', label: 'Consumables Section' },
+            { src: 'Inventory/7Ammo_Section.webp', label: 'Ammo Section' },
+            { src: 'Inventory/8Chest_System.webp', label: 'Chest System' },
+            { src: 'Inventory/9Campfire_Rest_System.webp', label: 'Campfire Rest System' },
+            { src: 'Inventory/10Bow_and_Arrow_Targeting.webp', label: 'Bow and Arrow Targeting' },
+            { src: 'Inventory/11Dropped_Items.webp', label: 'Dropped Items' },
+            { src: 'Inventory/12Button_Design_with_Shader_Material.webp', label: 'Button Design with Shader Material' }
+        ];
+        let currentGalleryIndex = 0;
+
+        function renderGalleryImage() {
+            const imageEl = document.getElementById('galleryImage');
+            const captionEl = document.getElementById('galleryCaption');
+            const counterEl = document.getElementById('galleryCounter');
+            const item = inventoryGallery[currentGalleryIndex];
+
+            imageEl.src = item.src;
+            imageEl.alt = item.label;
+            captionEl.textContent = item.label;
+            counterEl.textContent = `${currentGalleryIndex + 1} / ${inventoryGallery.length}`;
+        }
+
+        function nextGalleryImage() {
+            currentGalleryIndex = (currentGalleryIndex + 1) % inventoryGallery.length;
+            renderGalleryImage();
+        }
+
+        function prevGalleryImage() {
+            currentGalleryIndex = (currentGalleryIndex - 1 + inventoryGallery.length) % inventoryGallery.length;
+            renderGalleryImage();
+        }
+
+        function openFullscreen(imageSrc) {
+            document.getElementById('fullscreenImage').src = imageSrc;
+            document.getElementById('fullscreenOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFullscreen() {
+            document.getElementById('fullscreenOverlay').style.display = 'none';
+            document.body.style.overflow = 'scroll';
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+            } else if (e.key === 'ArrowRight') {
+                nextGalleryImage();
+            } else if (e.key === 'ArrowLeft') {
+                prevGalleryImage();
+            }
+        });
+
+        renderGalleryImage();
+    </script>
+</body>
+</html>
