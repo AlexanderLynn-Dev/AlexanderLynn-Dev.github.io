@@ -10,38 +10,16 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: url('Portfolio.jpg');
+            background-color: #f0f4f8;
+            background-image:
+                linear-gradient(rgba(240, 244, 248, 0.88), rgba(240, 244, 248, 0.92)),
+                url('Portfolio.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
             color: #374151;
-        }
-
-        .about-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 1.25rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            padding: 2.5rem;
-        }
-        .about-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fade-in-down {
-            animation: fadeInDown 1s ease-out forwards;
+            min-height: 100vh;
         }
 
         .navbar {
@@ -72,37 +50,492 @@
             color: white;
             font-size: 1.35rem;
         }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-down {
+            animation: fadeInDown 1s ease-out forwards;
+        }
+
+        .timeline {
+            position: relative;
+            --timeline-pad: 2.25rem;
+            --line-width: 3px;
+            --line-x: 0.75rem;
+            --marker-size: 14px;
+            padding-left: var(--timeline-pad);
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: var(--line-x);
+            top: 0.25rem;
+            bottom: 0.25rem;
+            width: var(--line-width);
+            background: linear-gradient(to bottom, #7eb6ea, #5a9bd8);
+            border-radius: 999px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            /* Center marker on vertical rail: rail center minus half marker minus timeline padding */
+            left: calc(var(--line-x) + (var(--line-width) / 2) - (var(--marker-size) / 2) - var(--timeline-pad));
+            top: 1.35rem;
+            width: var(--marker-size);
+            height: var(--marker-size);
+            border-radius: 50%;
+            border: 2px solid #5a9bd8;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(240, 244, 248, 0.95);
+            z-index: 1;
+        }
+
+        .exp-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 1.35rem;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 12px 28px rgba(15, 60, 100, 0.08), 0 4px 10px rgba(15, 60, 100, 0.04);
+        }
+
+        .exp-date {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #3b82c4;
+            margin-bottom: 0.85rem;
+        }
+
+        .exp-card-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .exp-logo {
+            flex: 0 0 auto;
+            width: 56px;
+            height: 56px;
+            border-radius: 0.85rem;
+            object-fit: cover;
+            object-position: center;
+            background: transparent;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        .exp-text-block {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        .exp-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f2744;
+            line-height: 1.25;
+        }
+
+        .exp-company {
+            margin-top: 0.35rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5b6b82;
+        }
+
+        .exp-body {
+            margin-top: 1.1rem;
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: #4b5563;
+        }
+
+        .exp-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            margin-top: 1.35rem;
+        }
+
+        .exp-tag {
+            background-color: #f2f9ff;
+            color: #1e4f79;
+            border: 2px solid #9fcaf1;
+            border-radius: 999px;
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 800;
+            line-height: 1.1;
+            box-shadow: inset 0 0 0 1px rgba(227, 241, 255, 0.95);
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .exp-tag:hover {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+            color: #ffffff;
+            box-shadow: none;
+        }
+
+        .education-section {
+            margin-top: 3.5rem;
+            width: 100%;
+        }
+
+        .education-heading {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: #1e3a8a;
+            margin-bottom: 0.35rem;
+        }
+
+        .education-heading::after {
+            content: '';
+            display: block;
+            width: 3.25rem;
+            height: 4px;
+            margin-top: 0.65rem;
+            border-radius: 999px;
+            background: linear-gradient(to right, #60a5fa, #2563eb);
+        }
+
+        .edu-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 1.25rem;
+            margin-top: 1.75rem;
+            width: 100%;
+        }
+
+        .edu-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 1.25rem;
+            padding: 1.35rem 1.35rem 1.35rem 1.6rem;
+            box-shadow: 0 12px 28px rgba(15, 60, 100, 0.08), 0 4px 10px rgba(15, 60, 100, 0.04);
+            overflow: hidden;
+        }
+
+        .edu-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(to bottom, #60a5fa, #2563eb);
+        }
+
+        .edu-card-inner {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .edu-logo {
+            flex: 0 0 auto;
+            width: 64px;
+            height: 64px;
+            border-radius: 1rem;
+            /* Use "contain" so school marks (like UCF) don't get clipped by the square frame */
+            object-fit: contain;
+            object-position: center;
+            background: transparent;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        .edu-degree {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: #0f2744;
+            line-height: 1.25;
+        }
+
+        .edu-institution {
+            margin-top: 0.35rem;
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .edu-meta {
+            margin-top: 0.35rem;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #3b82c4;
+        }
+
+        @media (max-width: 640px) {
+            .exp-card {
+                padding: 1.35rem 1.25rem;
+            }
+            .timeline {
+                --timeline-pad: 1.85rem;
+            }
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col items-center py-10 px-4 sm:px-6 lg:px-8">
     <nav class="navbar w-full py-4 px-6 flex justify-center">
-        <div class="flex space-x-6">
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4">
             <a href="index.html" class="navbar-link">Projects</a>
             <a href="about.html" class="navbar-link">About</a>
             <a href="experience.html" class="navbar-link active">Experience</a>
         </div>
     </nav>
 
-    <header class="text-center mb-12 w-full max-w-3xl animate-fade-in-down mt-20">
-        <h1 class="text-5xl sm:text-6xl font-extrabold text-gray-900 mb-4 leading-tight tracking-tight">
+    <header class="text-center mb-14 w-full max-w-3xl animate-fade-in-down mt-24">
+        <h1 class="text-5xl sm:text-6xl font-extrabold text-gray-900 mb-3 leading-tight tracking-tight">
             Experience
         </h1>
-        <p class="text-xl sm:text-2xl font-bold" style="color: rgba(0, 0, 0, 1)">
-            Professional work, leadership, and production experience
+        <p class="text-lg sm:text-xl font-semibold text-slate-600">
+            Roles, teams, and impact across game development and media
         </p>
     </header>
 
-    <main class="w-full max-w-4xl">
-        <section class="about-card">
-            <h2 class="text-3xl font-bold text-indigo-700 mb-6 text-center">Experience Overview</h2>
-            <p class="text-lg text-gray-700 leading-relaxed text-center">
-                This page is ready for your experience entries. Add internships, jobs, freelance work,
-                leadership roles, and notable responsibilities here.
-            </p>
+    <main class="w-full max-w-3xl pb-8">
+        <div class="timeline">
+            <article class="timeline-item">
+                <div class="exp-card">
+                    <p class="exp-date">January 2026 — May 2026</p>
+                    <div class="exp-card-top">
+                        <img class="exp-logo" src="Experience/a892449c-6b2b-41ba-bb8e-0ab4e909b721.png" alt="Sentinel Games logo">
+                        <div class="exp-text-block">
+                            <h2 class="exp-title">S.O.R.N. — UI/UX Designer</h2>
+                            <p class="exp-company">Sentinel Games — Orlando, FL</p>
+                        </div>
+                    </div>
+                    <p class="exp-body">
+                        Designed and implemented several interface systems highlighting player agency, dynamic visuals, accessibility, and robust customization that create a seamless, immersive player experience.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="exp-tag">User Experience</span>
+                        <span class="exp-tag">Typography</span>
+                        <span class="exp-tag">Wireframing</span>
+                        <span class="exp-tag">Accessibility</span>
+                        <span class="exp-tag">Marketing</span>
+                        <span class="exp-tag">QA Testing</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-item">
+                <div class="exp-card">
+                    <p class="exp-date">September 2025 — December 2025</p>
+                    <div class="exp-card-top">
+                        <img class="exp-logo" src="Experience/Mighty_Studios_Logo.webp" alt="Mighty Studios logo">
+                        <div class="exp-text-block">
+                            <h2 class="exp-title">David's Mighty Men — Creative Director, Programmer, UI/UX Designer</h2>
+                            <p class="exp-company">Mighty Studios — Orlando, FL</p>
+                        </div>
+                    </div>
+                    <p class="exp-body">
+                        Led a team of six from concept to vertical slice, directing overall vision for a Bible-based hack and slash. I programmed player movement and combat, complete with attack variations, combo chains, and special abilities. Implemented UI elements with PC and controller compatibility, ensuring seamless player interaction. Produced design documentation including GDD, ASG, Gantt Chart, Product Backlog, and Playtesting Report Forms.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Team Leadership</span>
+                        <span class="exp-tag">Technical Documentation</span>
+                        <span class="exp-tag">Motion Capture</span>
+                        <span class="exp-tag">Voice Acting</span>
+                        <span class="exp-tag">Audacity</span>
+                        <span class="exp-tag">Combat Programming</span>
+                        <span class="exp-tag">Visual Design</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-item">
+                <div class="exp-card">
+                    <p class="exp-date">September 2025 — December 2025</p>
+                    <div class="exp-card-top">
+                        <img class="exp-logo" src="Experience/FishCat_Studio_Logo.webp" alt="FishCat Studios logo">
+                        <div class="exp-text-block">
+                            <h2 class="exp-title">Fishy Business — Producer, UI/UX Designer</h2>
+                            <p class="exp-company">FishCat Studios — Orlando, FL</p>
+                        </div>
+                    </div>
+                    <p class="exp-body">
+                        Implemented mobile game UI elements including shop system, HUD and upgrade menus for a fish tower defense app. I achieved touch functionality and made proper dimensions to fit on phone screens, providing player with ease of navigation. Developed design documentation including GDD, ASG, Product Backlog and Team Contract. Created development timeline with 10+ milestones met per department to maintain tight deadlines.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Mobile Game Development</span>
+                        <span class="exp-tag">Layout Design</span>
+                        <span class="exp-tag">User Experience</span>
+                        <span class="exp-tag">Project Management</span>
+                        <span class="exp-tag">Risk Management</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-item">
+                <div class="exp-card">
+                    <p class="exp-date">June 2025 — Present</p>
+                    <div class="exp-card-top">
+                        <img class="exp-logo" src="Experience/beans-and-parm-logo.png" alt="Beans and Parm Studios logo">
+                        <div class="exp-text-block">
+                            <h2 class="exp-title">On Your Feet! — Creative Director, Level Designer</h2>
+                            <p class="exp-company">Beans and Parm Studios — Orlando, FL</p>
+                        </div>
+                    </div>
+                    <p class="exp-body">
+                        Designed soccer-based levels in a 2D platformer with mechanics centered around iconic skills from the sport. Generated engaging puzzles and platforming challenges with a soccer ball twist, driving player engagement. Conducted playtesting sessions with formalized documentation and iterated on feedback. Presented new features per level such as items, enemies, and scoring systems at an appropriate pace that lead to enhanced replayability and mastery of mechanics.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Sports Game Production</span>
+                        <span class="exp-tag">Player Progression</span>
+                        <span class="exp-tag">Level Iteration</span>
+                        <span class="exp-tag">Documentation</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-item">
+                <div class="exp-card">
+                    <p class="exp-date">May 2025 — Present</p>
+                    <div class="exp-card-top">
+                        <img class="exp-logo" src="Experience/AAT_Logo.png" alt="The AAT Project logo">
+                        <div class="exp-text-block">
+                            <h2 class="exp-title">A Thief For Good — Level Designer</h2>
+                            <p class="exp-company">The AAT Project — Internship — Remote</p>
+                        </div>
+                    </div>
+                    <p class="exp-body">
+                        Designed engaging levels for a stealth-based 3D platformer focusing on careful movement, jumping, hiding, and light combat. Levels are centered around navigating environments, collecting items, avoiding damage, and using stealth to accomplish goals.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Whiteboxing</span>
+                        <span class="exp-tag">Encounter Design</span>
+                        <span class="exp-tag">Pacing</span>
+                        <span class="exp-tag">Miro</span>
+                        <span class="exp-tag">Mipui</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-item">
+                <div class="exp-card">
+                    <p class="exp-date">January 2025 — May 2025</p>
+                    <div class="exp-card-top">
+                        <img class="exp-logo" src="Experience/University_Carillon_logo.webp" alt="University Carillon logo">
+                        <div class="exp-text-block">
+                            <h2 class="exp-title">Youth Ministry Staff Member</h2>
+                            <p class="exp-company">University Carillon — Internship — Oviedo, FL</p>
+                        </div>
+                    </div>
+                    <p class="exp-body">
+                        Engaged with middle and high school kids on a weekly basis from all different ages and backgrounds.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Teaching</span>
+                        <span class="exp-tag">Youth Development</span>
+                        <span class="exp-tag">Spiritual Growth</span>
+                        <span class="exp-tag">Event Support</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-item">
+                <div class="exp-card">
+                    <p class="exp-date">August 2024 — Present</p>
+                    <div class="exp-card-top">
+                        <img class="exp-logo" src="Experience/University_Carillon_logo.webp" alt="University Carillon logo">
+                        <div class="exp-text-block">
+                            <h2 class="exp-title">Facilities Worker</h2>
+                            <p class="exp-company">University Carillon — Oviedo, FL</p>
+                        </div>
+                    </div>
+                    <p class="exp-body">
+                        Contributed to set-up for weekly/special events, cleaning event rooms, and organizing inventory.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Event Management</span>
+                        <span class="exp-tag">Maintenance</span>
+                        <span class="exp-tag">Equipment Operation</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-item">
+                <div class="exp-card">
+                    <p class="exp-date">June 2024 — August 2024</p>
+                    <div class="exp-card-top">
+                        <img class="exp-logo" src="Experience/grow_goodness_logo.webp" alt="Grow Goodness LLC logo">
+                        <div class="exp-text-block">
+                            <h2 class="exp-title">Creative Team Member, Assistant</h2>
+                            <p class="exp-company">Grow Goodness LLC — Internship — Oviedo, FL</p>
+                        </div>
+                    </div>
+                    <p class="exp-body">
+                        Collaborated with the creative team to produce multimedia content, including graphics, videos, and creative brand designs. Engaged with online communities and managed social media accounts to enhance brand presence and drive user engagement. Assisted in coordinating and executing digital campaigns, including scheduling posts and managing content calendars. Aided in the creation and management of digital content across various platforms, including social media and web advertisements.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Graphic Design</span>
+                        <span class="exp-tag">Team Collaboration</span>
+                        <span class="exp-tag">Social Media</span>
+                        <span class="exp-tag">Video Editing</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-item">
+                <div class="exp-card">
+                    <p class="exp-date">March 2023 — March 2024</p>
+                    <div class="exp-card-top">
+                        <img class="exp-logo" src="Experience/outback-logo-0.webp" alt="Outback Steakhouse logo">
+                        <div class="exp-text-block">
+                            <h2 class="exp-title">Busser, Host</h2>
+                            <p class="exp-company">Outback Steakhouse — Oviedo, FL</p>
+                        </div>
+                    </div>
+                    <p class="exp-body">
+                        Worked in a fast paced restaurant environment bussing tables, washing plates and silverware, cleaning restrooms, and ushering in new guests.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Food Service</span>
+                        <span class="exp-tag">Teamwork</span>
+                        <span class="exp-tag">Organization</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <section class="education-section" aria-label="Education">
+            <h2 class="education-heading">Education</h2>
+            <div class="edu-grid">
+                <article class="edu-card">
+                    <div class="edu-card-inner">
+                        <img class="edu-logo" src="UCF.png" alt="University of Central Florida logo">
+                        <div>
+                            <h3 class="edu-degree">B.A. Digital Media - Game Design</h3>
+                            <p class="edu-institution">University of Central Florida</p>
+                            <p class="edu-meta">Expected: 2026</p>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
         </section>
     </main>
 
-    <footer class="mt-12 text-center text-gray-600 text-sm" style="color: rgba(0, 0, 0, 1)">
+    <footer class="mt-auto pt-10 pb-6 text-center text-gray-600 text-sm">
         <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
         <p>Technical Designer, University of Central Florida</p>
     </footer>
