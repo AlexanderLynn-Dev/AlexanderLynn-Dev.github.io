@@ -8,53 +8,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="icon.png">
     <style>
-        /* BASE STYLES */
         body {
             font-family: 'Inter', sans-serif;
-            background-image: url('Portfolio.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #374151;
+            background-color: #f3f5f7;
+            color: #2f3b4a;
         }
 
-        /* PROJECT CARD STYLES */
         .project-card {
-            /* Kept width/centering for vertical stack */
-            max-width: 1000px; /* **ADJUSTED: Increased max-width for even bigger content** */
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            background-color: #ffffff;
+            border: 1px solid #dfe8ef;
+            border-radius: 0.75rem;
+            box-shadow: none;
+            transition: border-color 0.2s ease, transform 0.2s ease;
             cursor: pointer;
-            overflow: hidden; 
+            overflow: hidden;
         }
         .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: translateY(-2px);
+            border-color: #bfd3e3;
         }
 
-        /* NEW: Flexbox wrapper for Image + Text */
         .card-content-wrapper {
             display: flex;
-            align-items: flex-start; /* Aligns content to the top */
-            padding: 2rem; /* **ADJUSTED: Slightly more padding for the larger card** */
+            flex-direction: column;
+            height: 100%;
         }
 
         .project-thumbnail {
-            /* **ADJUSTED: Sizing the thumbnail to be bigger** */
-            width: 45%; /* Thumbnail takes 45% of the wrapper width */
-            min-width: 300px; /* Ensure a minimum size on smaller screens */
-            height: auto;
-            border-radius: 1.25rem; /* Full radius on the image */
+            width: 100%;
+            height: 215px;
+            border: 1px solid #dce7ef;
+            border-radius: 0.75rem 0.75rem 0 0;
             object-fit: cover;
-            transition: transform 0.4s ease-in-out;
-            margin-right: 2rem; /* **ADJUSTED: More space between image and text** */
+            transition: transform 0.25s ease-in-out;
+            margin-right: 0;
         }
         
         .project-card:hover .project-thumbnail {
@@ -62,15 +49,29 @@
         }
 
         .text-content {
-            width: 55%; /* **ADJUSTED: Text takes remaining 55%** */
+            width: 100%;
+            padding: 1.15rem 1.15rem 1.35rem;
         }
 
         .project-title {
             padding: 0 0 0.5rem 0;
-            font-size: 1.875rem;
+            font-size: 1.55rem;
             font-weight: 800;
-            color: #1a202c;
+            color: #1f4f72;
             text-align: left;
+        }
+
+        .project-role {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #60707d;
+            margin-bottom: 0.65rem;
+        }
+
+        .project-description {
+            color: #4f5f6c;
+            font-size: 1rem;
+            line-height: 1.8;
         }
         
         /* HEADER ANIMATION (unchanged) */
@@ -88,37 +89,87 @@
             animation: fadeInDown 1s ease-out forwards;
         }
 
-        /* NAVBAR STYLES (unchanged) */
         .navbar {
-            position: fixed; 
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95); 
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            z-index: 1000; 
-            border-bottom-left-radius: 1.25rem; 
-            border-bottom-right-radius: 1.25rem;
+            background-color: #1f3e59;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+            z-index: 1000;
         }
         .navbar-link {
-            color: #4a5568;
-            font-size: 1.35rem;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            font-size: 1.35rem;
-            border-radius: 0.5rem;
+            color: #d2e1ec;
+            font-weight: 500;
+            padding: 0.45rem 0.85rem;
+            font-size: 0.9rem;
+            border-radius: 0.3rem;
             transition: all 0.2s ease-in-out;
         }
         .navbar-link:hover {
-            background-color: #e2e8f0;
-            font-size: 1.35rem;
-            color: #2d3748; 
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
         }
         .navbar-link.active {
-            background: linear-gradient(to right, #4649ff, #3352ff);
+            background-color: rgba(255, 255, 255, 0.16);
             color: white;
-            font-size: 1.35rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .filter-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.52rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            background-color: #eff4f8;
+            color: #355971;
+            border: 1px solid #d7e4ee;
+            border-radius: 999px;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            line-height: 1.1;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background-color: #3e7ea9;
+            border-color: #3e7ea9;
+            color: #ffffff;
+        }
+
+        .filter-btn.active {
+            background-color: #1f4f72;
+            border-color: #1f4f72;
+            color: #ffffff;
+        }
+
+        .hidden-project {
+            display: none;
+        }
+
+        header h2 {
+            color: #1f4f72 !important;
+        }
+
+        header p {
+            color: #6b7b88 !important;
+            font-size: 1rem !important;
+            font-weight: 500 !important;
+        }
+
+        .portfolio-title {
+            color: #1f4f72;
+        }
+
+        @media (max-width: 900px) {
+            .project-thumbnail {
+                height: 200px;
+            }
         }
     </style>
 </head>
@@ -137,36 +188,46 @@
             <h2 class="text-2xl sm:text-5xl font-extrabold text-gray-900 mb-4 leading-tight tracking-tight">
                 Alexander Lynn - Technical Designer
             </h2>
-            <p class="mt-8 text-lg text-gray-700 leading-relaxed font-semibold" style = "color:rgb(0, 0, 0); font-size: 20px;">
+            <p class="mt-8 text-lg text-gray-700 leading-relaxed font-semibold">
                 Specializing in UI Design, Gameplay Programming, and Project Management
             </p>
         </header>
 
         <main class="w-full max-w-7xl">
             <section>
-                <h2 class="text-4xl font-bold text-gray-800 mb-10 text-center" style="color:rgba(0, 0, 0, 1)">My Portfolio</h2>
+                <h2 class="portfolio-title text-4xl font-bold mb-8 text-center">My Portfolio</h2>
+
+                <div class="filter-wrap" id="projectFilters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="creative-director">Creative Director</button>
+                    <button class="filter-btn" data-filter="ui-designer">UI Designer</button>
+                    <button class="filter-btn" data-filter="programmer">Programmer</button>
+                    <button class="filter-btn" data-filter="level-designer">Level Designer</button>
+                    <button class="filter-btn" data-filter="producer">Producer</button>
+                    <button class="filter-btn" data-filter="solo-developer">Solo Developer</button>
+                </div>
                 
-                <div class="project-grid grid grid-cols-1 gap-12 max-w-7xl mx-auto">
-                    <a href="David.html" class="project-card group">
+                <div class="project-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <a href="David.html" class="project-card group" data-roles="creative-director ui-designer programmer">
                         <div class="card-content-wrapper">
                             <img src="David/High Res Screenshot.png" alt="Thumbnail for David's Mighty Men" class="project-thumbnail">
                             <div class="text-content">
                                 <h3 class="project-title">David's Mighty Men</h3>
-                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Role: Creative Director, UI Designer, Programmer </h4>
-                                <p class="text-gray-700 text-lg">
+                                <h4 class="project-role">Role: Creative Director, UI Designer, Programmer</h4>
+                                <p class="project-description">
                                     David's Mighty Men is a 3D Hack N' Slash currently in progress. I led a team of six during the game's first three months of development up until vertical slice.
                                 </p>
                             </div>
                         </div>
                     </a>
 
-                    <a href="Feet.html" class="project-card group">
+                    <a href="Feet.html" class="project-card group" data-roles="creative-director level-designer">
                         <div class="card-content-wrapper">
                             <img src="Thumbnails/Feet.png" alt="Thumbnail for On Your Feet!" class="project-thumbnail">
                             <div class="text-content">
                                 <h3 class="project-title">On Your Feet! (WIP)</h3>
-                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Role: Creative Director, Level Designer </h4>
-                                <p class="text-gray-700 text-lg">
+                                <h4 class="project-role">Role: Creative Director, Level Designer</h4>
+                                <p class="project-description">
                                     On Your Feet! is a 2D Platformer, Sports game currently in progress. I am
                                     the leader of the project and it is set to release in June 2026.
                                 </p>
@@ -174,26 +235,26 @@
                         </div>
                     </a>
 
-                    <a href="Fishy.html" class="project-card group">
+                    <a href="Fishy.html" class="project-card group" data-roles="producer ui-designer">
                         <div class="card-content-wrapper">
                             <img src="Fishy/FB-Square-Poster.png" alt="Thumbnail for Fishy Business" class="project-thumbnail">
                             <div class="text-content">
                                 <h3 class="project-title">Fishy Business</h3>
-                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Role: Producer, UI Designer </h4>
-                                <p class="text-gray-700 text-lg">
+                                <h4 class="project-role">Role: Producer, UI Designer</h4>
+                                <p class="project-description">
                                     Fishy Business is a Tower Defense mobile game. I worked as the Producer on a seven person team and it released in December 2025.
                                 </p>
                             </div>
                         </div>
                     </a>
 
-                    <a href="Inventory.html" class="project-card group">
+                    <a href="Inventory.html" class="project-card group" data-roles="solo-developer programmer ui-designer">
                         <div class="card-content-wrapper">
                             <img src="Inventory/4Item_Hover_Descriptions.webp" alt="Thumbnail for Inventory System Project" class="project-thumbnail">
                             <div class="text-content">
                                 <h3 class="project-title">Inventory System Project</h3>
-                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Role: Solo Developer </h4>
-                                <p class="text-gray-700 text-lg">
+                                <h4 class="project-role">Role: Solo Developer</h4>
+                                <p class="project-description">
                                     A personal project I worked on featuring dynamic gameplay interfaces, an RPG-style inventory system, third-person combat, and more.
                                 </p>
                             </div>
@@ -209,5 +270,24 @@
             <p>Technical Designer, University of Central Florida</p>
         </footer>
     </div>
+    <script>
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const selected = button.dataset.filter;
+
+                filterButtons.forEach((btn) => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                projectCards.forEach((card) => {
+                    const roles = (card.dataset.roles || '').split(' ');
+                    const show = selected === 'all' || roles.includes(selected);
+                    card.classList.toggle('hidden-project', !show);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

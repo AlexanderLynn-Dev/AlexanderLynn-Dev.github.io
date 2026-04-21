@@ -259,6 +259,124 @@
         .project-thumbnail {
             cursor: pointer;
         }
+
+        /* Shared site theme consistency */
+        body {
+            background-color: #f3f5f7;
+            background-image: none;
+            color: #2f3b4a;
+        }
+        .navbar {
+            background-color: #1f3e59;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .navbar-link {
+            color: #d2e1ec;
+            font-weight: 500;
+            padding: 0.45rem 0.85rem;
+            font-size: 0.9rem;
+            border-radius: 0.3rem;
+        }
+        .navbar-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+        .navbar-link.active {
+            background: rgba(255, 255, 255, 0.16);
+            color: #ffffff;
+            font-size: 0.9rem;
+            box-shadow: none;
+        }
+        .project-card {
+            background-color: #ffffff;
+            border: 1px solid #dfe8ef;
+            border-radius: 0.75rem;
+            box-shadow: none;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: none;
+            border-color: #bfd3e3;
+        }
+        .btn-primary {
+            background: #3d85b5;
+            border: 1.5px solid #3d85b5;
+            color: #ffffff;
+            box-shadow: none;
+        }
+        .btn-primary:hover {
+            background: #2f6f98;
+            border-color: #2f6f98;
+            color: #ffffff;
+            box-shadow: none;
+        }
+        .info-label {
+            color: #1f4f72;
+        }
+        .info-value {
+            color: #4f5f6c;
+        }
+        h2, h3 {
+            color: #1f4f72 !important;
+        }
+        p, li {
+            color: #4f5f6c !important;
+        }
+        hr {
+            border-color: #d7e4ee !important;
+        }
+        /* Reduce vertical scrolling on long project pages */
+        .mb-32 {
+            margin-bottom: 4.5rem !important;
+        }
+        .mb-24 {
+            margin-bottom: 3.25rem !important;
+        }
+        .my-24 {
+            margin-top: 3.5rem !important;
+            margin-bottom: 3.5rem !important;
+        }
+        .mt-24 {
+            margin-top: 3.5rem !important;
+        }
+        .p-12 {
+            padding: 2rem !important;
+        }
+        .p-10 {
+            padding: 1.6rem !important;
+        }
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            width: 100%;
+        }
+        .doc-item h3 {
+            font-size: 1.1rem !important;
+            margin-bottom: 0.7rem !important;
+            line-height: 1.35;
+        }
+        .doc-item .carousel-container {
+            padding-bottom: 120%;
+            border-radius: 0.6rem;
+        }
+        .doc-item .carousel-nav-btn {
+            padding: 0.45rem 0.35rem;
+            font-size: 1rem;
+        }
+        .doc-item .carousel-dot {
+            width: 8px;
+            height: 8px;
+        }
+        @media (max-width: 1024px) {
+            .doc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -270,7 +388,7 @@
         </div>
     </div>
 
-    <div class="min-h-screen flex flex-col items-center py-24 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
+    <div class="min-h-screen flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
 
         <nav class="navbar w-full py-4 px-6 flex justify-center">
             <div class="flex space-x-6">
@@ -354,56 +472,58 @@
                         
                     </div>
 
-                    <div class="w-full max-w-4xl mx-auto mb-16">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Game Design Document (GDD) Screenshots</h3>
-                        <div id="gdd-carousel" class="carousel-container mx-auto">
-                            <div class="carousel-slide active" data-index="0">
-                                <img src="DavidDock/GDD-1.png" alt="GDD Screenshot 1" onclick="openFullscreen(this.src)">
-                            </div>
-                            <div class="carousel-slide" data-index="1">
-                                <img src="DavidDock/GDD-2.png" alt="GDD Screenshot 2" onclick="openFullscreen(this.src)">
-                            </div>
-                            <button class="carousel-nav-btn prev" onclick="prevSlide('gdd-carousel')">&#10094;</button>
-                            <button class="carousel-nav-btn next" onclick="nextSlide('gdd-carousel')">&#10095;</button>
-                            <div class="carousel-dots" id="gdd-dots">
-                                <span class="carousel-dot active" onclick="currentSlide('gdd-carousel', 0)"></span>
-                                <span class="carousel-dot" onclick="currentSlide('gdd-carousel', 1)"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="w-full max-w-4xl mx-auto mb-16">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Art Style Guide (ASG) Screenshots</h3>
-                        <div id="asg-carousel" class="carousel-container mx-auto">
-                            <div class="carousel-slide active" data-index="0">
-                                <img src="DavidDock/ASG-1.png" alt="ASG Screenshot 1" onclick="openFullscreen(this.src)">
-                            </div>
-                            <div class="carousel-slide" data-index="1">
-                                <img src="DavidDock/ASG-2.png" alt="ASG Screenshot 2" onclick="openFullscreen(this.src)">
-                            </div>
-                            <button class="carousel-nav-btn prev" onclick="prevSlide('asg-carousel')">&#10094;</button>
-                            <button class="carousel-nav-btn next" onclick="nextSlide('asg-carousel')">&#10095;</button>
-                            <div class="carousel-dots" id="asg-dots">
-                                <span class="carousel-dot active" onclick="currentSlide('asg-carousel', 0)"></span>
-                                <span class="carousel-dot" onclick="currentSlide('asg-carousel', 1)"></span>
+                    <div class="doc-grid mb-16">
+                        <div class="doc-item">
+                            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Game Design Document (GDD)</h3>
+                            <div id="gdd-carousel" class="carousel-container mx-auto">
+                                <div class="carousel-slide active" data-index="0">
+                                    <img src="DavidDock/GDD-1.png" alt="GDD Screenshot 1" onclick="openFullscreen(this.src)">
+                                </div>
+                                <div class="carousel-slide" data-index="1">
+                                    <img src="DavidDock/GDD-2.png" alt="GDD Screenshot 2" onclick="openFullscreen(this.src)">
+                                </div>
+                                <button class="carousel-nav-btn prev" onclick="prevSlide('gdd-carousel')">&#10094;</button>
+                                <button class="carousel-nav-btn next" onclick="nextSlide('gdd-carousel')">&#10095;</button>
+                                <div class="carousel-dots" id="gdd-dots">
+                                    <span class="carousel-dot active" onclick="currentSlide('gdd-carousel', 0)"></span>
+                                    <span class="carousel-dot" onclick="currentSlide('gdd-carousel', 1)"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="w-full max-w-4xl mx-auto mb-16">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Playtesting Report Screenshots</h3>
-                        <div id="playtest-carousel" class="carousel-container mx-auto">
-                            <div class="carousel-slide active" data-index="0">
-                                <img src="DavidDock/Playtest Form Screenshot 1.png" alt="Playtest Form Screenshot 1" onclick="openFullscreen(this.src)">
+                        <div class="doc-item">
+                            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Art Style Guide (ASG)</h3>
+                            <div id="asg-carousel" class="carousel-container mx-auto">
+                                <div class="carousel-slide active" data-index="0">
+                                    <img src="DavidDock/ASG-1.png" alt="ASG Screenshot 1" onclick="openFullscreen(this.src)">
+                                </div>
+                                <div class="carousel-slide" data-index="1">
+                                    <img src="DavidDock/ASG-2.png" alt="ASG Screenshot 2" onclick="openFullscreen(this.src)">
+                                </div>
+                                <button class="carousel-nav-btn prev" onclick="prevSlide('asg-carousel')">&#10094;</button>
+                                <button class="carousel-nav-btn next" onclick="nextSlide('asg-carousel')">&#10095;</button>
+                                <div class="carousel-dots" id="asg-dots">
+                                    <span class="carousel-dot active" onclick="currentSlide('asg-carousel', 0)"></span>
+                                    <span class="carousel-dot" onclick="currentSlide('asg-carousel', 1)"></span>
+                                </div>
                             </div>
-                            <div class="carousel-slide" data-index="1">
-                                <img src="DavidDock/Playtest Form Screenshot 2.png" alt="Playtest Form Screenshot 2" onclick="openFullscreen(this.src)">
-                            </div>
-                            <button class="carousel-nav-btn prev" onclick="prevSlide('playtest-carousel')">&#10094;</button>
-                            <button class="carousel-nav-btn next" onclick="nextSlide('playtest-carousel')">&#10095;</button>
-                            <div class="carousel-dots" id="playtest-dots">
-                                <span class="carousel-dot active" onclick="currentSlide('playtest-carousel', 0)"></span>
-                                <span class="carousel-dot" onclick="currentSlide('playtest-carousel', 1)"></span>
+                        </div>
+
+                        <div class="doc-item">
+                            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Playtesting Report</h3>
+                            <div id="playtest-carousel" class="carousel-container mx-auto">
+                                <div class="carousel-slide active" data-index="0">
+                                    <img src="DavidDock/Playtest Form Screenshot 1.png" alt="Playtest Form Screenshot 1" onclick="openFullscreen(this.src)">
+                                </div>
+                                <div class="carousel-slide" data-index="1">
+                                    <img src="DavidDock/Playtest Form Screenshot 2.png" alt="Playtest Form Screenshot 2" onclick="openFullscreen(this.src)">
+                                </div>
+                                <button class="carousel-nav-btn prev" onclick="prevSlide('playtest-carousel')">&#10094;</button>
+                                <button class="carousel-nav-btn next" onclick="nextSlide('playtest-carousel')">&#10095;</button>
+                                <div class="carousel-dots" id="playtest-dots">
+                                    <span class="carousel-dot active" onclick="currentSlide('playtest-carousel', 0)"></span>
+                                    <span class="carousel-dot" onclick="currentSlide('playtest-carousel', 1)"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
