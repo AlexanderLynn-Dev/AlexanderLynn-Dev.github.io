@@ -127,25 +127,28 @@
         .filter-btn {
             background-color: #eff4f8;
             color: #355971;
-            border: 1px solid #d7e4ee;
+            border: 2px solid #8fb2cc;
             border-radius: 999px;
             padding: 0.4rem 0.9rem;
             font-size: 0.78rem;
             font-weight: 600;
             line-height: 1.1;
-            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.75) inset;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .filter-btn:hover {
             background-color: #3e7ea9;
             border-color: #3e7ea9;
             color: #ffffff;
+            box-shadow: none;
         }
 
         .filter-btn.active {
             background-color: #1f4f72;
             border-color: #1f4f72;
             color: #ffffff;
+            box-shadow: 0 0 0 2px rgba(31, 79, 114, 0.25);
         }
 
         .hidden-project {
