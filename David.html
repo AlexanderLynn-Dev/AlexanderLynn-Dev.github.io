@@ -411,7 +411,7 @@
                 <table class="info-table">
                     <tr>
                         <td class="info-label">Role:</td>
-                        <td class="info-value">Creative Director, UI Designer, Programmer</td>
+                        <td class="info-value">Creative Director, UI/UX Designer, Programmer</td>
                     </tr>
                     <tr>
                         <td class="info-label">Duration:</td>
@@ -460,6 +460,104 @@
             <div class="w-full mb-24 flex justify-center">
                 <img src="David/HighresScreenshot00013 - Copy.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
             </div>
+            
+            <section id="ui-design-section" class="mb-32">
+                <div class="project-card p-12 flex flex-col items-center">
+                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">UI/UX Design</h2>
+
+                    <div class="w-full max-w-4xl mx-auto mb-12">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">UI Video</h3>
+                        <div class="relative pt-[56.25%] w-full h-0">
+                            <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
+                                src="https://www.youtube.com/embed/Prvnm0YDfbA?si=-VaIDMtEO-TgOoGn" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="w-full mb-12 max-w-4xl">
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            As UI/UX Designer, I implemented all UI elements in game, ensuring seamless player interaction. I utilized Unreal Engine's CommonUI plugin to accomplish all my intended UI goals for the game. This game challenged me more than any other in my journey with UI/UX Design so far, and it ended up being very fun to make. My contributions for UI/UX design include:
+                        </p>
+                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700 leading-relaxed ml-4">
+                            <li><strong>Main Menu:</strong> Button layouts for Start, Continue, Settings, Credits, and Quit with live menu background implemented.</li>
+                            <li><strong>Settings Menu:</strong> Options to change video settings, audio settings, and view controls and combo lists.</li>
+                            <li><strong>Video Settings:</strong> Options to change Resolution, Window Mode, Vsync, Frame Rate, and Graphics settings. These settings save once you apply them, with the option to reset to default implemented as well.</li>
+                            <li><strong>Audio Settings:</strong> Options to change audio settings, including SFX, Music, and Voice Lines. These settings save once you apply them, with the option to reset to default implemented as well.</li>
+                            <li><strong>Sensitivity Settings:</strong> Options to adjust mouse and controller sensitivity. These settings save once you apply them, with the option to reset to default implemented as well.</li>
+                            <li><strong>Level Select:</strong> Select which level you want to play once you start the game.</li>
+                            <li><strong>Pause Menu:</strong> Sets the game paused and gives options to Continue, view Settings, or Quit to Main Menu.</li>
+                            <li><strong class="text-indigo-600">All menus are fully controller compatible.</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="w-full mb-24 flex justify-center">
+                <img src="David/HighresScreenshot00003 - Copy.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
+            </div>
+
+            <hr class="my-24 border-t-2 border-gray-300">
+
+            <section id="gameplay-programming-section" class="mb-32">
+                <div class="project-card p-12 flex flex-col items-center">
+                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">Gameplay Programming</h2>
+
+                    <div class="w-full max-w-4xl mx-auto mb-12">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Gameplay Programming Video</h3>
+                        <div class="relative pt-[56.25%] w-full h-0">
+                            <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
+                                src="https://www.youtube.com/embed/uw2Y_--RW28?si=j11315Z2XvkuZPtT" 
+                                title="YouTube video player - Gameplay Programming" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="w-full mb-12 max-w-4xl">
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            In the prototyping phase, I was tasked with developing systems related to our core gameplay mechanics. In the 2 week window we were given, I was able to successfully program all player movement and mechanics, providing the foundation for player engagement. I utilized a series of Blueprints and animation blend trees to accomplish this task. These systems include:
+                        </p>
+                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700 leading-relaxed ml-4">
+                            <li><strong>Player movement:</strong> Basic walk to run function, synced up nicely with animation blend trees.</li>
+                            <li><strong>Shielding:</strong> Player raises their shield to block incoming attacks.</li>
+                            <li><strong>Strafing:</strong> With shield raised, player moves at a set speed with rotation locked.</li>
+                            <li><strong>Dodging:</strong> Player performs quick movement displacement over a certain distance, depending on direction of controller.</li>
+                            <li><strong>Lock On:</strong> Orients player camera towards an enemy when toggled. Disabled by toggle/walking away from target.</li>
+                            <li><strong>Quick attacks:</strong> Short, quick swings dealing decent damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful ground strike.</li>
+                            <li><strong>Strong attacks:</strong> Longer, slower swings that use more of the player’s momentum but do a lot of damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful aerial strike.</li>
+                            <li><strong>Combining attacks:</strong> Players can switch between Quick and Strong Attacks mid combo, giving more freedom of expression and allowing more options for the player to experiment with, creating fun and engaging combat.</li>
+                            <li><strong>Charge Attack:</strong> Long buildup releases a powerful swing, dealing a lot of damage.</li>
+                            <li><strong>Divine intervention:</strong> When Divine Meter is full, player can call down powerful strike, devastating their opponents as an engaging cinematic plays.</li>
+                        </ul>
+                        <p class="text-lg text-gray-700 leading-relaxed mt-6">
+                            I was able to successfully build upon all of these mechanics and program them to the
+                            standard I wanted for vertical slice, which you can check out here:
+                        </p>
+                        <div class="relative pt-[56.25%] w-full h-0 mt-6">
+                            <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
+                                src="https://www.youtube.com/embed/hBYvHdHxsGY?si=up2vX9LnAziZsRsf" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="w-full mb-24 flex justify-center">
+                <img src="David/HighresScreenshot00002 - Copy.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
+            </div>
+            
+            <hr class="my-24 border-t-2 border-gray-300">
             
             <section id="project-management-section" class="mb-32" style="display: block;">
                 <div class="project-card p-12 flex flex-col items-center">
@@ -536,102 +634,6 @@
                 <img src="David/HighRes Outskirts5.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
             </div>
 
-           <section id="gameplay-programming-section" class="mb-32">
-                <div class="project-card p-12 flex flex-col items-center">
-                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">Gameplay Programming</h2>
-
-                    <div class="w-full max-w-4xl mx-auto mb-12">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Gameplay Programming Video</h3>
-                        <div class="relative pt-[56.25%] w-full h-0">
-                            <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
-                                src="https://www.youtube.com/embed/uw2Y_--RW28?si=j11315Z2XvkuZPtT" 
-                                title="YouTube video player - Gameplay Programming" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                    <div class="w-full mb-12 max-w-4xl">
-                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                            In the prototyping phase, I was tasked with developing systems related to our core gameplay mechanics. In the 2 week window we were given, I was able to successfully program all player movement and mechanics, providing the foundation for player engagement. I utilized a series of Blueprints and animation blend trees to accomplish this task. These systems include:
-                        </p>
-                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700 leading-relaxed ml-4">
-                            <li><strong>Player movement:</strong> Basic walk to run function, synced up nicely with animation blend trees.</li>
-                            <li><strong>Shielding:</strong> Player raises their shield to block incoming attacks.</li>
-                            <li><strong>Strafing:</strong> With shield raised, player moves at a set speed with rotation locked.</li>
-                            <li><strong>Dodging:</strong> Player performs quick movement displacement over a certain distance, depending on direction of controller.</li>
-                            <li><strong>Lock On:</strong> Orients player camera towards an enemy when toggled. Disabled by toggle/walking away from target.</li>
-                            <li><strong>Quick attacks:</strong> Short, quick swings dealing decent damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful ground strike.</li>
-                            <li><strong>Strong attacks:</strong> Longer, slower swings that use more of the player’s momentum but do a lot of damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful aerial strike.</li>
-                            <li><strong>Combining attacks:</strong> Players can switch between Quick and Strong Attacks mid combo, giving more freedom of expression and allowing more options for the player to experiment with, creating fun and engaging combat.</li>
-                            <li><strong>Charge Attack:</strong> Long buildup releases a powerful swing, dealing a lot of damage.</li>
-                            <li><strong>Divine intervention:</strong> When Divine Meter is full, player can call down powerful strike, devastating their opponents as an engaging cinematic plays.</li>
-                        </ul>
-                        <p class="text-lg text-gray-700 leading-relaxed mt-6">
-                            I was able to successfully build upon all of these mechanics and program them to the
-                            standard I wanted for vertical slice, which you can check out here:
-                        </p>
-                        <div class="relative pt-[56.25%] w-full h-0 mt-6">
-                            <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
-                                src="https://www.youtube.com/embed/hBYvHdHxsGY?si=up2vX9LnAziZsRsf" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <div class="w-full mb-24 flex justify-center">
-                <img src="David/HighresScreenshot00002 - Copy.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
-            </div>
-            
-            <hr class="my-24 border-t-2 border-gray-300">
-            
-            <section id="ui-design-section" class="mb-32">
-                <div class="project-card p-12 flex flex-col items-center">
-                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">UI Design</h2>
-
-                    <div class="w-full max-w-4xl mx-auto mb-12">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">UI Video</h3>
-                        <div class="relative pt-[56.25%] w-full h-0">
-                            <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
-                                src="https://www.youtube.com/embed/Prvnm0YDfbA?si=-VaIDMtEO-TgOoGn" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                    <div class="w-full mb-12 max-w-4xl">
-                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                            As UI Designer, I implemented all UI elements in game, ensuring seamless player interaction. I utilized Unreal Engine's CommonUI plugin to accomplish all my intended UI goals for the game. This game challenged me more than any other in my journey with UI Design so far, and it ended up being very fun to make. My contributions for UI design include:
-                        </p>
-                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700 leading-relaxed ml-4">
-                            <li><strong>Main Menu:</strong> Button layouts for Start, Continue, Settings, Credits, and Quit with live menu background implemented.</li>
-                            <li><strong>Settings Menu:</strong> Options to change video settings, audio settings, and view controls and combo lists.</li>
-                            <li><strong>Video Settings:</strong> Options to change Resolution, Window Mode, Vsync, Frame Rate, and Graphics settings. These settings save once you apply them, with the option to reset to default implemented as well.</li>
-                            <li><strong>Audio Settings:</strong> Options to change audio settings, including SFX, Music, and Voice Lines. These settings save once you apply them, with the option to reset to default implemented as well.</li>
-                            <li><strong>Sensitivity Settings:</strong> Options to adjust mouse and controller sensitivity. These settings save once you apply them, with the option to reset to default implemented as well.</li>
-                            <li><strong>Level Select:</strong> Select which level you want to play once you start the game.</li>
-                            <li><strong>Pause Menu:</strong> Sets the game paused and gives options to Continue, view Settings, or Quit to Main Menu.</li>
-                            <li><strong class="text-indigo-600">All menus are fully controller compatible.</strong></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <div class="w-full mb-24 flex justify-center">
-                <img src="David/HighresScreenshot00003 - Copy.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
-            </div>
-
         <hr class="my-24 border-t-2 border-gray-300">
         <section id="reflection-section" class="mb-24">
             <div class="project-card p-12 flex flex-col items-center">
@@ -663,7 +665,7 @@
 
         <footer class="mt-24 text-center text-gray-600 text-sm" style="color:rgba(0, 0, 0, 1)">
             <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
-            <p>Technical Designer, University of Central Florida</p>
+            <p>Alexander Lynn - Technical Designer</p>
         </footer>
     </div>
 
