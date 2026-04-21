@@ -240,7 +240,7 @@ main {
   justify-content: center; align-items: center;
   flex-direction: column; padding: 2rem;
 }
-.lightbox-img { max-width: 85%; max-height: 80vh; border-radius: 8px; }
+.lightbox-img { max-width: 94%; max-height: 92vh; border-radius: 8px; }
 .lightbox-close {
   position: absolute; top: 1.5rem; right: 2rem;
   font-size: 2rem; color: #fff; cursor: pointer; line-height: 1;
@@ -334,9 +334,9 @@ footer p { font-size: 0.8rem; color: var(--text-dim); }
         <div class="video-wrap">
           <iframe src="https://www.youtube.com/embed/Prvnm0YDfbA?si=-VaIDMtEO-TgOoGn" title="UI Video" allowfullscreen loading="lazy"></iframe>
         </div>
+        <p class="section-body" style="margin-top: 1rem;">As UI/UX Designer, I implemented all UI elements in game, ensuring seamless player interaction. I utilized Unreal Engine's CommonUI plugin to accomplish all my intended UI goals for the game. This game challenged me more than any other in my journey with UI/UX Design so far, and it ended up being very fun to make. My contributions for UI/UX design include:</p>
       </div>
       <div>
-        <p class="section-body">As UI/UX Designer, I implemented all UI elements in game, ensuring seamless player interaction. I utilized Unreal Engine's CommonUI plugin to accomplish all my intended UI goals for the game. This game challenged me more than any other in my journey with UI/UX Design so far, and it ended up being very fun to make. My contributions for UI/UX design include:</p>
         <ul class="feature-list">
           <li><strong>Main Menu:</strong> Button layouts for Start, Continue, Settings, Credits, and Quit with live menu background implemented.</li>
           <li><strong>Settings Menu:</strong> Options to change video settings, audio settings, and view controls and combo lists.</li>
@@ -349,7 +349,7 @@ footer p { font-size: 0.8rem; color: var(--text-dim); }
         </ul>
       </div>
     </div>
-    <div style="margin-top: 1.2rem;">
+    <div style="max-width: 720px; margin: 1.2rem auto 0;">
       <img class="img-full" src="David/HighresScreenshot00003 - Copy.png" alt="High Resolution Screenshot">
     </div>
   </div>
@@ -364,34 +364,34 @@ footer p { font-size: 0.8rem; color: var(--text-dim); }
         <div class="video-wrap">
           <iframe src="https://www.youtube.com/embed/uw2Y_--RW28?si=j11315Z2XvkuZPtT" title="Gameplay Programming Video" allowfullscreen loading="lazy"></iframe>
         </div>
+        <p class="section-body" style="margin-top: 1rem;">In the prototyping phase, I was tasked with developing systems related to our core gameplay mechanics. In the 2 week window we were given, I was able to successfully program all player movement and mechanics, providing the foundation for player engagement. I utilized a series of Blueprints and animation blend trees to accomplish this task. These systems include:</p>
       </div>
       <div>
-        <p class="section-body">In the prototyping phase, I was tasked with developing systems related to our core gameplay mechanics. In the 2 week window we were given, I was able to successfully program all player movement and mechanics, providing the foundation for player engagement. I utilized a series of Blueprints and animation blend trees to accomplish this task. These systems include:</p>
+        <div class="gameplay-points-grid" style="margin-top: 0;">
+          <ul class="feature-list">
+            <li><strong>Player movement:</strong> Basic walk to run function, synced up nicely with animation blend trees.</li>
+            <li><strong>Shielding:</strong> Player raises their shield to block incoming attacks.</li>
+            <li><strong>Strafing:</strong> With shield raised, player moves at a set speed with rotation locked.</li>
+            <li><strong>Dodging:</strong> Player performs quick movement displacement over a certain distance, depending on direction of controller.</li>
+            <li><strong>Lock On:</strong> Orients player camera towards an enemy when toggled. Disabled by toggle/walking away from target.</li>
+            <li><strong>Quick attacks:</strong> Short, quick swings dealing decent damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful ground strike.</li>
+          </ul>
+          <ul class="feature-list">
+            <li><strong>Strong attacks:</strong> Longer, slower swings that use more of the player’s momentum but do a lot of damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful aerial strike.</li>
+            <li><strong>Combining attacks:</strong> Players can switch between Quick and Strong Attacks mid combo, giving more freedom of expression and allowing more options for the player to experiment with, creating fun and engaging combat.</li>
+            <li><strong>Charge Attack:</strong> Long buildup releases a powerful swing, dealing a lot of damage.</li>
+            <li><strong>Divine intervention:</strong> When Divine Meter is full, player can call down powerful strike, devastating their opponents as an engaging cinematic plays.</li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="gameplay-points-grid">
-      <ul class="feature-list">
-        <li><strong>Player movement:</strong> Basic walk to run function, synced up nicely with animation blend trees.</li>
-        <li><strong>Shielding:</strong> Player raises their shield to block incoming attacks.</li>
-        <li><strong>Strafing:</strong> With shield raised, player moves at a set speed with rotation locked.</li>
-        <li><strong>Dodging:</strong> Player performs quick movement displacement over a certain distance, depending on direction of controller.</li>
-        <li><strong>Lock On:</strong> Orients player camera towards an enemy when toggled. Disabled by toggle/walking away from target.</li>
-        <li><strong>Quick attacks:</strong> Short, quick swings dealing decent damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful ground strike.</li>
-      </ul>
-      <ul class="feature-list">
-        <li><strong>Strong attacks:</strong> Longer, slower swings that use more of the player’s momentum but do a lot of damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful aerial strike.</li>
-        <li><strong>Combining attacks:</strong> Players can switch between Quick and Strong Attacks mid combo, giving more freedom of expression and allowing more options for the player to experiment with, creating fun and engaging combat.</li>
-        <li><strong>Charge Attack:</strong> Long buildup releases a powerful swing, dealing a lot of damage.</li>
-        <li><strong>Divine intervention:</strong> When Divine Meter is full, player can call down powerful strike, devastating their opponents as an engaging cinematic plays.</li>
-      </ul>
     </div>
     <div style="margin-top: 1.2rem;">
       <div class="video-wrap">
         <iframe src="https://www.youtube.com/embed/hBYvHdHxsGY?si=up2vX9LnAziZsRsf" title="Vertical Slice Video" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
-    <div style="margin-top: 1.2rem;">
-      <img class="img-full" src="David/HighresScreenshot00002 - Copy.png" alt="High Resolution Screenshot">
+    <div style="max-width: 720px; margin: 1.2rem auto 0;">
+      <img class="img-full" src="David/HighresScreenshot00002 - Copy.png" alt="DMM environment screenshot">
     </div>
   </div>
 
@@ -416,6 +416,7 @@ footer p { font-size: 0.8rem; color: var(--text-dim); }
           <button class="doc-nav-btn next" onclick="moveDocSlide('gdd', 1)" aria-label="Next GDD slide">&#10095;</button>
         </div>
         <p class="doc-counter" id="doc-counter-gdd">1 / 2</p>
+        <p class="img-caption" style="margin-top: 0.35rem; font-weight: 700;">Click image to view full size.</p>
       </div>
       <div>
         <p class="doc-col-title">Art Style Guide (ASG)</p>
@@ -430,6 +431,7 @@ footer p { font-size: 0.8rem; color: var(--text-dim); }
           <button class="doc-nav-btn next" onclick="moveDocSlide('asg', 1)" aria-label="Next ASG slide">&#10095;</button>
         </div>
         <p class="doc-counter" id="doc-counter-asg">1 / 2</p>
+        <p class="img-caption" style="margin-top: 0.35rem; font-weight: 700;">Click image to view full size.</p>
       </div>
       <div>
         <p class="doc-col-title">Playtesting Report</p>
@@ -444,10 +446,11 @@ footer p { font-size: 0.8rem; color: var(--text-dim); }
           <button class="doc-nav-btn next" onclick="moveDocSlide('playtest', 1)" aria-label="Next Playtesting slide">&#10095;</button>
         </div>
         <p class="doc-counter" id="doc-counter-playtest">1 / 2</p>
+        <p class="img-caption" style="margin-top: 0.35rem; font-weight: 700;">Click image to view full size.</p>
       </div>
     </div>
-    <div style="margin-top: 1.2rem;">
-      <img class="img-full" src="David/HighRes Outskirts5.png" alt="High Resolution Screenshot">
+    <div style="max-width: 720px; margin: 1.2rem auto 0;">
+      <img class="img-full" src="David/HighRes Outskirts5.png" alt="DMM environment screenshot">
     </div>
   </div>
 

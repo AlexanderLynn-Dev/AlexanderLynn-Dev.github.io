@@ -48,6 +48,9 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 .doc-nav-btn.prev { left:8px; } .doc-nav-btn.next { right:8px; }
 .doc-counter { margin-top:.55rem; text-align:center; font-size:.8rem; color:var(--text-dim); }
 .carousel-caption { margin-top:.8rem; text-align:center; color:var(--text-dim); font-size:.9rem; font-weight:600; }
+.ui-side-by-side { display:grid; grid-template-columns:1.15fr 0.85fr; gap:1.5rem; align-items:start; margin-top:1.2rem; }
+.ui-side-by-side .feature-list { margin-top:0; }
+.ui-side-by-side .doc-carousel { max-width:520px; margin-left:auto; margin-right:0; }
 .btn-primary { display:inline-block; text-decoration:none; background:#3d85b5; border:1.5px solid #3d85b5; color:#fff; font-weight:600; padding:.7rem 1.4rem; border-radius:.75rem; }
 .btn-primary:hover { background:#2f6f98; border-color:#2f6f98; }
 .lightbox { display:none; position:fixed; z-index:9999; inset:0; background:rgba(0,0,0,.92); justify-content:center; align-items:center; flex-direction:column; padding:2rem; }
@@ -57,7 +60,7 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 .lightbox-prev { left:1.5rem; } .lightbox-next { right:1.5rem; }
 footer { border-top:1px solid var(--border); padding:1.2rem 2rem; display:flex; justify-content:space-between; }
 footer p { font-size:.8rem; color:var(--text-dim); }
-@media (max-width:900px) { nav,footer{padding-left:1rem;padding-right:1rem;} .project-hero-content{padding:1.6rem 1rem;} main{padding:1.7rem 1rem 3rem;} .meta-strip{grid-template-columns:1fr 1fr;} .two-col{grid-template-columns:1fr;} }
+@media (max-width:900px) { nav,footer{padding-left:1rem;padding-right:1rem;} .project-hero-content{padding:1.6rem 1rem;} main{padding:1.7rem 1rem 3rem;} .meta-strip{grid-template-columns:1fr 1fr;} .two-col{grid-template-columns:1fr;} .ui-side-by-side{grid-template-columns:1fr;} .ui-side-by-side .doc-carousel{max-width:100%; margin:0 auto;} }
 </style>
 </head>
 <body>
@@ -118,29 +121,33 @@ footer p { font-size:.8rem; color:var(--text-dim); }
     <p class="section-label">UI/UX Design</p>
     <h2 class="section-title">User Interface Design</h2>
     <p class="section-body">As UI/UX Designer, I implemented all UI elements in game, providing the player with ease of navigation. Since this is a mobile game, I needed to make sure all elements fit correctly on a phone screen as well as implementing touch functionality. I utilized a series of widget blueprints and a bit of code in order to accomplish the intended goals for this project. Here are my contributions as UI Designer.</p>
-    <div style="margin-top:1.2rem;" class="doc-carousel" data-carousel="ui">
-      <div class="doc-slide active"><div class="img-item"><img src="Fishy/FB-Title.png" alt="Main Menu" class="lightbox-trigger"></div><p class="carousel-caption">Main Menu</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Settings.png" alt="Settings Menu" class="lightbox-trigger"></div><p class="carousel-caption">Settings Menu</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Shop.png" alt="Shop Menu" class="lightbox-trigger"></div><p class="carousel-caption">Shop Menu</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Lvl-Select.png" alt="Level Select" class="lightbox-trigger"></div><p class="carousel-caption">Level Select</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-HUD.png" alt="In-Game HUD" class="lightbox-trigger"></div><p class="carousel-caption">In-Game HUD</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Upgrade-Menu.png" alt="Upgrade Menu" class="lightbox-trigger"></div><p class="carousel-caption">Upgrade Menu</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Pause-Menu.png" alt="Pause Menu" class="lightbox-trigger"></div><p class="carousel-caption">Pause Menu</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Game-Over.png" alt="Game Over" class="lightbox-trigger"></div><p class="carousel-caption">Game Over</p></div>
-      <button class="doc-nav-btn prev" onclick="moveDocSlide('ui', -1)" aria-label="Previous UI slide">&#10094;</button>
-      <button class="doc-nav-btn next" onclick="moveDocSlide('ui', 1)" aria-label="Next UI slide">&#10095;</button>
+    <div class="ui-side-by-side">
+      <ul class="feature-list">
+        <li><strong>Main Menu:</strong> Button layouts for Start, Settings, Shop, and Quit.</li>
+        <li><strong>Settings Menu:</strong> Options to change certain audio settings in game.</li>
+        <li><strong>Shop Menu:</strong> Buy optional cosmetics with in-game currency.</li>
+        <li><strong>Level Select:</strong> Select which level you want to play once you start the game.</li>
+        <li><strong>In-Game HUD:</strong> Displays wave count, lives, fisherman stats, sell actions, and money.</li>
+        <li><strong>Upgrade Menu:</strong> Shows three upgrade paths depending on fisherman type.</li>
+        <li><strong>Pause Menu:</strong> Resume, view Settings, or Quit to Main Menu.</li>
+        <li><strong>Game Over:</strong> Continue, Play Again, or Return to Main Menu.</li>
+      </ul>
+      <div>
+        <div class="doc-carousel" data-carousel="ui">
+          <div class="doc-slide active"><div class="img-item"><img src="Fishy/FB-Title.png" alt="Main Menu" class="lightbox-trigger"></div><p class="carousel-caption">Main Menu</p></div>
+          <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Settings.png" alt="Settings Menu" class="lightbox-trigger"></div><p class="carousel-caption">Settings Menu</p></div>
+          <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Shop.png" alt="Shop Menu" class="lightbox-trigger"></div><p class="carousel-caption">Shop Menu</p></div>
+          <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Lvl-Select.png" alt="Level Select" class="lightbox-trigger"></div><p class="carousel-caption">Level Select</p></div>
+          <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-HUD.png" alt="In-Game HUD" class="lightbox-trigger"></div><p class="carousel-caption">In-Game HUD</p></div>
+          <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Upgrade-Menu.png" alt="Upgrade Menu" class="lightbox-trigger"></div><p class="carousel-caption">Upgrade Menu</p></div>
+          <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Pause-Menu.png" alt="Pause Menu" class="lightbox-trigger"></div><p class="carousel-caption">Pause Menu</p></div>
+          <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Game-Over.png" alt="Game Over" class="lightbox-trigger"></div><p class="carousel-caption">Game Over</p></div>
+          <button class="doc-nav-btn prev" onclick="moveDocSlide('ui', -1)" aria-label="Previous UI slide">&#10094;</button>
+          <button class="doc-nav-btn next" onclick="moveDocSlide('ui', 1)" aria-label="Next UI slide">&#10095;</button>
+        </div>
+        <p class="doc-counter" id="doc-counter-ui">1 / 8</p>
+      </div>
     </div>
-    <p class="doc-counter" id="doc-counter-ui">1 / 8</p>
-    <ul class="feature-list">
-      <li><strong>Main Menu:</strong> Button layouts for Start, Settings, Shop, and Quit.</li>
-      <li><strong>Settings Menu:</strong> Options to change certain audio settings in game.</li>
-      <li><strong>Shop Menu:</strong> Buy optional cosmetics with in-game currency.</li>
-      <li><strong>Level Select:</strong> Select which level you want to play once you start the game.</li>
-      <li><strong>In-Game HUD:</strong> Displays wave count, lives, fisherman stats, sell actions, and money.</li>
-      <li><strong>Upgrade Menu:</strong> Shows three upgrade paths depending on fisherman type.</li>
-      <li><strong>Pause Menu:</strong> Resume, view Settings, or Quit to Main Menu.</li>
-      <li><strong>Game Over:</strong> Continue, Play Again, or Return to Main Menu.</li>
-    </ul>
   </div>
 
   <div class="divider"></div>
