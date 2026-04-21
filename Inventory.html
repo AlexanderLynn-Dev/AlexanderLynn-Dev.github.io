@@ -1,416 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Lynn - Inventory System Project</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="icon.png">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-image: url('Portfolio.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #374151;
-            overflow-y: scroll;
-        }
-
-        .project-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 1.2rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            z-index: 1000;
-            border-bottom-left-radius: 1.25rem;
-            border-bottom-right-radius: 1.25rem;
-        }
-        .navbar-link {
-            color: #4a5568;
-            font-weight: 600;
-            font-size: 1.35rem;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            transition: all 0.2s ease-in-out;
-        }
-        .navbar-link:hover {
-            background-color: #e2e8f0;
-            color: #2d3748;
-        }
-        .navbar-link.active {
-            background: linear-gradient(to right, #4649ff, #3352ff);
-            color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-table {
-            width: 100%;
-            margin-top: 0.5rem;
-            margin-bottom: 1rem;
-            border-collapse: separate;
-            border-spacing: 0 0.85rem;
-        }
-        .info-table td {
-            padding: 0.65rem 0;
-            vertical-align: top;
-        }
-        .info-label {
-            font-weight: 700;
-            color: #1f2937;
-            width: 30%;
-            font-size: 1.2rem;
-        }
-        .info-value {
-            color: #374151;
-            font-weight: 500;
-            width: 70%;
-            font-size: 1.2rem;
-        }
-
-        .gallery-image {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            cursor: pointer;
-        }
-
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .carousel-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 0.75rem 0.6rem;
-            cursor: pointer;
-            font-size: 1.4rem;
-            z-index: 10;
-            border-radius: 0.5rem;
-            transition: background-color 0.2s ease;
-        }
-        .carousel-nav-btn:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-        .carousel-nav-btn.prev {
-            left: 0.75rem;
-        }
-        .carousel-nav-btn.next {
-            right: 0.75rem;
-        }
-
-        .carousel-caption {
-            text-align: center;
-            margin-top: 1rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #1f2937;
-        }
-
-        .fullscreen-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 5000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-        .fullscreen-content {
-            max-width: 90%;
-            max-height: 90%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .fullscreen-content img {
-            width: auto;
-            max-width: 100%;
-            height: auto;
-            max-height: 100vh;
-            object-fit: contain;
-        }
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 5001;
-            padding: 10px;
-            line-height: 1;
-        }
-
-        /* Shared site theme consistency */
-        body {
-            background-color: #f3f5f7;
-            background-image: none;
-            color: #2f3b4a;
-        }
-        .navbar {
-            background-color: #1f3e59;
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        .navbar-link {
-            color: #d2e1ec;
-            font-weight: 500;
-            padding: 0.45rem 0.85rem;
-            font-size: 0.9rem;
-            border-radius: 0.3rem;
-        }
-        .navbar-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            font-size: 0.9rem;
-        }
-        .navbar-link.active {
-            background: rgba(255, 255, 255, 0.16);
-            color: #ffffff;
-            box-shadow: none;
-        }
-        .project-card {
-            background-color: #ffffff;
-            border: 1px solid #dfe8ef;
-            border-radius: 0.75rem;
-            box-shadow: none;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-2px);
-            box-shadow: none;
-            border-color: #bfd3e3;
-        }
-        .info-label {
-            color: #1f4f72;
-        }
-        .info-value {
-            color: #4f5f6c;
-        }
-        h1, h2, h3 {
-            color: #1f4f72 !important;
-        }
-        p, li {
-            color: #4f5f6c !important;
-        }
-        hr {
-            border-color: #d7e4ee !important;
-        }
-        /* Reduce vertical scrolling on long project pages */
-        .mb-32 {
-            margin-bottom: 4.5rem !important;
-        }
-        .mb-24 {
-            margin-bottom: 3.25rem !important;
-        }
-        .my-24 {
-            margin-top: 3.5rem !important;
-            margin-bottom: 3.5rem !important;
-        }
-        .mt-24 {
-            margin-top: 3.5rem !important;
-        }
-        .p-12 {
-            padding: 2rem !important;
-        }
-        .p-10 {
-            padding: 1.6rem !important;
-        }
-        .p-8 {
-            padding: 1.4rem !important;
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory System Project - Alexander Lynn</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="icon.png">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg:#f3f5f7; --surface:#fff; --border:#dfe8ef; --blue:#1f4f72; --blue-bright:#3e7ea9; --text:#2f3b4a; --text-mid:#4f5f6c; --text-dim:#60707d; --white:#fff; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+nav { padding: 1rem 2rem; border-bottom: 1px solid rgba(0,0,0,.12); display:flex; justify-content:center; position:sticky; top:0; z-index:50; background:#1f3e59; }
+.nav-links { list-style:none; display:flex; gap:.35rem; }
+.nav-links a { display:block; padding:.45rem .9rem; text-decoration:none; font-size:.85rem; font-weight:600; color:#d2e1ec; border-radius:6px; }
+.nav-links a:hover, .nav-links a.active { color:#fff; background:rgba(255,255,255,.16); }
+.project-hero { border-bottom:1px solid var(--border); overflow:hidden; position:relative; }
+.project-hero-img { width:100%; max-height:480px; object-fit:cover; display:block; filter:brightness(.63); }
+.project-hero-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(11,28,45,.82) 0%, rgba(11,28,45,.5) 45%, rgba(11,28,45,.28) 100%); }
+.project-hero-content { position:absolute; bottom:0; left:0; right:0; padding:2.3rem 2rem; max-width:1200px; margin:0 auto; }
+.breadcrumb { font-size:.78rem; font-weight:600; color:#d2e1ec; margin-bottom:1rem; display:flex; gap:.5rem; }
+.breadcrumb a { color:#8ec3ea; text-decoration:none; }
+.project-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.2rem,5vw,4rem); font-weight:800; line-height:1; color:#fff; margin-bottom:1rem; text-shadow:0 3px 10px rgba(0,0,0,.5); }
+.project-roles { display:flex; gap:.5rem; flex-wrap:wrap; }
+.role-tag { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.3rem .75rem; border-radius:999px; background:rgba(13,48,76,.88); color:#e7f2fb; border:1px solid rgba(138,190,225,.45); }
+main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
+.meta-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:2.5rem; }
+.meta-item { background:var(--surface); padding:1.2rem; }
+.meta-label { font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim); margin-bottom:.4rem; }
+.meta-value { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--blue); }
+.section { margin-bottom:2.8rem; }
+.section-label { font-size:.75rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--blue-bright); margin-bottom:1.2rem; display:flex; gap:1rem; align-items:center; }
+.section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+.section-title { font-family:'Space Grotesk',sans-serif; font-size:1.55rem; font-weight:700; color:var(--blue); margin-bottom:1rem; }
+.section-body { font-size:1rem; line-height:1.8; color:var(--text-mid); max-width:860px; }
+.two-col { display:grid; grid-template-columns:1.2fr 1fr; gap:2rem; align-items:start; }
+.video-wrap { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px; border:1px solid var(--border); }
+.video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:none; }
+.feature-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:.7rem; margin-top:1rem; }
+.feature-list li { font-size:.95rem; line-height:1.7; color:var(--text-mid); padding-left:1.2rem; position:relative; }
+.feature-list li::before { content:''; position:absolute; left:0; top:.65rem; width:5px; height:5px; border-radius:50%; background:var(--blue-bright); }
+.divider { height:1px; background:var(--border); margin:2rem 0; }
+.doc-carousel { position:relative; max-width:980px; margin:0 auto; }
+.doc-slide { display:none; }
+.doc-slide.active { display:block; }
+.img-item img { width:100%; display:block; border-radius:8px; border:1px solid var(--border); cursor:pointer; aspect-ratio:16/9; object-fit:contain; background:#000; }
+.doc-nav-btn { position:absolute; top:50%; transform:translateY(-50%); width:34px; height:34px; border:1px solid rgba(31,79,114,.35); background:rgba(255,255,255,.9); color:#1f4f72; border-radius:999px; font-weight:700; line-height:1; cursor:pointer; z-index:2; }
+.doc-nav-btn.prev { left:8px; }
+.doc-nav-btn.next { right:8px; }
+.doc-counter { margin-top:.55rem; text-align:center; font-size:.8rem; color:var(--text-dim); }
+.carousel-caption { margin-top:.8rem; text-align:center; color:var(--text-dim); font-size:.9rem; font-weight:600; }
+.lightbox { display:none; position:fixed; z-index:9999; inset:0; background:rgba(0,0,0,.92); justify-content:center; align-items:center; flex-direction:column; padding:2rem; }
+.lightbox-img { max-width:85%; max-height:80vh; border-radius:8px; }
+.lightbox-close { position:absolute; top:1.5rem; right:2rem; font-size:2rem; color:#fff; cursor:pointer; line-height:1; }
+.lightbox-prev,.lightbox-next { position:absolute; top:50%; transform:translateY(-50%); background:rgba(17,24,39,.9); color:#fff; border:1px solid rgba(255,255,255,.4); font-size:1.4rem; padding:.9rem 1.1rem; cursor:pointer; border-radius:6px; }
+.lightbox-prev { left:1.5rem; } .lightbox-next { right:1.5rem; }
+footer { border-top:1px solid var(--border); padding:1.2rem 2rem; display:flex; justify-content:space-between; }
+footer p { font-size:.8rem; color:var(--text-dim); }
+@media (max-width:900px) { nav,footer{padding-left:1rem;padding-right:1rem;} .project-hero-content{padding:1.6rem 1rem;} main{padding:1.7rem 1rem 3rem;} .meta-strip{grid-template-columns:1fr 1fr;} .two-col{grid-template-columns:1fr;} }
+</style>
 </head>
-<body class="antialiased">
-    <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen()">
-        <span class="close-btn" onclick="closeFullscreen()">&times;</span>
-        <div class="fullscreen-content">
-            <img id="fullscreenImage" src="" alt="Full Screen Image">
+<body>
+<nav>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+  </ul>
+</nav>
+
+<div class="project-hero">
+  <img class="project-hero-img" src="Inventory/1In_Game_HUD.webp" alt="Inventory System Project">
+  <div class="project-hero-overlay"></div>
+  <div class="project-hero-content">
+    <div class="breadcrumb"><a href="index.html">Projects</a><span>/</span><span>Inventory System</span></div>
+    <h1 class="project-title">Inventory System Project</h1>
+    <div class="project-roles"><span class="role-tag">Solo Developer</span><span class="role-tag">UI/UX Design</span><span class="role-tag">Gameplay Programming</span></div>
+  </div>
+</div>
+
+<main>
+  <div class="meta-strip">
+    <div class="meta-item"><div class="meta-label">Role</div><div class="meta-value">Solo Developer</div></div>
+    <div class="meta-item"><div class="meta-label">Engine</div><div class="meta-value">Unreal Engine 5</div></div>
+    <div class="meta-item"><div class="meta-label">Focus</div><div class="meta-value">RPG Inventory Systems</div></div>
+    <div class="meta-item"><div class="meta-label">Type</div><div class="meta-value">UI/Gameplay Systems</div></div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Overview</p>
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">System Goals</h2>
+        <p class="section-body">For this project, I wanted to learn more about RPG-style inventory systems in Unreal Engine and how to showcase my UI design skills during gameplay, and it ended up being a lot of fun to make. Here is a collection of the systems I have made so far:</p>
+        <ul class="feature-list">
+          <li>Player item HUD: Displays player health, stamina, and items.</li>
+          <li>Interaction system for items, chests, and world objects.</li>
+          <li>Inventory menu with armor, consumables, and ammo equipment.</li>
+          <li>Item hover descriptions, sorting, dropping, and chest transfer.</li>
+          <li>Campfire rest system, potion healing, and bow + arrow combat support.</li>
+          <li>Icon design/implementation and locomotion-synced equipment.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/toTz3hfITIU?si=cujzI1sSE-EQiagK" title="Inventory System Showcase" allowfullscreen loading="lazy"></iframe>
         </div>
+        <p class="carousel-caption">Inventory System Showcase</p>
+      </div>
     </div>
+  </div>
 
-    <div class="min-h-screen flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
-        <nav class="navbar w-full py-4 px-6 flex justify-center">
-            <div class="flex space-x-6">
-                <a href="index.html" class="navbar-link active">Projects</a>
-                <a href="about.html" class="navbar-link">About</a>
-                <a href="experience.html" class="navbar-link">Experience</a>
-            </div>
-        </nav>
+  <div class="divider"></div>
 
-        <header class="w-full flex flex-col items-center mt-20">
-            <div class="w-full mb-12 max-w-4xl">
-                <img src="Inventory/4Item_Hover_Descriptions.webp" alt="Item Hover Descriptions screenshot" class="w-full h-auto rounded-xl shadow-lg cursor-pointer" onclick="openFullscreen(this.src)">
-            </div>
-
-            <div class="w-full max-w-3xl mx-auto mb-20 project-card p-8 sm:p-10">
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">Inventory System Project</h1>
-                <table class="info-table">
-                    <tr>
-                        <td class="info-label">Role:</td>
-                        <td class="info-value">Solo Developer</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Engine:</td>
-                        <td class="info-value">Unreal Engine 5</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Focus:</td>
-                        <td class="info-value">RPG-style inventory systems and in-game UI design</td>
-                    </tr>
-                </table>
-
-                <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                    For this project, I wanted to learn more about RPG-style inventory systems in Unreal Engine and how to showcase my UI design skills during gameplay, and it ended up being a lot of fun to make. Here is a collection of the systems I have made so far:
-                </p>
-
-                <ul class="list-disc list-inside space-y-2 text-lg text-gray-700 leading-relaxed ml-2">
-                    <li>Player item HUD: Displays player health, stamina, and items.</li>
-                    <li>Interaction system: An interactable widget that enables players to pick up items, open chests, and more.</li>
-                    <li>Pulling up inventory in game: Player can open inventory at any point in game.</li>
-                    <li>Equipping armor, consumables, and ammo: Equipped items show up on player and update in game HUD.</li>
-                    <li>Item hover descriptions: Lists stats for items such as durability, weight, value, and more.</li>
-                    <li>Sorting items: Players can sort items in inventory by either weight or value.</li>
-                    <li>Chest system: Players can open chests and add items to inventory.</li>
-                    <li>Dropping items: Players can remove items from inventory by dropping them.</li>
-                    <li>Reusable button shader material: Made for dynamic button interface for standard, hover, click, and disabled states.</li>
-                    <li>Campfire rest system: A restore point that refills health and creates a checkpoint.</li>
-                    <li>Potion equip and healing: Potions can be equipped and used in game to restore player health.</li>
-                    <li>Bow and arrow system: Players can launch arrows at enemies and deal damage. Headshots are an automatic kill.</li>
-                    <li>Player weight becomes heavier when too many items are in inventory.</li>
-                    <li>Icon design and implementation.</li>
-                    <li>Weapons and items synced with player locomotion.</li>
-                    <li>Archer Enemy AI.</li>
-                </ul>
-            </div>
-
-            <div class="w-full max-w-4xl mx-auto mb-20">
-                <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Inventory System Showcase</h2>
-                <div class="relative pt-[56.25%] w-full h-0">
-                    <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl"
-                        src="https://www.youtube.com/embed/toTz3hfITIU?si=cujzI1sSE-EQiagK"
-                        title="Inventory System Showcase"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-        </header>
-
-        <main class="w-full max-w-5xl">
-            <section class="mb-16">
-                <div class="project-card p-8 sm:p-10">
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-indigo-700 mb-8 text-center">Project Gallery</h2>
-                    <div class="carousel-container">
-                        <img id="galleryImage" class="gallery-image" src="Inventory/1In_Game_HUD.webp" alt="In Game HUD" onclick="openFullscreen(this.src)">
-                        <button class="carousel-nav-btn prev" onclick="prevGalleryImage()" aria-label="Previous image">&#10094;</button>
-                        <button class="carousel-nav-btn next" onclick="nextGalleryImage()" aria-label="Next image">&#10095;</button>
-                    </div>
-                    <p id="galleryCaption" class="carousel-caption">In Game HUD</p>
-                    <p id="galleryCounter" class="text-center mt-2 text-gray-600">1 / 12</p>
-                </div>
-            </section>
-        </main>
-
-        <footer class="mt-12 text-center text-gray-600 text-sm" style="color: rgba(0, 0, 0, 1)">
-            <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
-            <p>Alexander Lynn - Technical Designer</p>
-        </footer>
+  <div class="section">
+    <p class="section-label">Project Gallery</p>
+    <h2 class="section-title">Inventory Features</h2>
+    <div class="doc-carousel" data-carousel="inventory">
+      <div class="doc-slide active"><div class="img-item"><img src="Inventory/1In_Game_HUD.webp" alt="In Game HUD" class="lightbox-trigger"></div><p class="carousel-caption">In Game HUD</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/2Interaction_System.webp" alt="Interaction System" class="lightbox-trigger"></div><p class="carousel-caption">Interaction System</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/3Inventory_Empty.webp" alt="Inventory Empty" class="lightbox-trigger"></div><p class="carousel-caption">Inventory Empty</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/4Item_Hover_Descriptions.webp" alt="Item Hover Descriptions" class="lightbox-trigger"></div><p class="carousel-caption">Item Hover Descriptions</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/5Armor_Section.webp" alt="Armor Section" class="lightbox-trigger"></div><p class="carousel-caption">Armor Section</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/6Consumables_Section.webp" alt="Consumables Section" class="lightbox-trigger"></div><p class="carousel-caption">Consumables Section</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/7Ammo_Section.webp" alt="Ammo Section" class="lightbox-trigger"></div><p class="carousel-caption">Ammo Section</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/8Chest_System.webp" alt="Chest System" class="lightbox-trigger"></div><p class="carousel-caption">Chest System</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/9Campfire_Rest_System.webp" alt="Campfire Rest System" class="lightbox-trigger"></div><p class="carousel-caption">Campfire Rest System</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/10Bow_and_Arrow_Targeting.webp" alt="Bow and Arrow Targeting" class="lightbox-trigger"></div><p class="carousel-caption">Bow and Arrow Targeting</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/11Dropped_Items.webp" alt="Dropped Items" class="lightbox-trigger"></div><p class="carousel-caption">Dropped Items</p></div>
+      <button class="doc-nav-btn prev" onclick="moveDocSlide('inventory', -1)" aria-label="Previous image">&#10094;</button>
+      <button class="doc-nav-btn next" onclick="moveDocSlide('inventory', 1)" aria-label="Next image">&#10095;</button>
     </div>
+    <p class="doc-counter" id="doc-counter-inventory">1 / 11</p>
+  </div>
+</main>
 
-    <script>
-        const inventoryGallery = [
-            { src: 'Inventory/1In_Game_HUD.webp', label: 'In Game HUD' },
-            { src: 'Inventory/2Interaction_System.webp', label: 'Interaction System' },
-            { src: 'Inventory/3Inventory_Empty.webp', label: 'Inventory Empty' },
-            { src: 'Inventory/4Item_Hover_Descriptions.webp', label: 'Item Hover Descriptions' },
-            { src: 'Inventory/5Armor_Section.webp', label: 'Armor Section' },
-            { src: 'Inventory/6Consumables_Section.webp', label: 'Consumables Section' },
-            { src: 'Inventory/7Ammo_Section.webp', label: 'Ammo Section' },
-            { src: 'Inventory/8Chest_System.webp', label: 'Chest System' },
-            { src: 'Inventory/9Campfire_Rest_System.webp', label: 'Campfire Rest System' },
-            { src: 'Inventory/10Bow_and_Arrow_Targeting.webp', label: 'Bow and Arrow Targeting' },
-            { src: 'Inventory/11Dropped_Items.webp', label: 'Dropped Items' }
-        ];
-        let currentGalleryIndex = 0;
+<footer>
+  <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
+  <p>Alexander Lynn - Technical Designer</p>
+</footer>
 
-        function renderGalleryImage() {
-            const imageEl = document.getElementById('galleryImage');
-            const captionEl = document.getElementById('galleryCaption');
-            const counterEl = document.getElementById('galleryCounter');
-            const item = inventoryGallery[currentGalleryIndex];
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lb-close">&times;</span>
+  <button class="lightbox-prev" id="lb-prev">&#10094;</button>
+  <img class="lightbox-img" id="lb-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next">&#10095;</button>
+</div>
 
-            imageEl.src = item.src;
-            imageEl.alt = item.label;
-            captionEl.textContent = item.label;
-            counterEl.textContent = `${currentGalleryIndex + 1} / ${inventoryGallery.length}`;
-        }
-
-        function nextGalleryImage() {
-            currentGalleryIndex = (currentGalleryIndex + 1) % inventoryGallery.length;
-            renderGalleryImage();
-        }
-
-        function prevGalleryImage() {
-            currentGalleryIndex = (currentGalleryIndex - 1 + inventoryGallery.length) % inventoryGallery.length;
-            renderGalleryImage();
-        }
-
-        function openFullscreen(imageSrc) {
-            document.getElementById('fullscreenImage').src = imageSrc;
-            document.getElementById('fullscreenOverlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeFullscreen() {
-            document.getElementById('fullscreenOverlay').style.display = 'none';
-            document.body.style.overflow = 'scroll';
-        }
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                closeFullscreen();
-            } else if (e.key === 'ArrowRight') {
-                nextGalleryImage();
-            } else if (e.key === 'ArrowLeft') {
-                prevGalleryImage();
-            }
-        });
-
-        renderGalleryImage();
-    </script>
+<script>
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+let triggers = [], idx = 0;
+document.querySelectorAll('.lightbox-trigger').forEach((el, i) => {
+  triggers.push(el);
+  el.addEventListener('click', () => { idx = i; lbImg.src = el.src; lb.style.display = 'flex'; });
+});
+document.getElementById('lb-close').onclick = () => lb.style.display = 'none';
+lb.addEventListener('click', e => { if (e.target === lb) lb.style.display = 'none'; });
+document.getElementById('lb-prev').onclick = () => { idx = (idx - 1 + triggers.length) % triggers.length; lbImg.src = triggers[idx].src; };
+document.getElementById('lb-next').onclick = () => { idx = (idx + 1) % triggers.length; lbImg.src = triggers[idx].src; };
+document.addEventListener('keydown', e => {
+  if (lb.style.display !== 'flex') return;
+  if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
+  if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
+  if (e.key === 'Escape') lb.style.display = 'none';
+});
+const docSlideIndex = { inventory: 0 };
+function moveDocSlide(carouselName, step) {
+  const carousel = document.querySelector('.doc-carousel[data-carousel="' + carouselName + '"]');
+  if (!carousel) return;
+  const slides = carousel.querySelectorAll('.doc-slide');
+  docSlideIndex[carouselName] = (docSlideIndex[carouselName] + step + slides.length) % slides.length;
+  slides.forEach((slide, i) => slide.classList.toggle('active', i === docSlideIndex[carouselName]));
+  const counter = document.getElementById('doc-counter-' + carouselName);
+  if (counter) counter.textContent = (docSlideIndex[carouselName] + 1) + ' / ' + slides.length;
+}
+</script>
 </body>
 </html>

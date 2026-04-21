@@ -1,677 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Lynn - Fishy Business Project</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="icon.png">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-image: url('Portfolio.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #374151;
-            overflow-y: scroll;
-        }
-
-        .project-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 1.20rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .btn-primary {
-            background: linear-gradient(to right, #4649ff, #3352ff);
-            border: none;
-            color: white;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease-in-out;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(to right, #4649ff, #3352ff);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.15), 0 3px 6px -2px rgba(0, 0, 0, 0.08);
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fade-in-down {
-            animation: fadeInDown 1s ease-out forwards;
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            z-index: 1000;
-            border-bottom-left-radius: 1.25rem;
-            border-bottom-right-radius: 1.25rem;
-        }
-        .navbar-link {
-            color: #4a5568;
-            font-weight: 600;
-            font-size: 1.35rem;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            transition: all 0.2s ease-in-out;
-        }
-        .navbar-link:hover {
-            background-color: #e2e8f0;
-            color: #2d3748;
-            font-size: 1.35rem;
-        }
-        .navbar-link.active {
-            background: linear-gradient(to right, #4649ff, #3352ff);
-            color: white;
-            font-size: 1.35rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-table {
-            width: 100%;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            border-collapse: separate;
-            border-spacing: 0 1rem;
-        }
-        .info-table td {
-            padding: 1rem 0;
-        }
-        .info-label {
-            font-weight: 700;
-            color: #1f2937;
-            width: 30%;
-            font-size: 1.3rem;
-        }
-        .info-value {
-            color: #374151;
-            font-weight: 500;
-            width: 70%;
-            font-size: 1.3rem;
-        }
-
-        .ui-comparison-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr; 
-            gap: 2rem;
-            align-items: flex-start;
-            width: 100%;
-        }
-
-        .ui-image-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            background-color: #fff;
-            cursor: pointer;
-        }
-        .ui-image-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            object-fit: contain;
-            aspect-ratio: 16/10; 
-            max-height: 400px;
-        }
-        
-        .main-thumbnail {
-            cursor: pointer;
-        }
-        
-        /* Fullscreen Overlay Styles */
-        .fullscreen-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 5000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .fullscreen-content {
-            max-width: 90%;
-            max-height: 90%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .fullscreen-content img {
-            width: auto;
-            max-width: 100%;
-            height: auto;
-            max-height: 100vh;
-            object-fit: contain;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 5001;
-            padding: 10px;
-            line-height: 1;
-        }
-
-        .ui-carousel-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 62.5%; /* 16:10 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            background-color: #000;
-        }
-
-        .ui-carousel-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            background-color: #000;
-        }
-        .ui-carousel-slide.active {
-            display: block;
-            opacity: 1;
-        }
-        .ui-carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 0.75rem;
-            cursor: pointer;
-        }
-
-        /* Carousel Styles (Copied from previous implementation) */
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 129.4%; /* Document aspect ratio 1:1.294 (8.5x11) */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            background-color: #000;
-        }
-
-        .carousel-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            background-color: #000;
-        }
-        .carousel-slide.active {
-            display: block;
-            opacity: 1;
-        }
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 0.75rem;
-            cursor: pointer;
-        }
-
-        .carousel-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 0.75rem 0.5rem;
-            cursor: pointer;
-            font-size: 1.5rem;
-            z-index: 10;
-            border-radius: 0.5rem;
-            transition: background-color 0.3s ease;
-        }
-        .carousel-nav-btn:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-        .carousel-nav-btn.prev {
-            left: 0.5rem;
-        }
-        .carousel-nav-btn.next {
-            right: 0.5rem;
-        }
-
-        .carousel-dots {
-            position: absolute;
-            bottom: 0.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-            z-index: 10;
-        }
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
-            background-color: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .carousel-dot.active {
-            background-color: white;
-            transform: scale(1.2);
-        }
-
-        /* Shared site theme consistency */
-        body {
-            background-color: #f3f5f7;
-            background-image: none;
-            color: #2f3b4a;
-        }
-        .navbar {
-            background-color: #1f3e59;
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        .navbar-link {
-            color: #d2e1ec;
-            font-weight: 500;
-            padding: 0.45rem 0.85rem;
-            font-size: 0.9rem;
-            border-radius: 0.3rem;
-        }
-        .navbar-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            font-size: 0.9rem;
-        }
-        .navbar-link.active {
-            background: rgba(255, 255, 255, 0.16);
-            color: #ffffff;
-            font-size: 0.9rem;
-            box-shadow: none;
-        }
-        .project-card {
-            background-color: #ffffff;
-            border: 1px solid #dfe8ef;
-            border-radius: 0.75rem;
-            box-shadow: none;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-2px);
-            box-shadow: none;
-            border-color: #bfd3e3;
-        }
-        .btn-primary {
-            background: #3d85b5;
-            border: 1.5px solid #3d85b5;
-            color: #ffffff;
-            box-shadow: none;
-        }
-        .btn-primary:hover {
-            background: #2f6f98;
-            border-color: #2f6f98;
-            color: #ffffff;
-            box-shadow: none;
-        }
-        .info-label {
-            color: #1f4f72;
-        }
-        .info-value {
-            color: #4f5f6c;
-        }
-        h2, h3 {
-            color: #1f4f72 !important;
-        }
-        p, li {
-            color: #4f5f6c !important;
-        }
-        hr {
-            border-color: #d7e4ee !important;
-        }
-        /* Reduce vertical scrolling on long project pages */
-        .mb-32 {
-            margin-bottom: 4.5rem !important;
-        }
-        .mb-24 {
-            margin-bottom: 3.25rem !important;
-        }
-        .my-24 {
-            margin-top: 3.5rem !important;
-            margin-bottom: 3.5rem !important;
-        }
-        .mt-24 {
-            margin-top: 3.5rem !important;
-        }
-        .p-12 {
-            padding: 2rem !important;
-        }
-        .p-10 {
-            padding: 1.6rem !important;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fishy Business Project - Alexander Lynn</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="icon.png">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg:#f3f5f7; --surface:#fff; --border:#dfe8ef; --blue:#1f4f72; --blue-bright:#3e7ea9; --text:#2f3b4a; --text-mid:#4f5f6c; --text-dim:#60707d; --white:#fff; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+nav { padding:1rem 2rem; border-bottom:1px solid rgba(0,0,0,.12); display:flex; justify-content:center; position:sticky; top:0; z-index:50; background:#1f3e59; }
+.nav-links { list-style:none; display:flex; gap:.35rem; }
+.nav-links a { display:block; padding:.45rem .9rem; text-decoration:none; font-size:.85rem; font-weight:600; color:#d2e1ec; border-radius:6px; }
+.nav-links a:hover,.nav-links a.active { color:#fff; background:rgba(255,255,255,.16); }
+.project-hero { border-bottom:1px solid var(--border); overflow:hidden; position:relative; }
+.project-hero-img { width:100%; max-height:480px; object-fit:cover; display:block; filter:brightness(.64); }
+.project-hero-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(11,28,45,.82) 0%, rgba(11,28,45,.5) 45%, rgba(11,28,45,.28) 100%); }
+.project-hero-content { position:absolute; bottom:0; left:0; right:0; padding:2.3rem 2rem; max-width:1200px; margin:0 auto; }
+.breadcrumb { font-size:.78rem; font-weight:600; color:#d2e1ec; margin-bottom:1rem; display:flex; gap:.5rem; }
+.breadcrumb a { color:#8ec3ea; text-decoration:none; }
+.project-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.2rem,5vw,4rem); font-weight:800; line-height:1; color:#fff; margin-bottom:1rem; text-shadow:0 3px 10px rgba(0,0,0,.5); }
+.project-roles { display:flex; gap:.5rem; flex-wrap:wrap; }
+.role-tag { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.3rem .75rem; border-radius:999px; background:rgba(13,48,76,.88); color:#e7f2fb; border:1px solid rgba(138,190,225,.45); }
+main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
+.meta-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:2.5rem; }
+.meta-item { background:var(--surface); padding:1.2rem; }
+.meta-label { font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim); margin-bottom:.4rem; }
+.meta-value { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--blue); }
+.section { margin-bottom:2.8rem; }
+.section-label { font-size:.75rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--blue-bright); margin-bottom:1.2rem; display:flex; gap:1rem; align-items:center; }
+.section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+.section-title { font-family:'Space Grotesk',sans-serif; font-size:1.55rem; font-weight:700; color:var(--blue); margin-bottom:1rem; }
+.section-body { font-size:1rem; line-height:1.8; color:var(--text-mid); max-width:860px; }
+.two-col { display:grid; grid-template-columns:1.2fr 1fr; gap:2rem; align-items:start; }
+.video-wrap { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px; border:1px solid var(--border); }
+.video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:none; }
+.feature-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:.7rem; margin-top:1rem; }
+.feature-list li { font-size:.95rem; line-height:1.7; color:var(--text-mid); padding-left:1.2rem; position:relative; }
+.feature-list li::before { content:''; position:absolute; left:0; top:.65rem; width:5px; height:5px; border-radius:50%; background:var(--blue-bright); }
+.divider { height:1px; background:var(--border); margin:2rem 0; }
+.doc-carousel { position:relative; max-width:980px; margin:0 auto; }
+.doc-slide { display:none; }
+.doc-slide.active { display:block; }
+.img-item img { width:100%; display:block; border-radius:8px; border:1px solid var(--border); cursor:pointer; aspect-ratio:16/10; object-fit:contain; background:#000; }
+.doc-nav-btn { position:absolute; top:50%; transform:translateY(-50%); width:34px; height:34px; border:1px solid rgba(31,79,114,.35); background:rgba(255,255,255,.9); color:#1f4f72; border-radius:999px; font-weight:700; line-height:1; cursor:pointer; z-index:2; }
+.doc-nav-btn.prev { left:8px; } .doc-nav-btn.next { right:8px; }
+.doc-counter { margin-top:.55rem; text-align:center; font-size:.8rem; color:var(--text-dim); }
+.carousel-caption { margin-top:.8rem; text-align:center; color:var(--text-dim); font-size:.9rem; font-weight:600; }
+.btn-primary { display:inline-block; text-decoration:none; background:#3d85b5; border:1.5px solid #3d85b5; color:#fff; font-weight:600; padding:.7rem 1.4rem; border-radius:.75rem; }
+.btn-primary:hover { background:#2f6f98; border-color:#2f6f98; }
+.lightbox { display:none; position:fixed; z-index:9999; inset:0; background:rgba(0,0,0,.92); justify-content:center; align-items:center; flex-direction:column; padding:2rem; }
+.lightbox-img { max-width:85%; max-height:80vh; border-radius:8px; }
+.lightbox-close { position:absolute; top:1.5rem; right:2rem; font-size:2rem; color:#fff; cursor:pointer; line-height:1; }
+.lightbox-prev,.lightbox-next { position:absolute; top:50%; transform:translateY(-50%); background:rgba(17,24,39,.9); color:#fff; border:1px solid rgba(255,255,255,.4); font-size:1.4rem; padding:.9rem 1.1rem; cursor:pointer; border-radius:6px; }
+.lightbox-prev { left:1.5rem; } .lightbox-next { right:1.5rem; }
+footer { border-top:1px solid var(--border); padding:1.2rem 2rem; display:flex; justify-content:space-between; }
+footer p { font-size:.8rem; color:var(--text-dim); }
+@media (max-width:900px) { nav,footer{padding-left:1rem;padding-right:1rem;} .project-hero-content{padding:1.6rem 1rem;} main{padding:1.7rem 1rem 3rem;} .meta-strip{grid-template-columns:1fr 1fr;} .two-col{grid-template-columns:1fr;} }
+</style>
 </head>
-<body class="antialiased">
+<body>
+<nav>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+  </ul>
+</nav>
 
-    <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen()">
-        <span class="close-btn" onclick="closeFullscreen()">&times;</span>
-        <div id="fullscreenContent" class="fullscreen-content">
-            <img id="fullscreenImage" src="" alt="Full Screen Image">
+<div class="project-hero">
+  <img class="project-hero-img" src="Fishy/FB-Poster.png" alt="Fishy Business Poster">
+  <div class="project-hero-overlay"></div>
+  <div class="project-hero-content">
+    <div class="breadcrumb"><a href="index.html">Projects</a><span>/</span><span>Fishy Business</span></div>
+    <h1 class="project-title">Fishy Business</h1>
+    <div class="project-roles"><span class="role-tag">Producer</span><span class="role-tag">UI/UX Designer</span></div>
+  </div>
+</div>
+
+<main>
+  <div class="meta-strip">
+    <div class="meta-item"><div class="meta-label">Role</div><div class="meta-value">Producer, UI/UX Designer</div></div>
+    <div class="meta-item"><div class="meta-label">Duration</div><div class="meta-value">September 2025 - December 2025</div></div>
+    <div class="meta-item"><div class="meta-label">Team Size</div><div class="meta-value">7</div></div>
+    <div class="meta-item"><div class="meta-label">Engine</div><div class="meta-value">Unreal Engine</div></div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Overview</p>
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">Fishy Business</h2>
+        <p class="section-body">Fishy Business is a 2D Tower Defense mobile game, set to release in December 2025. Catch fish in the water and sell them to grow your fisherman business and save your people! I was the Producer of this project and I also worked on UI design and implementation.</p>
+        <p style="margin-top:1rem;"><a href="https://fishcat-studios.itch.io/fishy-business" target="_blank" rel="noopener noreferrer" class="btn-primary">Play on itch.io</a></p>
+      </div>
+      <div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/sI6E5IZVMcA?si=vhn7FhTovD9LboFG" title="Fishy Business Trailer" allowfullscreen loading="lazy"></iframe>
         </div>
+        <p class="carousel-caption">Fishy Business Trailer</p>
+      </div>
     </div>
+  </div>
 
-    <div class="min-h-screen flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
+  <div class="divider"></div>
 
-        <nav class="navbar w-full py-4 px-6 flex justify-center">
-            <div class="flex space-x-6">
-                <a href="index.html" class="navbar-link active">Projects</a>
-                <a href="about.html" class="navbar-link">About</a>
-                <a href="experience.html" class="navbar-link">Experience</a>
-            </div>
-        </nav>
+  <div class="section">
+    <p class="section-label">Project Management</p>
+    <h2 class="section-title">Project Management & Documentation</h2>
+    <p class="section-body">As Producer, I led a team of seven, scheduling meetings and delegating tasks on a weekly basis. I organized a development timeline that ensured each team member knew what to work on at all times, strengthening overall production. I was also heavily involved in handling the documentation for the game, including the GDD, ASG, Product Backlog, team contracts, and more. Strong communication and team collaboration was crucial to ensure that all standards are set from the get-go and deadlines are met successfully.</p>
+  </div>
 
-        <header class="w-full flex flex-col items-center">
-            
-            <div class="w-full mb-24 max-w-4xl mt-32">
-                <img src="Fishy/FB-Poster.png" alt="Fishy Business Poster" class="w-full h-auto rounded-xl shadow-lg main-thumbnail" onclick="openFullscreen('Fishy/FB-Poster.png')">
-            </div>
+  <div class="divider"></div>
 
-            <div class="w-full max-w-2xl mx-auto mb-32 project-card p-10">
-                <table class="info-table">
-                    <tr>
-                        <td class="info-label">Role:</td>
-                        <td class="info-value">Producer, UI/UX Designer</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Duration:</td>
-                        <td class="info-value">September 2025 – December 2025</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Team size:</td>
-                        <td class="info-value">7</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Genre:</td>
-                        <td class="info-value">Tower Defense, Mobile</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Engine:</td>
-                        <td class="info-value">Unreal Engine</td>
-                    </tr>
-                </table>
-
-                <p class="text-xl text-gray-700 leading-relaxed mx-auto text-left">
-                    Fishy Business is a 2D Tower Defense mobile game, set to release in December 2025.
-                    Catch fish in the water and sell them to grow your fisherman business and save your
-                    people! I was the Producer of this project and I also worked on UI design and
-                    implementation.
-                </p>
-                <div class="mt-8 text-center">
-                    <a href="https://fishcat-studios.itch.io/fishy-business" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block text-lg px-8 py-3">
-                        Play on itch.io
-                    </a>
-                </div>
-            </div>
-
-            <div class="w-full max-w-4xl mx-auto mb-32">
-                <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Fishy Business Trailer</h3>
-                <div class="relative pt-[56.25%] w-full h-0">
-                    <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
-                        src="https://www.youtube.com/embed/sI6E5IZVMcA?si=vhn7FhTovD9LboFG" 
-                        title="Fishy Business Trailer" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-
-        </header>
-
-        <main class="w-full max-w-5xl">
-            
-            <section id="project-management-section" class="mb-32" style="display: block;">
-                <div class="project-card p-12 flex flex-col items-center">
-                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">Project Management & Documentation</h2>
-                    
-                    <div class="w-full">
-                        <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                            As Producer, I led a team of seven, scheduling meetings and delegating tasks on a
-                            weekly basis. I organized a development timeline that ensured each team member
-                            knew what to work on at all times, strengthening overall production. I was also heavily
-                            involved in handling the documentation for the game, including the GDD, ASG, Product
-                            Backlog, team contracts, and more. Strong communication and team collaboration was
-                            crucial to ensure that all standards are set from the get-go and deadlines are met
-                            successfully.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            
-            <hr class="my-24 border-t-2 border-gray-300">
-            <section id="ui-section" class="mb-32" style="display: block;">
-                <div class="project-card p-12 flex flex-col items-center">
-                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">User Interface (UI) Design</h2>
-                    
-                    <div class="w-full mb-12 max-w-4xl">
-                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                            As UI/UX Designer, I implemented all UI elements in game, providing the player with ease
-                            of navigation. Since this is a mobile game, I needed to make sure all elements fit
-                            correctly on a phone screen as well as implementing touch functionality. I utilized a
-                            series of widget blueprints and a bit of code in order to accomplish the intended goals
-                            for this project, and I think it turned out pretty good! Here are my contributions as UI
-                            Designer.
-                        </p>
-                    </div>
-
-                    <div class="w-full max-w-4xl mx-auto mb-12">
-                        <div id="ui-carousel" class="ui-carousel-container mx-auto">
-                            <div class="ui-carousel-slide active" data-index="0">
-                                <img src="Fishy/FB-Title.png" alt="Main Menu" onclick="openFullscreen(this.src)">
-                            </div>
-                            <div class="ui-carousel-slide" data-index="1">
-                                <img src="Fishy/FB-Settings.png" alt="Settings Menu" onclick="openFullscreen(this.src)">
-                            </div>
-                            <div class="ui-carousel-slide" data-index="2">
-                                <img src="Fishy/FB-Shop.png" alt="Shop Menu" onclick="openFullscreen(this.src)">
-                            </div>
-                            <div class="ui-carousel-slide" data-index="3">
-                                <img src="Fishy/FB-Lvl-Select.png" alt="Level Select" onclick="openFullscreen(this.src)">
-                            </div>
-                            <div class="ui-carousel-slide" data-index="4">
-                                <img src="Fishy/FB-HUD.png" alt="In-Game HUD" onclick="openFullscreen(this.src)">
-                            </div>
-                            <div class="ui-carousel-slide" data-index="5">
-                                <img src="Fishy/FB-Upgrade-Menu.png" alt="Upgrade Menu" onclick="openFullscreen(this.src)">
-                            </div>
-                            <div class="ui-carousel-slide" data-index="6">
-                                <img src="Fishy/FB-Pause-Menu.png" alt="Pause Menu" onclick="openFullscreen(this.src)">
-                            </div>
-                            <div class="ui-carousel-slide" data-index="7">
-                                <img src="Fishy/FB-Game-Over.png" alt="Game Over" onclick="openFullscreen(this.src)">
-                            </div>
-                            <button class="carousel-nav-btn prev" onclick="prevSlide('ui-carousel')">&#10094;</button>
-                            <button class="carousel-nav-btn next" onclick="nextSlide('ui-carousel')">&#10095;</button>
-                            <div class="carousel-dots" id="ui-dots">
-                                <span class="carousel-dot active" onclick="currentSlide('ui-carousel', 0)"></span>
-                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 1)"></span>
-                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 2)"></span>
-                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 3)"></span>
-                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 4)"></span>
-                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 5)"></span>
-                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 6)"></span>
-                                <span class="carousel-dot" onclick="currentSlide('ui-carousel', 7)"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="w-full mb-12 max-w-4xl">
-                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700 leading-relaxed ml-4">
-                            <li><strong>Main Menu:</strong> Button layouts for Start, Settings, Shop, and Quit.</li>
-                            <li><strong>Settings Menu:</strong> Options to change certain audio settings in game.</li>
-                            <li><strong>Shop Menu:</strong> Buy optional cosmetics with in-game currency.</li>
-                            <li><strong>Level Select:</strong> Select which level you want to play once you start the game.</li>
-                            <li><strong>In-Game HUD:</strong> On the left, displays wave count and lives remaining. On the right, displays each selectable fisherman with their value, amount of fish caught, option to sell fish, and amount of money the player currently has.</li>
-                            <li><strong>Upgrade Menu:</strong> When a fisherman is selected, displays three different upgrades to choose from, depending on the fisherman type.</li>
-                            <li><strong>Pause Menu:</strong> Sets the game paused and gives options to Resume, view Settings, or Quit to Main Menu.</li>
-                            <li><strong>Game Over:</strong> Ends the game and gives options to Continue, Play Again, or Return to Main Menu.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="my-24 border-t-2 border-gray-300">
-            <section id="reflection-section" class="mb-24">
-                <div class="project-card p-12 flex flex-col items-center">
-                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">Reflection</h2>
-                    <p class="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto text-left">
-                        Throughout development of Fishy Business, I'd say I've learned a great amount on
-                        project management, UI design and how to make a mobile game. I've learned the
-                        importance of team communication and meetings, how rewarding the results can be
-                        when properly sticking to schedules and deadlines, and overall aspects of the multiple
-                        responsibilities a producer needs to juggle during production. In terms of UI design, I've
-                        learned to adjust my PC minded brain to fit for mobile users, changing my workflow in
-                        the process.
-                    </p>
-                </div>
-            </section>
-        </main>
-
-        <footer class="mt-24 text-center text-gray-600 text-sm" style="color:rgba(0, 0, 0, 1)">
-            <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
-            <p>Alexander Lynn - Technical Designer</p>
-        </footer>
+  <div class="section">
+    <p class="section-label">UI/UX Design</p>
+    <h2 class="section-title">User Interface Design</h2>
+    <p class="section-body">As UI/UX Designer, I implemented all UI elements in game, providing the player with ease of navigation. Since this is a mobile game, I needed to make sure all elements fit correctly on a phone screen as well as implementing touch functionality. I utilized a series of widget blueprints and a bit of code in order to accomplish the intended goals for this project. Here are my contributions as UI Designer.</p>
+    <div style="margin-top:1.2rem;" class="doc-carousel" data-carousel="ui">
+      <div class="doc-slide active"><div class="img-item"><img src="Fishy/FB-Title.png" alt="Main Menu" class="lightbox-trigger"></div><p class="carousel-caption">Main Menu</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Settings.png" alt="Settings Menu" class="lightbox-trigger"></div><p class="carousel-caption">Settings Menu</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Shop.png" alt="Shop Menu" class="lightbox-trigger"></div><p class="carousel-caption">Shop Menu</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Lvl-Select.png" alt="Level Select" class="lightbox-trigger"></div><p class="carousel-caption">Level Select</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-HUD.png" alt="In-Game HUD" class="lightbox-trigger"></div><p class="carousel-caption">In-Game HUD</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Upgrade-Menu.png" alt="Upgrade Menu" class="lightbox-trigger"></div><p class="carousel-caption">Upgrade Menu</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Pause-Menu.png" alt="Pause Menu" class="lightbox-trigger"></div><p class="carousel-caption">Pause Menu</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Fishy/FB-Game-Over.png" alt="Game Over" class="lightbox-trigger"></div><p class="carousel-caption">Game Over</p></div>
+      <button class="doc-nav-btn prev" onclick="moveDocSlide('ui', -1)" aria-label="Previous UI slide">&#10094;</button>
+      <button class="doc-nav-btn next" onclick="moveDocSlide('ui', 1)" aria-label="Next UI slide">&#10095;</button>
     </div>
+    <p class="doc-counter" id="doc-counter-ui">1 / 8</p>
+    <ul class="feature-list">
+      <li><strong>Main Menu:</strong> Button layouts for Start, Settings, Shop, and Quit.</li>
+      <li><strong>Settings Menu:</strong> Options to change certain audio settings in game.</li>
+      <li><strong>Shop Menu:</strong> Buy optional cosmetics with in-game currency.</li>
+      <li><strong>Level Select:</strong> Select which level you want to play once you start the game.</li>
+      <li><strong>In-Game HUD:</strong> Displays wave count, lives, fisherman stats, sell actions, and money.</li>
+      <li><strong>Upgrade Menu:</strong> Shows three upgrade paths depending on fisherman type.</li>
+      <li><strong>Pause Menu:</strong> Resume, view Settings, or Quit to Main Menu.</li>
+      <li><strong>Game Over:</strong> Continue, Play Again, or Return to Main Menu.</li>
+    </ul>
+  </div>
 
-    <script>
-        // Global function to manage slide index
-        const slideIndices = {
-            'backlog-carousel': 0,
-            'ui-carousel': 0
-        };
+  <div class="divider"></div>
 
-        // Function to show a specific slide
-        function showSlide(carouselId, n) {
-            const carousel = document.getElementById(carouselId);
-            if (!carousel) return;
+  <div class="section">
+    <p class="section-label">Reflection</p>
+    <h2 class="section-title">Reflection</h2>
+    <p class="section-body">Throughout development of Fishy Business, I'd say I've learned a great amount on project management, UI design, and how to make a mobile game. I've learned the importance of team communication and meetings, how rewarding the results can be when properly sticking to schedules and deadlines, and overall aspects of the multiple responsibilities a producer needs to juggle during production. In terms of UI design, I've learned to adjust my PC minded workflow to fit mobile users.</p>
+  </div>
+</main>
 
-            const slideClass = carouselId === 'ui-carousel' ? 'ui-carousel-slide' : 'carousel-slide';
-            const slides = carousel.getElementsByClassName(slideClass);
-            const dotContainerId = carouselId.replace('-carousel', '-dots');
-            const dotContainer = document.getElementById(dotContainerId);
-            
-            // Check if dots exist before trying to access them
-            const dots = dotContainer ? dotContainer.getElementsByClassName('carousel-dot') : [];
-            const totalSlides = slides.length;
+<footer>
+  <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
+  <p>Alexander Lynn - Technical Designer</p>
+</footer>
 
-            if (totalSlides === 0) return;
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lb-close">&times;</span>
+  <button class="lightbox-prev" id="lb-prev">&#10094;</button>
+  <img class="lightbox-img" id="lb-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next">&#10095;</button>
+</div>
 
-            if (n >= totalSlides) {
-                slideIndices[carouselId] = 0;
-            } else if (n < 0) {
-                slideIndices[carouselId] = totalSlides - 1;
-            } else {
-                slideIndices[carouselId] = n;
-            }
-
-            // Hide all slides and remove active class from dots
-            for (let i = 0; i < totalSlides; i++) {
-                slides[i].classList.remove('active');
-                if (dots.length > i) {
-                    dots[i].classList.remove('active');
-                }
-            }
-
-            // Show the current slide and activate the current dot
-            slides[slideIndices[carouselId]].classList.add('active');
-            if (dots.length > slideIndices[carouselId]) {
-                dots[slideIndices[carouselId]].classList.add('active');
-            }
-        }
-
-        // Functions to move to next or previous slide
-        function nextSlide(carouselId) {
-            showSlide(carouselId, slideIndices[carouselId] + 1);
-        }
-
-        function prevSlide(carouselId) {
-            showSlide(carouselId, slideIndices[carouselId] - 1);
-        }
-
-        // Function to go to a specific dot's slide
-        function currentSlide(carouselId, n) {
-            showSlide(carouselId, n);
-        }
-
-        // Fullscreen Modal Functions (existing)
-        function openFullscreen(imageSrc) {
-            document.getElementById('fullscreenImage').src = imageSrc;
-            document.getElementById('fullscreenOverlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when fullscreen
-        }
-
-        function closeFullscreen() {
-            document.getElementById('fullscreenOverlay').style.display = 'none';
-            document.body.style.overflow = 'scroll'; // Re-enable scrolling
-        }
-
-        // Close on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === "Escape") {
-                closeFullscreen();
-            }
-        });
-
-        // Initialize carousels on load
-        window.onload = function() {
-            showSlide('backlog-carousel', 0);
-            showSlide('ui-carousel', 0);
-        };
-    </script>
+<script>
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+let triggers = [], idx = 0;
+document.querySelectorAll('.lightbox-trigger').forEach((el, i) => {
+  triggers.push(el);
+  el.addEventListener('click', () => { idx = i; lbImg.src = el.src; lb.style.display = 'flex'; });
+});
+document.getElementById('lb-close').onclick = () => lb.style.display = 'none';
+lb.addEventListener('click', e => { if (e.target === lb) lb.style.display = 'none'; });
+document.getElementById('lb-prev').onclick = () => { idx = (idx - 1 + triggers.length) % triggers.length; lbImg.src = triggers[idx].src; };
+document.getElementById('lb-next').onclick = () => { idx = (idx + 1) % triggers.length; lbImg.src = triggers[idx].src; };
+document.addEventListener('keydown', e => {
+  if (lb.style.display !== 'flex') return;
+  if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
+  if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
+  if (e.key === 'Escape') lb.style.display = 'none';
+});
+const docSlideIndex = { ui: 0 };
+function moveDocSlide(carouselName, step) {
+  const carousel = document.querySelector('.doc-carousel[data-carousel="' + carouselName + '"]');
+  if (!carousel) return;
+  const slides = carousel.querySelectorAll('.doc-slide');
+  docSlideIndex[carouselName] = (docSlideIndex[carouselName] + step + slides.length) % slides.length;
+  slides.forEach((slide, i) => slide.classList.toggle('active', i === docSlideIndex[carouselName]));
+  const counter = document.getElementById('doc-counter-' + carouselName);
+  if (counter) counter.textContent = (docSlideIndex[carouselName] + 1) + ' / ' + slides.length;
+}
+</script>
 </body>
 </html>

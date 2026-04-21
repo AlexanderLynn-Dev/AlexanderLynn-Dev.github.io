@@ -1,620 +1,543 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Lynn - On Your Feet! Project</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="icon.png">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-image: url('Portfolio.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #374151;
-            overflow-y: scroll;
-        }
-
-        .project-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 1.20rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .btn-primary {
-            background: linear-gradient(to right, #4649ff, #3352ff);
-            border: none;
-            color: white;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease-in-out;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(to right, #4649ff, #3352ff);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.15), 0 3px 6px -2px rgba(0, 0, 0, 0.08);
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fade-in-down {
-            animation: fadeInDown 1s ease-out forwards;
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            z-index: 1000;
-            border-bottom-left-radius: 1.25rem;
-            border-bottom-right-radius: 1.25rem;
-        }
-        .navbar-link {
-            color: #4a5568;
-            font-weight: 600;
-            font-size: 1.35rem;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            transition: all 0.2s ease-in-out;
-        }
-        .navbar-link:hover {
-            background-color: #e2e8f0;
-            color: #2d3748;
-            font-size: 1.35rem;
-        }
-        .navbar-link.active {
-            background: linear-gradient(to right, #4649ff, #3352ff);
-            color: white;
-            font-size: 1.35rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-table {
-            width: 100%;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            border-collapse: separate;
-            border-spacing: 0 1rem;
-        }
-        .info-table td {
-            padding: 1rem 0;
-        }
-        .info-label {
-            font-weight: 700;
-            color: #1f2937;
-            width: 30%;
-            font-size: 1.3rem;
-        }
-        .info-value {
-            color: #374151;
-            font-weight: 500;
-            width: 70%;
-            font-size: 1.3rem;
-        }
-
-        /* Adjusted for larger comparison section */
-        .level-comparison-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr; /* Three columns for sketch, iteration, and final */
-            gap: 1.5rem;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-            width: 100%;
-        }
-
-        /* Responsive adjustment for Spain (2 items) */
-        .level-comparison-container.two-items {
-            grid-template-columns: 1fr 1fr;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .media-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden; /* Ensures rounded corners */
-            background-color: #f3f4f6; /* Light background for consistency */
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio - fixed aspect for media */
-            position: relative;
-            cursor: pointer; /* Add pointer cursor for clickability */
-        }
-        .media-item img,
-        .media-item video,
-        .media-item iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Keeps entire image/video visible */
-            border-radius: 0.75rem;
-            background-color: #000; /* Black background for videos and images in full screen */
-        }
-        .media-item p.label {
-            position: absolute;
-            bottom: 0.5rem;
-            left: 0.5rem;
-            background-color: rgba(31, 79, 114, 0.86);
-            color: #ffffff !important;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            z-index: 5;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-        }
-
-        /* Styles for the fullscreen overlay/modal */
-        .fullscreen-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 5000;
-            display: none; /* Hidden by default */
-            justify-content: center;
-            align-items: center;
-        }
-
-        .fullscreen-content {
-            max-width: 90%;
-            max-height: 90%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .fullscreen-content img {
-            width: auto;
-            max-width: 100%;
-            height: auto;
-            max-height: 100vh; /* Max height is viewport height */
-            object-fit: contain;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 5001;
-            padding: 10px;
-            line-height: 1;
-        }
-
-        /* Carousel Styles */
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            border-radius: 1rem;
-            background-color: #f3f4f6;
-        }
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .carousel-slide {
-            min-width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            position: relative;
-        }
-        .carousel-slide img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background-color: #000;
-        }
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: background-color 0.3s;
-        }
-        .carousel-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        .carousel-btn.prev { left: 10px; }
-        .carousel-btn.next { right: 10px; }
-        .carousel-counter {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        /* Shared site theme consistency */
-        body {
-            background-color: #f3f5f7;
-            background-image: none;
-            color: #2f3b4a;
-        }
-        .navbar {
-            background-color: #1f3e59;
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        .navbar-link {
-            color: #d2e1ec;
-            font-weight: 500;
-            padding: 0.45rem 0.85rem;
-            font-size: 0.9rem;
-            border-radius: 0.3rem;
-        }
-        .navbar-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            font-size: 0.9rem;
-        }
-        .navbar-link.active {
-            background: rgba(255, 255, 255, 0.16);
-            color: #ffffff;
-            font-size: 0.9rem;
-            box-shadow: none;
-        }
-        .project-card {
-            background-color: #ffffff;
-            border: 1px solid #dfe8ef;
-            border-radius: 0.75rem;
-            box-shadow: none;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-2px);
-            box-shadow: none;
-            border-color: #bfd3e3;
-        }
-        .btn-primary {
-            background: #3d85b5;
-            border: 1.5px solid #3d85b5;
-            color: #ffffff;
-            box-shadow: none;
-        }
-        .btn-primary:hover {
-            background: #2f6f98;
-            border-color: #2f6f98;
-            color: #ffffff;
-            box-shadow: none;
-        }
-        .info-label {
-            color: #1f4f72;
-        }
-        .info-value {
-            color: #4f5f6c;
-        }
-        h2, h3 {
-            color: #1f4f72 !important;
-        }
-        p, li {
-            color: #4f5f6c !important;
-        }
-        hr {
-            border-color: #d7e4ee !important;
-        }
-        /* Reduce vertical scrolling on long project pages */
-        .mb-32 {
-            margin-bottom: 4.5rem !important;
-        }
-        .mb-24 {
-            margin-bottom: 3.25rem !important;
-        }
-        .my-24 {
-            margin-top: 3.5rem !important;
-            margin-bottom: 3.5rem !important;
-        }
-        .mt-24 {
-            margin-top: 3.5rem !important;
-        }
-        .p-12 {
-            padding: 2rem !important;
-        }
-        .p-10 {
-            padding: 1.6rem !important;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>On Your Feet! - Alexander Lynn</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="icon.png">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --surface2: #edf3f7;
+  --border: #dfe8ef;
+  --border-blue: rgba(62,126,169,0.35);
+  --blue: #1f4f72;
+  --blue-bright: #3e7ea9;
+  --blue-dim: #eff4f8;
+  --text: #2f3b4a;
+  --text-mid: #4f5f6c;
+  --text-dim: #60707d;
+  --white: #ffffff;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+}
+nav {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  display: flex; align-items: center;
+  justify-content: center;
+  position: sticky; top: 0; z-index: 50;
+  background: #1f3e59;
+}
+.nav-links { display: flex; list-style: none; gap: 0.35rem; }
+.nav-links a {
+  display: block; padding: 0.45rem 0.9rem;
+  text-decoration: none; font-size: 0.85rem; font-weight: 600;
+  color: #d2e1ec; border-radius: 6px;
+  transition: all 0.2s ease;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: #ffffff; background: rgba(255,255,255,0.16);
+}
+.project-hero {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden; position: relative;
+}
+.project-hero-img {
+  width: 100%; max-height: 480px;
+  object-fit: cover; display: block;
+  filter: brightness(0.78);
+}
+.project-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(11,28,45,0.64) 0%, rgba(11,28,45,0.34) 45%, rgba(11,28,45,0.16) 100%);
+}
+.project-hero-content {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2.3rem 2rem;
+  max-width: 1200px; margin: 0 auto;
+}
+.breadcrumb {
+  font-size: 0.78rem; font-weight: 600;
+  color: #d2e1ec; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+}
+.breadcrumb a { color: #8ec3ea; text-decoration: none; }
+.project-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 800; line-height: 1; letter-spacing: -0.03em;
+  color: #ffffff; margin-bottom: 1rem;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+}
+.project-roles { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.role-tag {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.3rem 0.75rem; border-radius: 999px;
+  background: rgba(13,48,76,0.88);
+  color: #e7f2fb;
+  border: 1px solid rgba(138,190,225,0.45);
+}
+main {
+  max-width: 1200px; margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+.meta-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden; margin-bottom: 2.5rem;
+}
+.meta-item { background: var(--surface); padding: 1.2rem; }
+.meta-label {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 0.4rem;
+}
+.meta-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--blue);
+}
+.section { margin-bottom: 2.8rem; }
+.section-label {
+  font-size: 0.75rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--blue-bright); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.55rem; font-weight: 700;
+  color: var(--blue); letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.section-body {
+  font-size: 1rem; line-height: 1.8;
+  color: var(--text-mid); max-width: 760px;
+}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+.two-col.wide { grid-template-columns: 1.2fr 1fr; }
+.feature-list {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: 0.7rem;
+  margin-top: 1rem;
+}
+.feature-list li {
+  font-size: 0.95rem; line-height: 1.7;
+  color: var(--text-mid); padding-left: 1.2rem;
+  position: relative;
+}
+.feature-list li::before {
+  content: ''; position: absolute; left: 0; top: 0.65rem;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--blue-bright);
+}
+.feature-list li strong { color: var(--text); font-weight: 700; }
+.gameplay-points-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+.gameplay-points-grid .feature-list { margin-top: 0; }
+.img-full {
+  width: 100%; display: block; border-radius: 8px;
+  border: 1px solid var(--border); object-fit: cover;
+}
+.img-caption {
+  font-size: 0.78rem; color: var(--text-dim);
+  margin-top: 0.6rem; text-align: center;
+}
+.img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.3rem; }
+.img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1.3rem; }
+.doc-columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1.3rem; }
+.doc-col-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 0.65rem;
+  text-align: center;
+}
+.doc-col-stack { display: grid; gap: 0.8rem; }
+.doc-carousel {
+  position: relative;
+}
+.doc-slide {
+  display: none;
+}
+.doc-slide.active {
+  display: block;
+}
+.doc-slide .img-item img {
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: #ffffff;
+  min-height: 180px;
+}
+.doc-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(31, 79, 114, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f4f72;
+  border-radius: 999px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+.doc-nav-btn.prev { left: 8px; }
+.doc-nav-btn.next { right: 8px; }
+.doc-counter {
+  margin-top: 0.45rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+.img-item img {
+  width: 100%; display: block; border-radius: 8px;
+  border: 1px solid var(--border); cursor: pointer;
+  transition: filter 0.2s ease;
+  aspect-ratio: 16/9; object-fit: cover;
+}
+.img-item img:hover { filter: brightness(1.05); }
+.level-comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+  margin: 1rem 0 1.1rem;
+}
+.media-item {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f4f6;
+  aspect-ratio: 16 / 9;
+}
+.media-item img,
+.media-item video,
+.media-item iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: 0;
+  background: #000;
+}
+.media-item .label {
+  position: absolute;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  margin: 0;
+  z-index: 2;
+  background: rgba(31, 79, 114, 0.88);
+  color: #ffffff;
+  padding: 0.26rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.video-wrap {
+  position: relative; padding-bottom: 56.25%; height: 0;
+  overflow: hidden; border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.video-wrap iframe {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%; border: none;
+}
+.divider { height: 1px; background: var(--border); margin: 2rem 0; }
+.reflection-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue-bright);
+  border-radius: 8px; padding: 1.5rem 1.8rem;
+}
+.reflection-box p { font-size: 1rem; line-height: 1.8; color: var(--text-mid); }
+.reflection-box p + p { margin-top: 1rem; }
+.lightbox {
+  display: none; position: fixed; z-index: 9999; inset: 0;
+  background: rgba(0,0,0,0.92);
+  justify-content: center; align-items: center;
+  flex-direction: column; padding: 2rem;
+}
+.lightbox-img { max-width: 85%; max-height: 80vh; border-radius: 8px; }
+.lightbox-close {
+  position: absolute; top: 1.5rem; right: 2rem;
+  font-size: 2rem; color: #fff; cursor: pointer; line-height: 1;
+}
+.lightbox-close:hover { color: #ffffff; }
+.lightbox-prev, .lightbox-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(17,24,39,0.9); color: #fff;
+  border: 1px solid rgba(255,255,255,0.4); font-size: 1.4rem;
+  padding: 0.9rem 1.1rem; cursor: pointer;
+  transition: background 0.2s; z-index: 10000; line-height: 1; border-radius: 6px;
+}
+.lightbox-prev { left: 1.5rem; }
+.lightbox-next { right: 1.5rem; }
+.lightbox-prev:hover, .lightbox-next:hover { background: var(--blue-bright); color: var(--white); }
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.2rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+footer p { font-size: 0.8rem; color: var(--text-dim); }
+.footer-mark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem; font-weight: 800; color: var(--blue);
+}
+@media (max-width: 900px) {
+  nav, footer { padding-left: 1rem; padding-right: 1rem; }
+  .project-hero-content { padding: 1.6rem 1rem; }
+  main { padding: 1.7rem 1rem 3rem; }
+  .meta-strip { grid-template-columns: 1fr 1fr; }
+  .two-col, .two-col.wide, .img-grid-2, .img-grid-3, .doc-columns, .gameplay-points-grid { grid-template-columns: 1fr; }
+  .level-comparison-container { grid-template-columns: 1fr; }
+}
+</style>
 </head>
-<body class="antialiased">
+<body>
+<nav>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+  </ul>
+</nav>
 
-    <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen()">
-        <span class="close-btn" onclick="closeFullscreen()">&times;</span>
-        <div id="fullscreenContent" class="fullscreen-content">
-            <img id="fullscreenImage" src="" alt="Full Screen Image">
+<div class="project-hero">
+  <img class="project-hero-img" src="Feet/feetbackgroundtitle.png" alt="On Your Feet!">
+  <div class="project-hero-overlay"></div>
+  <div class="project-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Projects</a><span>/</span><span>On Your Feet!</span>
+    </div>
+    <h1 class="project-title">On Your Feet!</h1>
+    <div class="project-roles">
+      <span class="role-tag">Creative Director</span>
+      <span class="role-tag">Level Designer</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="meta-strip">
+    <div class="meta-item"><div class="meta-label">Role</div><div class="meta-value">Creative Director, Level Designer</div></div>
+    <div class="meta-item"><div class="meta-label">Duration</div><div class="meta-value">June 2025 - June 2026 (WIP)</div></div>
+    <div class="meta-item"><div class="meta-label">Team Size</div><div class="meta-value">2</div></div>
+    <div class="meta-item"><div class="meta-label">Engine</div><div class="meta-value">Unity</div></div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Overview</p>
+    <div class="two-col wide">
+      <div>
+        <h2 class="section-title">On Your Feet!</h2>
+        <p class="section-body">On Your Feet! is a 2D Platformer, Sports game, set to release in June 2026. After your father gets captured by aliens, you embark on a soccer adventure like no other, traveling through 8 countries in the process. With a team of two, I worked on project management and designed all the levels.</p>
+      </div>
+      <div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/EMHQQV_J39U?si=4-TG8W3wIEfSX9AT" title="On Your Feet! Trailer" allowfullscreen loading="lazy"></iframe>
         </div>
+        <p class="img-caption">On Your Feet! Trailer</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <p class="section-label">Project Management</p>
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">Initial Storyboard Sketches</h2>
+        <div class="doc-col-stack doc-carousel" data-carousel="sketches">
+          <div class="doc-slide active">
+            <div class="img-item"><img src="Feet/Sketch 1.png" alt="Sketch 1" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="Feet/Sketch 2.png" alt="Sketch 2" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="Feet/Sketch 3.png" alt="Sketch 3" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="Feet/Sketch 4.png" alt="Sketch 4" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="Feet/Sketch 6.png" alt="Sketch 6" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="Feet/Sketch 7.png" alt="Sketch 7" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="Feet/Sketch 8.png" alt="Sketch 8" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="Feet/Sketch 9.png" alt="Sketch 9" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="Feet/Sketch 10.png" alt="Sketch 10" class="lightbox-trigger"></div>
+          </div>
+          <button class="doc-nav-btn prev" onclick="moveDocSlide('sketches', -1)" aria-label="Previous sketch">&#10094;</button>
+          <button class="doc-nav-btn next" onclick="moveDocSlide('sketches', 1)" aria-label="Next sketch">&#10095;</button>
+        </div>
+        <p class="doc-counter" id="doc-counter-sketches">1 / 10</p>
+      </div>
+      <div>
+        <p class="section-body">As Creative Director, I also hold the creative vision for this game, which is a passion project of mine. Since we only have a team of two, managing the project is a lot easier. This lets me give more over the shoulder feedback as I oversee all aspects of the game's development, making sure all aspects align with my creative vision. My role also consists of designing all documentation for the game for concepts, story, and mechanics pipelines. Additionally, I conduct several playtesting sessions as development goes on to help iterate on designs, improving player experience. Here are some of my contributions as Creative Director.</p>
+        <ul class="feature-list">
+          <li><strong>Sketches:</strong> Created 10+ storyboard sketches to map the game journey.</li>
+          <li><strong>Creative Vision:</strong> Oversaw tone, pacing, and mechanics direction.</li>
+          <li><strong>Documentation:</strong> Built concept, story, and mechanics pipeline documents.</li>
+          <li><strong>Playtesting:</strong> Ran sessions and iterated on feedback continuously.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <p class="section-label">Level Design</p>
+    <p class="section-body">Our game features several levels spanning across 8 different worlds, and my role as Level Designer is to help design unique levels that drive player engagement and keep things fresh while introducing new mechanics along the way. Here are my contributions as Level Designer.</p>
+
+    <div style="margin-top: 1.3rem;">
+      <h2 class="section-title" style="text-align:center;">World 1: Portugal (Port 1-1)</h2>
+      <div class="level-comparison-container">
+        <div class="media-item">
+          <img src="Feet/Port 1-1.png" alt="Port 1-1 Level Concept" loading="lazy" class="lightbox-trigger">
+          <p class="label">Initial Concept Sketch</p>
+        </div>
+        <div class="media-item">
+          <video src="Feet/Port 1-1.mp4" autoplay loop playsinline controls muted loading="lazy"></video>
+          <p class="label">Second Iteration</p>
+        </div>
+        <div class="media-item">
+          <iframe src="https://www.youtube.com/embed/g0JroU1hTWo?si=DitwVWxtG0eJ04Am" title="Portugal Level Gameplay" allowfullscreen loading="lazy"></iframe>
+          <p class="label">Completed Level Gameplay</p>
+        </div>
+      </div>
+      <p class="section-body">The player must hit a button with their ball, which deactivates a wall, allowing them to move forward. Next, they must bounce the ball off another platform to hit an out-of-reach button, deactivating a second wall. They then sprint and long jump to reach a platform, and must crawl to get a key that opens a door. Finally, the player hits a series of platforms with the ball, which then strikes a final button, activating a bridge for a limited time and thus beating the level.</p>
     </div>
 
-    <div class="min-h-screen flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
+    <div class="divider"></div>
 
-        <nav class="navbar w-full py-4 px-6 flex justify-center">
-            <div class="flex space-x-6">
-                <a href="index.html" class="navbar-link active">Projects</a>
-                <a href="about.html" class="navbar-link">About</a>
-                <a href="experience.html" class="navbar-link">Experience</a>
-            </div>
-        </nav>
-
-        <header class="w-full flex flex-col items-center">
-            <div class="text-center mb-12 w-full max-w-4xl animate-fade-in-down mt-32">
-                <img src="Feet/Images/On Your Feet Title.png" alt="On Your Feet!" class="w-full h-auto mb-4">
-            </div>
-
-            <div class="w-full max-w-2xl mx-auto mb-32 project-card p-10">
-                <table class="info-table">
-                    <tr>
-                        <td class="info-label">Role:</td>
-                        <td class="info-value">Creative Director, Level Designer</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Duration:</td>
-                        <td class="info-value">June 2025 – June 2026 (WIP)</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Team size:</td>
-                        <td class="info-value">2</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Genre:</td>
-                        <td class="info-value">2D Platformer, Sports</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Engine:</td>
-                        <td class="info-value">Unity</td>
-                    </tr>
-                </table>
-
-                <p class="text-xl text-gray-700 leading-relaxed mx-auto text-left mb-8">
-                    On Your Feet! Is a 2D Platformer, Sports game, set to release in June 2026. After your father gets captured by aliens, you embark on a soccer adventure like no other, traveling through 8 countries in the process. With a team of two, I worked on project management and designed all the levels.
-                </p>
-                <div class="mt-8 text-center">
-                    <a href="https://alex-lynn.itch.io/on-your-feet-demo" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block text-lg px-8 py-3">
-                        Play Free Demo on itch.io
-                    </a>
-                </div>
-            </div>
-
-            <div class="w-full max-w-4xl mx-auto mb-32">
-                <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">On Your Feet! Trailer</h3>
-                <div class="relative pt-[56.25%] w-full h-0">
-                    <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
-                        src="https://www.youtube.com/embed/EMHQQV_J39U?si=4-TG8W3wIEfSX9AT" 
-                        title="On Your Feet! Trailer" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-
-        </header>
-
-        <main class="w-full max-w-5xl"> <section id="project-management-section" class="mb-32" style="display: block;">
-                <div class="project-card p-12 flex flex-col items-center">
-                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">Project Management</h2>
-                    
-                    <div class="w-full mb-12">
-                        <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                            As Creative Director, I also hold the creative vision for this game, which is a passion project of mine. Since we only have a team of two, managing the project is a lot easier. This lets me give more over the shoulder feedback as I oversee all aspects of the game’s development, making sure all aspects align with my creative vision. My role also consists of designing all documentation for the game for concepts, story, and mechanics pipelines. Additionally, I conduct several playtesting sessions as development goes on to help iterate on designs, improving player experience. Here are some of my contributions as Creative Director.
-                        </p>
-                    </div>
-
-                    <div class="w-full mb-12">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Initial Storyboard Sketches</h3>
-                        <div class="carousel-container max-w-4xl mx-auto shadow-2xl">
-                            <div class="carousel-track" id="carouselTrack">
-                                <div class="carousel-slide">
-                                    <img src="Feet/Sketch 1.png" alt="Sketch 1" onclick="openFullscreen('Feet/Sketch 1.png')">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="Feet/Sketch 2.png" alt="Sketch 2" onclick="openFullscreen('Feet/Sketch 2.png')">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="Feet/Sketch 3.png" alt="Sketch 3" onclick="openFullscreen('Feet/Sketch 3.png')">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="Feet/Sketch 4.png" alt="Sketch 4" onclick="openFullscreen('Feet/Sketch 4.png')">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="Feet/Sketch 5.png" alt="Sketch 5" onclick="openFullscreen('Feet/Sketch 5.png')">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="Feet/Sketch 6.png" alt="Sketch 6" onclick="openFullscreen('Feet/Sketch 6.png')">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="Feet/Sketch 7.png" alt="Sketch 7" onclick="openFullscreen('Feet/Sketch 7.png')">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="Feet/Sketch 8.png" alt="Sketch 8" onclick="openFullscreen('Feet/Sketch 8.png')">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="Feet/Sketch 9.png" alt="Sketch 9" onclick="openFullscreen('Feet/Sketch 9.png')">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="Feet/Sketch 10.png" alt="Sketch 10" onclick="openFullscreen('Feet/Sketch 10.png')">
-                                </div>
-                            </div>
-                            <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#10094;</button>
-                            <button class="carousel-btn next" onclick="moveCarousel(1)">&#10095;</button>
-                            <div class="carousel-counter" id="carouselCounter">1 / 10</div>
-                        </div>
-                    </div>
-
-    
-                </div>
-            </section>
-            
-            <hr class="my-24 border-t-2 border-gray-300">
-            <section id="level-design-section" class="mb-32" style="display: block;">
-                <div class="project-card p-12 flex flex-col items-center">
-                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">Level Design</h2>
-                    
-                    <div class="w-full mb-12">
-                        <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                            Our game features several levels spanning across 8 different worlds, and my role as Level Designer is to help design unique levels that drive player engagement and keep things fresh while introducing new mechanics along the way. Here are my contributions as Level Designer.
-                        </p>
-                    </div>
-
-                    <div class="w-full max-w-5xl mx-auto mb-16"> <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">World 1: Portugal (Port 1-1)</h3>
-                        <div class="level-comparison-container">
-                            <div class="media-item">
-                                <img src="Feet/Port 1-1.png" alt="Port 1-1 Level Concept" loading="lazy" onclick="openFullscreen('Feet/Port 1-1.png')">
-                                <p class="label">Initial Concept Sketch</p>
-                            </div>
-                            <div class="media-item" onclick="event.stopPropagation();">
-                                <video src="Feet/Port 1-1.mp4" autoplay loop playsinline controls muted loading="lazy"></video>
-                                <p class="label">Second Iteration</p>
-                            </div>
-                            <div class="media-item" onclick="event.stopPropagation();">
-                                <iframe src="https://www.youtube.com/embed/g0JroU1hTWo?si=DitwVWxtG0eJ04Am" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                <p class="label">Completed Level Gameplay</p>
-                            </div>
-                        </div>
-                        <p class="text-md text-gray-700 leading-relaxed text-left">
-                            The player must hit a button with their ball, which deactivates a wall, allowing them to move forward. Next, they must bounce the ball off another platform to hit an out-of-reach button, deactivating a second wall. They then sprint and long jump to reach a platform, and must crawl to get a key that opens a door. Finally, the player hits a series of platforms with the ball, which then strikes a final button, activating a bridge for a limited time and thus beating the level.
-                        </p>
-                    </div>
-
-                    <div class="w-full max-w-5xl mx-auto mb-16"> <hr class="my-10 border-t border-gray-300">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">World 2: Italy (Italy 1-1)</h3>
-                        <div class="level-comparison-container">
-                            <div class="media-item">
-                                <img src="Feet/Italy 1-1.png" alt="Italy 1-1 Level Concept" loading="lazy" onclick="openFullscreen('Feet/Italy 1-1.png')">
-                                <p class="label">Initial Concept Sketch</p>
-                            </div>
-                            <div class="media-item" onclick="event.stopPropagation();">
-                                <video src="Feet/Italy 1-1.mp4" autoplay loop playsinline controls muted loading="lazy"></video>
-                                <p class="label">Second Iteration</p>
-                            </div>
-                            <div class="media-item" onclick="event.stopPropagation();">
-                                <iframe src="https://www.youtube.com/embed/SmCGDtTd8jc?si=Rgz7PLXB7G-zZAlk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                <p class="label">Completed Level Gameplay</p>
-                            </div>
-                        </div>
-                        <p class="text-md text-gray-700 leading-relaxed text-left">
-                            The player uses the Charge Kick to break a pillar, jumps on a spring, and defeats an enemy. They then use the Charge Kick again to move a crate onto a pressure plate, which activates a bridge and deactivates more walls. The player then jumps on a series of springs to get to a platform that holds a key for unlocking a door. After getting the key, they must avoid a series of falling crates and spikes to reach the end of the level.
-                        </p>
-                    </div>
-
-                    <div class="w-full max-w-5xl mx-auto mb-16"> <hr class="my-10 border-t border-gray-300">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">World 3: France (France 1-1)</h3>
-                        <div class="level-comparison-container">
-                            <div class="media-item">
-                                <img src="Feet/France 1-1.png" alt="France 1-1 Level Concept" loading="lazy" onclick="openFullscreen('Feet/France 1-1.png')">
-                                <p class="label">Initial Concept Sketch</p>
-                            </div>
-                            <div class="media-item" onclick="event.stopPropagation();">
-                                <video src="Feet/France 1-1.mp4" autoplay loop playsinline controls muted loading="lazy"></video>
-                                <p class="label">Second Iteration</p>
-                            </div>
-                            <div class="media-item" onclick="event.stopPropagation();">
-                                <iframe src="https://www.youtube.com/embed/KmWrNfCzR04?si=FBG7B_qJ1X4huWFs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                <p class="label">Completed Level Gameplay</p>
-                            </div>
-                        </div>
-                        <p class="text-md text-gray-700 leading-relaxed text-left">
-                            The player uses the Aim Kick to reach a button, then uses it again to hit a moving switch. They must avoid enemies, bounce the ball off the ceiling to hit a switch, and then jump on a series of breakable platforms to evade more enemies. The player jumps onto a moving platform and hits a switch with the correct timing. After that, they hit a different switch to rotate platforms that have spikes on the bottom. The level concludes with the player riding an auto-scrolling platform while dodging enemies and hitting switches, thereby reaching the goal.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-        <hr class="my-24 border-t-2 border-gray-300">
-        <section id="reflection-section" class="mb-24">
-            <div class="project-card p-12 flex flex-col items-center">
-                <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">Reflection</h2>
-                <p class="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto **text-left**">
-                    On Your Feet! has been a blast to work on so far! I've been coming up with concepts since around November 2024, and it's really awesome seeing the progress we've made since the start of development. This project has really helped me refine my creative mind and use the full extent of my imagination to flesh out all my ideas effectively. My 1 on 1 leadership skills has also improved a lot as me and Andrew continue to do great work together!
-                </p>
-            </div>
-        </section>
-        </main>
-
-        <footer class="mt-24 text-center text-gray-600 text-sm" style="color:rgba(0, 0, 0, 1)">
-            <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
-            <p>Alexander Lynn - Technical Designer</p>
-        </footer>
+    <div>
+      <h2 class="section-title" style="text-align:center;">World 2: Italy (Italy 1-1)</h2>
+      <div class="level-comparison-container">
+        <div class="media-item">
+          <img src="Feet/Italy 1-1.png" alt="Italy 1-1 Level Concept" loading="lazy" class="lightbox-trigger">
+          <p class="label">Initial Concept Sketch</p>
+        </div>
+        <div class="media-item">
+          <video src="Feet/Italy 1-1.mp4" autoplay loop playsinline controls muted loading="lazy"></video>
+          <p class="label">Second Iteration</p>
+        </div>
+        <div class="media-item">
+          <iframe src="https://www.youtube.com/embed/SmCGDtTd8jc?si=Rgz7PLXB7G-zZAlk" title="Italy Level Gameplay" allowfullscreen loading="lazy"></iframe>
+          <p class="label">Completed Level Gameplay</p>
+        </div>
+      </div>
+      <p class="section-body">The player uses the Charge Kick to break a pillar, jumps on a spring, and defeats an enemy. They then use the Charge Kick again to move a crate onto a pressure plate, which activates a bridge and deactivates more walls. The player then jumps on a series of springs to get to a platform that holds a key for unlocking a door. After getting the key, they must avoid a series of falling crates and spikes to reach the end of the level.</p>
     </div>
 
-    <script>
-        function openFullscreen(imageSrc) {
-            document.getElementById('fullscreenImage').src = imageSrc;
-            document.getElementById('fullscreenOverlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when fullscreen
-        }
+    <div class="divider"></div>
 
-        function closeFullscreen() {
-            document.getElementById('fullscreenOverlay').style.display = 'none';
-            document.body.style.overflow = 'scroll'; // Re-enable scrolling
-        }
+    <div>
+      <h2 class="section-title" style="text-align:center;">World 3: France (France 1-1)</h2>
+      <div class="level-comparison-container">
+        <div class="media-item">
+          <img src="Feet/France 1-1.png" alt="France 1-1 Level Concept" loading="lazy" class="lightbox-trigger">
+          <p class="label">Initial Concept Sketch</p>
+        </div>
+        <div class="media-item">
+          <video src="Feet/France 1-1.mp4" autoplay loop playsinline controls muted loading="lazy"></video>
+          <p class="label">Second Iteration</p>
+        </div>
+        <div class="media-item">
+          <iframe src="https://www.youtube.com/embed/KmWrNfCzR04?si=FBG7B_qJ1X4huWFs" title="France Level Gameplay" allowfullscreen loading="lazy"></iframe>
+          <p class="label">Completed Level Gameplay</p>
+        </div>
+      </div>
+      <p class="section-body">The player uses the Aim Kick to reach a button, then uses it again to hit a moving switch. They must avoid enemies, bounce the ball off the ceiling to hit a switch, and then jump on a series of breakable platforms to evade more enemies. The player jumps onto a moving platform and hits a switch with the correct timing. After that, they hit a different switch to rotate platforms that have spikes on the bottom. The level concludes with the player riding an auto-scrolling platform while dodging enemies and hitting switches, thereby reaching the goal.</p>
+    </div>
+  </div>
 
-        // Close on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === "Escape") {
-                closeFullscreen();
-            }
-        });
+  <div class="divider"></div>
 
-        let currentSlide = 0;
-        const totalSlides = 10;
-        const track = document.getElementById('carouselTrack');
-        const counter = document.getElementById('carouselCounter');
+  <div class="section">
+    <p class="section-label">Reflection</p>
+    <h2 class="section-title">Reflection</h2>
+    <p class="section-body">On Your Feet! has been a blast to work on so far! I've been coming up with concepts since around November 2024, and it's really awesome seeing the progress we've made since the start of development. This project has really helped me refine my creative mind and use the full extent of my imagination to flesh out all my ideas effectively. My 1 on 1 leadership skills has also improved a lot as me and Andrew continue to do great work together!</p>
+  </div>
 
-        function moveCarousel(direction) {
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-            const offset = -currentSlide * 100;
-            track.style.transform = `translateX(${offset}%)`;
-            counter.innerText = `${currentSlide + 1} / ${totalSlides}`;
-        }
-    </script>
+  <div class="divider"></div>
+</main>
+
+<footer>
+  <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
+  <p>Alexander Lynn - Technical Designer</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lb-close">&times;</span>
+  <button class="lightbox-prev" id="lb-prev">&#10094;</button>
+  <img class="lightbox-img" id="lb-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next">&#10095;</button>
+</div>
+
+<script>
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  let triggers = [], idx = 0;
+  document.querySelectorAll('.lightbox-trigger').forEach((el, i) => {
+    triggers.push(el);
+    el.addEventListener('click', () => { idx = i; lbImg.src = el.src; lb.style.display = 'flex'; });
+  });
+  document.getElementById('lb-close').onclick = () => lb.style.display = 'none';
+  lb.addEventListener('click', e => { if (e.target === lb) lb.style.display = 'none'; });
+  document.getElementById('lb-prev').onclick = () => { idx = (idx - 1 + triggers.length) % triggers.length; lbImg.src = triggers[idx].src; };
+  document.getElementById('lb-next').onclick = () => { idx = (idx + 1) % triggers.length; lbImg.src = triggers[idx].src; };
+  document.addEventListener('keydown', e => {
+    if (lb.style.display !== 'flex') return;
+    if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
+    if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
+    if (e.key === 'Escape') lb.style.display = 'none';
+  });
+
+  const docSlideIndex = { sketches: 0 };
+  function moveDocSlide(carouselName, step) {
+    const carousel = document.querySelector(`.doc-carousel[data-carousel="${carouselName}"]`);
+    if (!carousel) return;
+    const slides = carousel.querySelectorAll('.doc-slide');
+    if (!slides.length) return;
+    docSlideIndex[carouselName] = (docSlideIndex[carouselName] + step + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === docSlideIndex[carouselName]));
+    const counter = document.getElementById(`doc-counter-${carouselName}`);
+    if (counter) counter.textContent = `${docSlideIndex[carouselName] + 1} / ${slides.length}`;
+  }
+</script>
 </body>
 </html>
+
