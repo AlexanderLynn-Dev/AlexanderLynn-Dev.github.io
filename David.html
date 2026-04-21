@@ -1,747 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Lynn - David's Mighty Men Project</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="icon.png">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-image: url('Portfolio.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #374151;
-            overflow-y: scroll;
-        }
-
-        .project-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 1.20rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .btn-primary {
-            background: linear-gradient(to right, #4649ff, #3352ff);
-            border: none;
-            color: white;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease-in-out;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(to right, #4649ff, #3352ff);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px -2p x rgba(0, 0, 0, 0.15), 0 3px 6px -2px rgba(0, 0, 0, 0.08);
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fade-in-down {
-            animation: fadeInDown 1s ease-out forwards;
-        }
-
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            /* For A4 aspect ratio (210mm x 297mm or 1:1.414) we'll use a common doc ratio like 1:1.294 (8.5x11) */
-            padding-bottom: 129.4%; /* 1 / 0.772 * 100% */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            background-color: #000; /* Black background for contrast */
-        }
-
-        .video-label {
-            text-align: center;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #1a202c;
-            margin-bottom: 0.75rem;
-            padding: 0 1rem;
-        }
-        
-        .carousel-wrapper {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .carousel-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            opacity: 0; /* Use opacity for transition */
-            transition: opacity 0.5s ease-in-out;
-            background-color: #000;
-        }
-        .carousel-slide.active {
-            display: block;
-            opacity: 1;
-        }
-        .carousel-slide img,
-        .carousel-slide video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Ensures the image fits within the container while maintaining aspect ratio */
-            border-radius: 0.75rem;
-            cursor: pointer;
-        }
-
-        .carousel-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 0.75rem 0.5rem;
-            cursor: pointer;
-            font-size: 1.5rem;
-            z-index: 10;
-            border-radius: 0.5rem;
-            transition: background-color 0.3s ease;
-        }
-        .carousel-nav-btn:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-        .carousel-nav-btn.prev {
-            left: 0.5rem;
-        }
-        .carousel-nav-btn.next {
-            right: 0.5rem;
-        }
-
-        .carousel-dots {
-            position: absolute;
-            bottom: 0.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-            z-index: 10;
-        }
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
-            background-color: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .carousel-dot.active {
-            background-color: white;
-            transform: scale(1.2);
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            z-index: 1000;
-            border-bottom-left-radius: 1.25rem;
-            border-bottom-right-radius: 1.25rem;
-        }
-        .navbar-link {
-            color: #4a5568;
-            font-weight: 600;
-            font-size: 1.35rem;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            transition: all 0.2s ease-in-out;
-        }
-        .navbar-link:hover {
-            background-color: #e2e8f0;
-            color: #2d3748;
-            font-size: 1.35rem;
-        }
-        .navbar-link.active {
-            background: linear-gradient(to right, #4649ff, #3352ff);
-            color: white;
-            font-size: 1.35rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-table {
-            width: 100%;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            border-collapse: separate;
-            border-spacing: 0 1rem;
-        }
-        .info-table td {
-            padding: 1rem 0;
-        }
-        .info-label {
-            font-weight: 700;
-            color: #1f2937;
-            width: 30%;
-            font-size: 1.3rem;
-        }
-        .info-value {
-            color: #374151;
-            font-weight: 500;
-            width: 70%;
-            font-size: 1.3rem;
-        }
-
-        /* Styles for the fullscreen overlay/modal */
-        .fullscreen-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 5000;
-            display: none; /* Hidden by default */
-            justify-content: center;
-            align-items: center;
-        }
-
-        .fullscreen-content {
-            max-width: 90%;
-            max-height: 90%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .fullscreen-content img {
-            width: auto;
-            max-width: 100%;
-            height: auto;
-            max-height: 100vh; /* Max height is viewport height */
-            object-fit: contain;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 5001;
-            padding: 10px;
-            line-height: 1;
-        }
-
-        /* Styles for the project thumbnails/images outside of carousels to be clickable */
-        .project-thumbnail {
-            cursor: pointer;
-        }
-
-        /* Shared site theme consistency */
-        body {
-            background-color: #f3f5f7;
-            background-image: none;
-            color: #2f3b4a;
-        }
-        .navbar {
-            background-color: #1f3e59;
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        .navbar-link {
-            color: #d2e1ec;
-            font-weight: 500;
-            padding: 0.45rem 0.85rem;
-            font-size: 0.9rem;
-            border-radius: 0.3rem;
-        }
-        .navbar-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            font-size: 0.9rem;
-        }
-        .navbar-link.active {
-            background: rgba(255, 255, 255, 0.16);
-            color: #ffffff;
-            font-size: 0.9rem;
-            box-shadow: none;
-        }
-        .project-card {
-            background-color: #ffffff;
-            border: 1px solid #dfe8ef;
-            border-radius: 0.75rem;
-            box-shadow: none;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-2px);
-            box-shadow: none;
-            border-color: #bfd3e3;
-        }
-        .btn-primary {
-            background: #3d85b5;
-            border: 1.5px solid #3d85b5;
-            color: #ffffff;
-            box-shadow: none;
-        }
-        .btn-primary:hover {
-            background: #2f6f98;
-            border-color: #2f6f98;
-            color: #ffffff;
-            box-shadow: none;
-        }
-        .info-label {
-            color: #1f4f72;
-        }
-        .info-value {
-            color: #4f5f6c;
-        }
-        h2, h3 {
-            color: #1f4f72 !important;
-        }
-        p, li {
-            color: #4f5f6c !important;
-        }
-        hr {
-            border-color: #d7e4ee !important;
-        }
-        /* Reduce vertical scrolling on long project pages */
-        .mb-32 {
-            margin-bottom: 4.5rem !important;
-        }
-        .mb-24 {
-            margin-bottom: 3.25rem !important;
-        }
-        .my-24 {
-            margin-top: 3.5rem !important;
-            margin-bottom: 3.5rem !important;
-        }
-        .mt-24 {
-            margin-top: 3.5rem !important;
-        }
-        .p-12 {
-            padding: 2rem !important;
-        }
-        .p-10 {
-            padding: 1.6rem !important;
-        }
-        .doc-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1rem;
-            width: 100%;
-        }
-        .doc-item h3 {
-            font-size: 1.1rem !important;
-            margin-bottom: 0.7rem !important;
-            line-height: 1.35;
-        }
-        .doc-item .carousel-container {
-            padding-bottom: 120%;
-            border-radius: 0.6rem;
-        }
-        .doc-item .carousel-nav-btn {
-            padding: 0.45rem 0.35rem;
-            font-size: 1rem;
-        }
-        .doc-item .carousel-dot {
-            width: 8px;
-            height: 8px;
-        }
-        @media (max-width: 1024px) {
-            .doc-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David's Mighty Men - Alexander Lynn</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="icon.png">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --surface2: #edf3f7;
+  --border: #dfe8ef;
+  --border-blue: rgba(62,126,169,0.35);
+  --blue: #1f4f72;
+  --blue-bright: #3e7ea9;
+  --blue-dim: #eff4f8;
+  --text: #2f3b4a;
+  --text-mid: #4f5f6c;
+  --text-dim: #60707d;
+  --white: #ffffff;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+}
+nav {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  display: flex; align-items: center;
+  justify-content: center;
+  position: sticky; top: 0; z-index: 50;
+  background: #1f3e59;
+}
+.nav-links { display: flex; list-style: none; gap: 0.35rem; }
+.nav-links a {
+  display: block; padding: 0.45rem 0.9rem;
+  text-decoration: none; font-size: 0.85rem; font-weight: 600;
+  color: #d2e1ec; border-radius: 6px;
+  transition: all 0.2s ease;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: #ffffff; background: rgba(255,255,255,0.16);
+}
+.project-hero {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden; position: relative;
+}
+.project-hero-img {
+  width: 100%; max-height: 480px;
+  object-fit: cover; display: block;
+  filter: brightness(0.68);
+}
+.project-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(11,28,45,0.82) 0%, rgba(11,28,45,0.5) 45%, rgba(11,28,45,0.28) 100%);
+}
+.project-hero-content {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2.3rem 2rem;
+  max-width: 1200px; margin: 0 auto;
+}
+.breadcrumb {
+  font-size: 0.78rem; font-weight: 600;
+  color: #d2e1ec; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+}
+.breadcrumb a { color: #8ec3ea; text-decoration: none; }
+.project-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 800; line-height: 1; letter-spacing: -0.03em;
+  color: #ffffff; margin-bottom: 1rem;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+}
+.project-roles { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.role-tag {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.3rem 0.75rem; border-radius: 999px;
+  background: rgba(13,48,76,0.88);
+  color: #e7f2fb;
+  border: 1px solid rgba(138,190,225,0.45);
+}
+main {
+  max-width: 1200px; margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+.meta-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden; margin-bottom: 2.5rem;
+}
+.meta-item { background: var(--surface); padding: 1.2rem; }
+.meta-label {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 0.4rem;
+}
+.meta-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--blue);
+}
+.section { margin-bottom: 2.8rem; }
+.section-label {
+  font-size: 0.75rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--blue-bright); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.55rem; font-weight: 700;
+  color: var(--blue); letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.section-body {
+  font-size: 1rem; line-height: 1.8;
+  color: var(--text-mid); max-width: 760px;
+}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+.two-col.wide { grid-template-columns: 1.2fr 1fr; }
+.feature-list {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: 0.7rem;
+  margin-top: 1rem;
+}
+.feature-list li {
+  font-size: 0.95rem; line-height: 1.7;
+  color: var(--text-mid); padding-left: 1.2rem;
+  position: relative;
+}
+.feature-list li::before {
+  content: ''; position: absolute; left: 0; top: 0.65rem;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--blue-bright);
+}
+.feature-list li strong { color: var(--text); font-weight: 700; }
+.gameplay-points-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+.gameplay-points-grid .feature-list { margin-top: 0; }
+.img-full {
+  width: 100%; display: block; border-radius: 8px;
+  border: 1px solid var(--border); object-fit: cover;
+}
+.img-caption {
+  font-size: 0.78rem; color: var(--text-dim);
+  margin-top: 0.6rem; text-align: center;
+}
+.img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.3rem; }
+.img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1.3rem; }
+.doc-columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1.3rem; }
+.doc-col-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 0.65rem;
+  text-align: center;
+}
+.doc-col-stack { display: grid; gap: 0.8rem; }
+.doc-carousel {
+  position: relative;
+}
+.doc-slide {
+  display: none;
+}
+.doc-slide.active {
+  display: block;
+}
+.doc-slide .img-item img {
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: #ffffff;
+  min-height: 180px;
+}
+.doc-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(31, 79, 114, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f4f72;
+  border-radius: 999px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+.doc-nav-btn.prev { left: 8px; }
+.doc-nav-btn.next { right: 8px; }
+.doc-counter {
+  margin-top: 0.45rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+.img-item img {
+  width: 100%; display: block; border-radius: 8px;
+  border: 1px solid var(--border); cursor: pointer;
+  transition: filter 0.2s ease;
+  aspect-ratio: 16/9; object-fit: cover;
+}
+.img-item img:hover { filter: brightness(1.05); }
+.video-wrap {
+  position: relative; padding-bottom: 56.25%; height: 0;
+  overflow: hidden; border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.video-wrap iframe {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%; border: none;
+}
+.divider { height: 1px; background: var(--border); margin: 2rem 0; }
+.reflection-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue-bright);
+  border-radius: 8px; padding: 1.5rem 1.8rem;
+}
+.reflection-box p { font-size: 1rem; line-height: 1.8; color: var(--text-mid); }
+.reflection-box p + p { margin-top: 1rem; }
+.lightbox {
+  display: none; position: fixed; z-index: 9999; inset: 0;
+  background: rgba(0,0,0,0.92);
+  justify-content: center; align-items: center;
+  flex-direction: column; padding: 2rem;
+}
+.lightbox-img { max-width: 85%; max-height: 80vh; border-radius: 8px; }
+.lightbox-close {
+  position: absolute; top: 1.5rem; right: 2rem;
+  font-size: 2rem; color: #fff; cursor: pointer; line-height: 1;
+}
+.lightbox-close:hover { color: #ffffff; }
+.lightbox-prev, .lightbox-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(17,24,39,0.9); color: #fff;
+  border: 1px solid rgba(255,255,255,0.4); font-size: 1.4rem;
+  padding: 0.9rem 1.1rem; cursor: pointer;
+  transition: background 0.2s; z-index: 10000; line-height: 1; border-radius: 6px;
+}
+.lightbox-prev { left: 1.5rem; }
+.lightbox-next { right: 1.5rem; }
+.lightbox-prev:hover, .lightbox-next:hover { background: var(--blue-bright); color: var(--white); }
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.2rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+footer p { font-size: 0.8rem; color: var(--text-dim); }
+.footer-mark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem; font-weight: 800; color: var(--blue);
+}
+@media (max-width: 900px) {
+  nav, footer { padding-left: 1rem; padding-right: 1rem; }
+  .project-hero-content { padding: 1.6rem 1rem; }
+  main { padding: 1.7rem 1rem 3rem; }
+  .meta-strip { grid-template-columns: 1fr 1fr; }
+  .two-col, .two-col.wide, .img-grid-2, .img-grid-3, .doc-columns, .gameplay-points-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
-<body class="antialiased">
+<body>
+<nav>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+  </ul>
+</nav>
 
-    <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen()">
-        <span class="close-btn" onclick="closeFullscreen()">&times;</span>
-        <div id="fullscreenContent" class="fullscreen-content">
-            <img id="fullscreenImage" src="" alt="Full Screen Image">
+<div class="project-hero">
+  <img class="project-hero-img" src="David/High Res Screenshot.png" alt="David's Mighty Men">
+  <div class="project-hero-overlay"></div>
+  <div class="project-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Projects</a><span>/</span><span>David's Mighty Men</span>
+    </div>
+    <h1 class="project-title">David's Mighty Men</h1>
+    <div class="project-roles">
+      <span class="role-tag">Creative Director</span>
+      <span class="role-tag">UI/UX Designer</span>
+      <span class="role-tag">Programmer</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="meta-strip">
+    <div class="meta-item"><div class="meta-label">Role</div><div class="meta-value">Creative Director, UI/UX Designer, Programmer</div></div>
+    <div class="meta-item"><div class="meta-label">Duration</div><div class="meta-value">September 2025 - December 2025</div></div>
+    <div class="meta-item"><div class="meta-label">Team Size</div><div class="meta-value">6</div></div>
+    <div class="meta-item"><div class="meta-label">Engine</div><div class="meta-value">Unreal Engine</div></div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Overview</p>
+    <div class="two-col wide">
+      <div>
+        <h2 class="section-title">David's Mighty Men</h2>
+        <p class="section-body">David's Mighty Men is a 3D Hack N' Slash Historical game set 3,000 years ago in the times of King David's reign. I led a team of six during the game's first three months of development up until vertical slice. I worked on project management, UI design, and gameplay programming.</p>
+      </div>
+      <div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/hBYvHdHxsGY?si=up2vX9LnAziZsRsf" title="Vertical Slice Gameplay Showcase" allowfullscreen loading="lazy"></iframe>
         </div>
+        <p class="img-caption">Vertical Slice Gameplay Showcase</p>
+      </div>
     </div>
+  </div>
 
-    <div class="min-h-screen flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
+  <div class="divider"></div>
 
-        <nav class="navbar w-full py-4 px-6 flex justify-center">
-            <div class="flex space-x-6">
-                <a href="index.html" class="navbar-link active">Projects</a>
-                <a href="about.html" class="navbar-link">About</a>
-                <a href="experience.html" class="navbar-link">Experience</a>
-            </div>
-        </nav>
-
-        <header class="w-full flex flex-col items-center">
-            <div class="text-center mb-12 w-full max-w-4xl animate-fade-in-down mt-32">
-                <img src="David/TITLE.png" alt="David's Mighty Men" class="w-full h-auto mb-4">
-            </div>
-
-            <div class="w-full mb-24 flex justify-center">
-                <img src="David/High Res Screenshot.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
-            </div>
-            
-            <div class="w-full max-w-2xl mx-auto mb-32 project-card p-10">
-                <table class="info-table">
-                    <tr>
-                        <td class="info-label">Role:</td>
-                        <td class="info-value">Creative Director, UI/UX Designer, Programmer</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Duration:</td>
-                        <td class="info-value">September 2025 – May 2026</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Team size:</td>
-                        <td class="info-value">6</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Genre:</td>
-                        <td class="info-value">3D Hack N’ Slash Historical</td>
-                    </tr>
-                    <tr>
-                        <td class="info-label">Engine:</td>
-                        <td class="info-value">Unreal Engine</td>
-                    </tr>
-                </table>
-
-                <p class="text-xl text-gray-700 leading-relaxed mx-auto text-left">
-                    David's Mighty Men is a 3D Hack N' Slash Historical game set 3,000 years ago in the
-                    times of King David's reign. I led a team of six during the game's first three months of
-                    development up until vertical slice. I worked on project management, UI design, and
-                    gameplay programming.
-                </p>
-            </div>
-
-            <div class="w-full max-w-4xl mx-auto mb-32">
-                <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Vertical Slice Gameplay Showcase</h3>
-                <div class="relative pt-[56.25%] w-full h-0">
-                    <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
-                        src="https://www.youtube.com/embed/hBYvHdHxsGY?si=up2vX9LnAziZsRsf" 
-                        title="Vertical Slice Gameplay Showcase" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-
-        </header>
-
-        <main class="w-full max-w-5xl">
-            
-            <div class="w-full mb-24 flex justify-center">
-                <img src="David/HighresScreenshot00013 - Copy.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
-            </div>
-            
-            <section id="ui-design-section" class="mb-32">
-                <div class="project-card p-12 flex flex-col items-center">
-                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">UI/UX Design</h2>
-
-                    <div class="w-full max-w-4xl mx-auto mb-12">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">UI Video</h3>
-                        <div class="relative pt-[56.25%] w-full h-0">
-                            <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
-                                src="https://www.youtube.com/embed/Prvnm0YDfbA?si=-VaIDMtEO-TgOoGn" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                    <div class="w-full mb-12 max-w-4xl">
-                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                            As UI/UX Designer, I implemented all UI elements in game, ensuring seamless player interaction. I utilized Unreal Engine's CommonUI plugin to accomplish all my intended UI goals for the game. This game challenged me more than any other in my journey with UI/UX Design so far, and it ended up being very fun to make. My contributions for UI/UX design include:
-                        </p>
-                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700 leading-relaxed ml-4">
-                            <li><strong>Main Menu:</strong> Button layouts for Start, Continue, Settings, Credits, and Quit with live menu background implemented.</li>
-                            <li><strong>Settings Menu:</strong> Options to change video settings, audio settings, and view controls and combo lists.</li>
-                            <li><strong>Video Settings:</strong> Options to change Resolution, Window Mode, Vsync, Frame Rate, and Graphics settings. These settings save once you apply them, with the option to reset to default implemented as well.</li>
-                            <li><strong>Audio Settings:</strong> Options to change audio settings, including SFX, Music, and Voice Lines. These settings save once you apply them, with the option to reset to default implemented as well.</li>
-                            <li><strong>Sensitivity Settings:</strong> Options to adjust mouse and controller sensitivity. These settings save once you apply them, with the option to reset to default implemented as well.</li>
-                            <li><strong>Level Select:</strong> Select which level you want to play once you start the game.</li>
-                            <li><strong>Pause Menu:</strong> Sets the game paused and gives options to Continue, view Settings, or Quit to Main Menu.</li>
-                            <li><strong class="text-indigo-600">All menus are fully controller compatible.</strong></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <div class="w-full mb-24 flex justify-center">
-                <img src="David/HighresScreenshot00003 - Copy.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
-            </div>
-
-            <hr class="my-24 border-t-2 border-gray-300">
-
-            <section id="gameplay-programming-section" class="mb-32">
-                <div class="project-card p-12 flex flex-col items-center">
-                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">Gameplay Programming</h2>
-
-                    <div class="w-full max-w-4xl mx-auto mb-12">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Gameplay Programming Video</h3>
-                        <div class="relative pt-[56.25%] w-full h-0">
-                            <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
-                                src="https://www.youtube.com/embed/uw2Y_--RW28?si=j11315Z2XvkuZPtT" 
-                                title="YouTube video player - Gameplay Programming" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                    <div class="w-full mb-12 max-w-4xl">
-                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                            In the prototyping phase, I was tasked with developing systems related to our core gameplay mechanics. In the 2 week window we were given, I was able to successfully program all player movement and mechanics, providing the foundation for player engagement. I utilized a series of Blueprints and animation blend trees to accomplish this task. These systems include:
-                        </p>
-                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700 leading-relaxed ml-4">
-                            <li><strong>Player movement:</strong> Basic walk to run function, synced up nicely with animation blend trees.</li>
-                            <li><strong>Shielding:</strong> Player raises their shield to block incoming attacks.</li>
-                            <li><strong>Strafing:</strong> With shield raised, player moves at a set speed with rotation locked.</li>
-                            <li><strong>Dodging:</strong> Player performs quick movement displacement over a certain distance, depending on direction of controller.</li>
-                            <li><strong>Lock On:</strong> Orients player camera towards an enemy when toggled. Disabled by toggle/walking away from target.</li>
-                            <li><strong>Quick attacks:</strong> Short, quick swings dealing decent damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful ground strike.</li>
-                            <li><strong>Strong attacks:</strong> Longer, slower swings that use more of the player’s momentum but do a lot of damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful aerial strike.</li>
-                            <li><strong>Combining attacks:</strong> Players can switch between Quick and Strong Attacks mid combo, giving more freedom of expression and allowing more options for the player to experiment with, creating fun and engaging combat.</li>
-                            <li><strong>Charge Attack:</strong> Long buildup releases a powerful swing, dealing a lot of damage.</li>
-                            <li><strong>Divine intervention:</strong> When Divine Meter is full, player can call down powerful strike, devastating their opponents as an engaging cinematic plays.</li>
-                        </ul>
-                        <p class="text-lg text-gray-700 leading-relaxed mt-6">
-                            I was able to successfully build upon all of these mechanics and program them to the
-                            standard I wanted for vertical slice, which you can check out here:
-                        </p>
-                        <div class="relative pt-[56.25%] w-full h-0 mt-6">
-                            <iframe class="absolute top-0 left-0 w-full h-full rounded-xl shadow-xl" 
-                                src="https://www.youtube.com/embed/hBYvHdHxsGY?si=up2vX9LnAziZsRsf" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <div class="w-full mb-24 flex justify-center">
-                <img src="David/HighresScreenshot00002 - Copy.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
-            </div>
-            
-            <hr class="my-24 border-t-2 border-gray-300">
-            
-            <section id="project-management-section" class="mb-32" style="display: block;">
-                <div class="project-card p-12 flex flex-col items-center">
-                    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">Project Management</h2>
-                    
-                    <div class="w-full mb-12">
-                        <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                            As Creative Director, I lead a team of six, directing the overall vision for the game while managing each department in terms of their quality. I oversee all aspects of the game’s development, including level design, gameplay mechanics, and artistic direction. I am in constant talks with the producer and leads, making sure the project vision is still in scope so that each department has a clear picture of their tasks for the week. While the producer makes sure that the team can accomplish goals in a specific amount of time, I make sure that all creative goals are met, having the final say on the result of what’s being made, including art, assets, mechanics, story, and more. I am also heavily involved in designing the documentation, including the GDD, ASG, Gantt charts, team contracts and more. Additionally, I am responsible for conducting playtesting sessions as development goes on, making playtesting reports and hearing feedback from testers and iterating that feedback into production. Here are some of my contributions as Creative Director.
-                        </p>
-                        
-                    </div>
-
-                    <div class="doc-grid mb-16">
-                        <div class="doc-item">
-                            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Game Design Document (GDD)</h3>
-                            <div id="gdd-carousel" class="carousel-container mx-auto">
-                                <div class="carousel-slide active" data-index="0">
-                                    <img src="DavidDock/GDD-1.png" alt="GDD Screenshot 1" onclick="openFullscreen(this.src)">
-                                </div>
-                                <div class="carousel-slide" data-index="1">
-                                    <img src="DavidDock/GDD-2.png" alt="GDD Screenshot 2" onclick="openFullscreen(this.src)">
-                                </div>
-                                <button class="carousel-nav-btn prev" onclick="prevSlide('gdd-carousel')">&#10094;</button>
-                                <button class="carousel-nav-btn next" onclick="nextSlide('gdd-carousel')">&#10095;</button>
-                                <div class="carousel-dots" id="gdd-dots">
-                                    <span class="carousel-dot active" onclick="currentSlide('gdd-carousel', 0)"></span>
-                                    <span class="carousel-dot" onclick="currentSlide('gdd-carousel', 1)"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="doc-item">
-                            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Art Style Guide (ASG)</h3>
-                            <div id="asg-carousel" class="carousel-container mx-auto">
-                                <div class="carousel-slide active" data-index="0">
-                                    <img src="DavidDock/ASG-1.png" alt="ASG Screenshot 1" onclick="openFullscreen(this.src)">
-                                </div>
-                                <div class="carousel-slide" data-index="1">
-                                    <img src="DavidDock/ASG-2.png" alt="ASG Screenshot 2" onclick="openFullscreen(this.src)">
-                                </div>
-                                <button class="carousel-nav-btn prev" onclick="prevSlide('asg-carousel')">&#10094;</button>
-                                <button class="carousel-nav-btn next" onclick="nextSlide('asg-carousel')">&#10095;</button>
-                                <div class="carousel-dots" id="asg-dots">
-                                    <span class="carousel-dot active" onclick="currentSlide('asg-carousel', 0)"></span>
-                                    <span class="carousel-dot" onclick="currentSlide('asg-carousel', 1)"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="doc-item">
-                            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Playtesting Report</h3>
-                            <div id="playtest-carousel" class="carousel-container mx-auto">
-                                <div class="carousel-slide active" data-index="0">
-                                    <img src="DavidDock/Playtest Form Screenshot 1.png" alt="Playtest Form Screenshot 1" onclick="openFullscreen(this.src)">
-                                </div>
-                                <div class="carousel-slide" data-index="1">
-                                    <img src="DavidDock/Playtest Form Screenshot 2.png" alt="Playtest Form Screenshot 2" onclick="openFullscreen(this.src)">
-                                </div>
-                                <button class="carousel-nav-btn prev" onclick="prevSlide('playtest-carousel')">&#10094;</button>
-                                <button class="carousel-nav-btn next" onclick="nextSlide('playtest-carousel')">&#10095;</button>
-                                <div class="carousel-dots" id="playtest-dots">
-                                    <span class="carousel-dot active" onclick="currentSlide('playtest-carousel', 0)"></span>
-                                    <span class="carousel-dot" onclick="currentSlide('playtest-carousel', 1)"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </section>
-
-            <div class="w-full mb-24 flex justify-center">
-                <img src="David/HighRes Outskirts5.png" alt="High Resolution Screenshot" class="w-full max-w-6xl h-auto rounded-xl shadow-xl">
-            </div>
-
-        <hr class="my-24 border-t-2 border-gray-300">
-        <section id="reflection-section" class="mb-24">
-            <div class="project-card p-12 flex flex-col items-center">
-                <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 w-full text-center">Reflection</h2>
-                <p class="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto text-left">
-                    When I first started this project, I wanted to blend the worlds of faith and video games
-                    together to create something truly unique. There are several awesome stories told in the
-                    Bible that can be made into games, and this is just one of them. I wanted to make a
-                    game centered around a biblical story that would be fun for all types of players to enjoy.
-                    I honestly didn't think an idea like this would even get past the pitch, let alone make it to
-                    vertical slice! To say I learned a lot from this experience would be a huge
-                    understatement.
-                </p>
-                <p class="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto text-left mt-6">
-                    As development progressed, I continued to challenge myself every day, learning a lot
-                    about team leadership, programming, UI design, and other aspects of game
-                    development. Most importantly, I learned to keep pushing on despite the many
-                    obstacles that came our way and the deadlines we were under. With a team of six and
-                    only three months practicing full production cycles, everyone had to carry on multiple
-                    roles and get out of their comfort zones in order to keep up the pace. I juggled the
-                    responsibilities of a project leader, vision holder, player programmer, UI designer,
-                    scriptwriter, motion capture actor, organizing voice recording sessions, organizing
-                    playtesting sessions, and writing over 54 pages of documentation at once for this
-                    project. Given the circumstances, I'm very proud of what we were able to accomplish!
-                </p>
-            </div>
-        </section>
-        </main>
-
-        <footer class="mt-24 text-center text-gray-600 text-sm" style="color:rgba(0, 0, 0, 1)">
-            <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
-            <p>Alexander Lynn - Technical Designer</p>
-        </footer>
+  <div class="section">
+    <p class="section-label">UI/UX Design</p>
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">UI Video</h2>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/Prvnm0YDfbA?si=-VaIDMtEO-TgOoGn" title="UI Video" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+      <div>
+        <p class="section-body">As UI/UX Designer, I implemented all UI elements in game, ensuring seamless player interaction. I utilized Unreal Engine's CommonUI plugin to accomplish all my intended UI goals for the game. This game challenged me more than any other in my journey with UI/UX Design so far, and it ended up being very fun to make. My contributions for UI/UX design include:</p>
+        <ul class="feature-list">
+          <li><strong>Main Menu:</strong> Button layouts for Start, Continue, Settings, Credits, and Quit with live menu background implemented.</li>
+          <li><strong>Settings Menu:</strong> Options to change video settings, audio settings, and view controls and combo lists.</li>
+          <li><strong>Video Settings:</strong> Options to change Resolution, Window Mode, Vsync, Frame Rate, and Graphics settings. These settings save once you apply them, with the option to reset to default implemented as well.</li>
+          <li><strong>Audio Settings:</strong> Options to change audio settings, including SFX, Music, and Voice Lines. These settings save once you apply them, with the option to reset to default implemented as well.</li>
+          <li><strong>Sensitivity Settings:</strong> Options to adjust mouse and controller sensitivity. These settings save once you apply them, with the option to reset to default implemented as well.</li>
+          <li><strong>Level Select:</strong> Select which level you want to play once you start the game.</li>
+          <li><strong>Pause Menu:</strong> Sets the game paused and gives options to Continue, view Settings, or Quit to Main Menu.</li>
+          <li><strong>All menus are fully controller compatible.</strong></li>
+        </ul>
+      </div>
     </div>
+    <div style="margin-top: 1.2rem;">
+      <img class="img-full" src="David/HighresScreenshot00003 - Copy.png" alt="High Resolution Screenshot">
+    </div>
+  </div>
 
-    <script>
-        // Global function to manage slide index
-        const slideIndices = {
-            'gdd-carousel': 0,
-            'asg-carousel': 0,
-            'playtest-carousel': 0
-        };
+  <div class="divider"></div>
 
-        // Function to show a specific slide
-        function showSlide(carouselId, n) {
-            const carousel = document.getElementById(carouselId);
-            const slides = carousel.getElementsByClassName('carousel-slide');
-            const dots = document.getElementById(carouselId.replace('-carousel', '-dots')).getElementsByClassName('carousel-dot');
-            const totalSlides = slides.length;
+  <div class="section">
+    <p class="section-label">Gameplay Programming</p>
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">Gameplay Programming Video</h2>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/uw2Y_--RW28?si=j11315Z2XvkuZPtT" title="Gameplay Programming Video" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+      <div>
+        <p class="section-body">In the prototyping phase, I was tasked with developing systems related to our core gameplay mechanics. In the 2 week window we were given, I was able to successfully program all player movement and mechanics, providing the foundation for player engagement. I utilized a series of Blueprints and animation blend trees to accomplish this task. These systems include:</p>
+      </div>
+    </div>
+    <div class="gameplay-points-grid">
+      <ul class="feature-list">
+        <li><strong>Player movement:</strong> Basic walk to run function, synced up nicely with animation blend trees.</li>
+        <li><strong>Shielding:</strong> Player raises their shield to block incoming attacks.</li>
+        <li><strong>Strafing:</strong> With shield raised, player moves at a set speed with rotation locked.</li>
+        <li><strong>Dodging:</strong> Player performs quick movement displacement over a certain distance, depending on direction of controller.</li>
+        <li><strong>Lock On:</strong> Orients player camera towards an enemy when toggled. Disabled by toggle/walking away from target.</li>
+        <li><strong>Quick attacks:</strong> Short, quick swings dealing decent damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful ground strike.</li>
+      </ul>
+      <ul class="feature-list">
+        <li><strong>Strong attacks:</strong> Longer, slower swings that use more of the player’s momentum but do a lot of damage. A 1.5 second timer is fired for each time the player presses the Quick Attack input, giving them a short window of time before their combo resets. These attacks finish with a powerful aerial strike.</li>
+        <li><strong>Combining attacks:</strong> Players can switch between Quick and Strong Attacks mid combo, giving more freedom of expression and allowing more options for the player to experiment with, creating fun and engaging combat.</li>
+        <li><strong>Charge Attack:</strong> Long buildup releases a powerful swing, dealing a lot of damage.</li>
+        <li><strong>Divine intervention:</strong> When Divine Meter is full, player can call down powerful strike, devastating their opponents as an engaging cinematic plays.</li>
+      </ul>
+    </div>
+    <div style="margin-top: 1.2rem;">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/hBYvHdHxsGY?si=up2vX9LnAziZsRsf" title="Vertical Slice Video" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+    <div style="margin-top: 1.2rem;">
+      <img class="img-full" src="David/HighresScreenshot00002 - Copy.png" alt="High Resolution Screenshot">
+    </div>
+  </div>
 
-            if (n >= totalSlides) {
-                slideIndices[carouselId] = 0;
-            } else if (n < 0) {
-                slideIndices[carouselId] = totalSlides - 1;
-            } else {
-                slideIndices[carouselId] = n;
-            }
+  <div class="divider"></div>
 
-            // Hide all slides and remove active class from dots
-            for (let i = 0; i < totalSlides; i++) {
-                slides[i].classList.remove('active');
-                dots[i].classList.remove('active');
-            }
+  <div class="section">
+    <p class="section-label">Project Management</p>
+    <h2 class="section-title">Project Management</h2>
+    <p class="section-body">As Creative Director, I lead a team of six, directing the overall vision for the game while managing each department in terms of their quality. I oversee all aspects of the game’s development, including level design, gameplay mechanics, and artistic direction. I am in constant talks with the producer and leads, making sure the project vision is still in scope so that each department has a clear picture of their tasks for the week. While the producer makes sure that the team can accomplish goals in a specific amount of time, I make sure that all creative goals are met, having the final say on the result of what’s being made, including art, assets, mechanics, story, and more. I am also heavily involved in designing the documentation, including the GDD, ASG, Gantt charts, team contracts and more. Additionally, I am responsible for conducting playtesting sessions as development goes on, making playtesting reports and hearing feedback from testers and iterating that feedback into production. Here are some of my contributions as Creative Director.</p>
 
-            // Show the current slide and activate the current dot
-            slides[slideIndices[carouselId]].classList.add('active');
-            dots[slideIndices[carouselId]].classList.add('active');
-        }
+    <div class="doc-columns">
+      <div>
+        <p class="doc-col-title">Game Design Document (GDD)</p>
+        <div class="doc-col-stack doc-carousel" data-carousel="gdd">
+          <div class="doc-slide active">
+            <div class="img-item"><img src="DavidDock/GDD-1.png" alt="GDD Screenshot 1" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="DavidDock/GDD-2.png" alt="GDD Screenshot 2" class="lightbox-trigger"></div>
+          </div>
+          <button class="doc-nav-btn prev" onclick="moveDocSlide('gdd', -1)" aria-label="Previous GDD slide">&#10094;</button>
+          <button class="doc-nav-btn next" onclick="moveDocSlide('gdd', 1)" aria-label="Next GDD slide">&#10095;</button>
+        </div>
+        <p class="doc-counter" id="doc-counter-gdd">1 / 2</p>
+      </div>
+      <div>
+        <p class="doc-col-title">Art Style Guide (ASG)</p>
+        <div class="doc-col-stack doc-carousel" data-carousel="asg">
+          <div class="doc-slide active">
+            <div class="img-item"><img src="DavidDock/ASG-1.png" alt="ASG Screenshot 1" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="DavidDock/ASG-2.png" alt="ASG Screenshot 2" class="lightbox-trigger"></div>
+          </div>
+          <button class="doc-nav-btn prev" onclick="moveDocSlide('asg', -1)" aria-label="Previous ASG slide">&#10094;</button>
+          <button class="doc-nav-btn next" onclick="moveDocSlide('asg', 1)" aria-label="Next ASG slide">&#10095;</button>
+        </div>
+        <p class="doc-counter" id="doc-counter-asg">1 / 2</p>
+      </div>
+      <div>
+        <p class="doc-col-title">Playtesting Report</p>
+        <div class="doc-col-stack doc-carousel" data-carousel="playtest">
+          <div class="doc-slide active">
+            <div class="img-item"><img src="DavidDock/Playtest Form Screenshot 1.png" alt="Playtesting Screenshot 1" class="lightbox-trigger"></div>
+          </div>
+          <div class="doc-slide">
+            <div class="img-item"><img src="DavidDock/Playtest Form Screenshot 2.png" alt="Playtesting Screenshot 2" class="lightbox-trigger"></div>
+          </div>
+          <button class="doc-nav-btn prev" onclick="moveDocSlide('playtest', -1)" aria-label="Previous Playtesting slide">&#10094;</button>
+          <button class="doc-nav-btn next" onclick="moveDocSlide('playtest', 1)" aria-label="Next Playtesting slide">&#10095;</button>
+        </div>
+        <p class="doc-counter" id="doc-counter-playtest">1 / 2</p>
+      </div>
+    </div>
+    <div style="margin-top: 1.2rem;">
+      <img class="img-full" src="David/HighRes Outskirts5.png" alt="High Resolution Screenshot">
+    </div>
+  </div>
 
-        // Functions to move to next or previous slide
-        function nextSlide(carouselId) {
-            showSlide(carouselId, slideIndices[carouselId] + 1);
-        }
+  <div class="divider"></div>
 
-        function prevSlide(carouselId) {
-            showSlide(carouselId, slideIndices[carouselId] - 1);
-        }
+  <div class="section">
+    <p class="section-label">Reflection</p>
+    <h2 class="section-title">Reflection</h2>
+    <div class="reflection-box">
+      <p>When I first started this project, I wanted to blend the worlds of faith and video games together to create something truly unique. There are several awesome stories told in the Bible that can be made into games, and this is just one of them. I wanted to make a game centered around a biblical story that would be fun for all types of players to enjoy. I honestly didn't think an idea like this would even get past the pitch, let alone make it to vertical slice! To say I learned a lot from this experience would be a huge understatement.</p>
+      <p>As development progressed, I continued to challenge myself every day, learning a lot about team leadership, programming, UI design, and other aspects of game development. Most importantly, I learned to keep pushing on despite the many obstacles that came our way and the deadlines we were under. With a team of six and only three months practicing full production cycles, everyone had to carry on multiple roles and get out of their comfort zones in order to keep up the pace. I juggled the responsibilities of a project leader, vision holder, player programmer, UI designer, scriptwriter, motion capture actor, organizing voice recording sessions, organizing playtesting sessions, and writing over 54 pages of documentation at once for this project. Given the circumstances, I'm very proud of what we were able to accomplish!</p>
+    </div>
+  </div>
+</main>
 
-        // Function to go to a specific dot's slide
-        function currentSlide(carouselId, n) {
-            showSlide(carouselId, n);
-        }
+<footer>
+  <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
+  <p>Alexander Lynn - Technical Designer</p>
+</footer>
 
-        // Fullscreen Modal Functions (existing)
-        function openFullscreen(imageSrc) {
-            document.getElementById('fullscreenImage').src = imageSrc;
-            document.getElementById('fullscreenOverlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when fullscreen
-        }
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lb-close">&times;</span>
+  <button class="lightbox-prev" id="lb-prev">&#10094;</button>
+  <img class="lightbox-img" id="lb-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next">&#10095;</button>
+</div>
 
-        function closeFullscreen() {
-            document.getElementById('fullscreenOverlay').style.display = 'none';
-            document.body.style.overflow = 'scroll'; // Re-enable scrolling
-        }
+<script>
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  let triggers = [], idx = 0;
+  document.querySelectorAll('.lightbox-trigger').forEach((el, i) => {
+    triggers.push(el);
+    el.addEventListener('click', () => { idx = i; lbImg.src = el.src; lb.style.display = 'flex'; });
+  });
+  document.getElementById('lb-close').onclick = () => lb.style.display = 'none';
+  lb.addEventListener('click', e => { if (e.target === lb) lb.style.display = 'none'; });
+  document.getElementById('lb-prev').onclick = () => { idx = (idx - 1 + triggers.length) % triggers.length; lbImg.src = triggers[idx].src; };
+  document.getElementById('lb-next').onclick = () => { idx = (idx + 1) % triggers.length; lbImg.src = triggers[idx].src; };
+  document.addEventListener('keydown', e => {
+    if (lb.style.display !== 'flex') return;
+    if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
+    if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
+    if (e.key === 'Escape') lb.style.display = 'none';
+  });
 
-        // Close on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === "Escape") {
-                closeFullscreen();
-            }
-        });
-
-        // Initialize carousels on load
-        window.onload = function() {
-            showSlide('gdd-carousel', 0);
-            showSlide('asg-carousel', 0);
-            showSlide('playtest-carousel', 0);
-        };
-    </script>
+  const docSlideIndex = { gdd: 0, asg: 0, playtest: 0 };
+  function moveDocSlide(carouselName, step) {
+    const carousel = document.querySelector(`.doc-carousel[data-carousel="${carouselName}"]`);
+    if (!carousel) return;
+    const slides = carousel.querySelectorAll('.doc-slide');
+    if (!slides.length) return;
+    docSlideIndex[carouselName] = (docSlideIndex[carouselName] + step + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === docSlideIndex[carouselName]));
+    const counter = document.getElementById(`doc-counter-${carouselName}`);
+    if (counter) counter.textContent = `${docSlideIndex[carouselName] + 1} / ${slides.length}`;
+  }
+</script>
 </body>
 </html>
+
