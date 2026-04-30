@@ -128,7 +128,7 @@ main {
   color: var(--text-mid); max-width: 760px;
 }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
-.two-col.wide { grid-template-columns: 1.2fr 1fr; }
+.two-col.wide { grid-template-columns: 1fr 1fr; }
 .feature-list {
   list-style: none; padding: 0;
   display: flex; flex-direction: column; gap: 0.7rem;
@@ -162,7 +162,8 @@ main {
 }
 .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.3rem; }
 .img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1.3rem; }
-.doc-columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1.3rem; }
+.doc-columns { display: grid; gap: 1rem; margin-top: 1.3rem; }
+.doc-top-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .doc-col-title {
   font-size: 0.9rem;
   font-weight: 700;
@@ -171,44 +172,13 @@ main {
   text-align: center;
 }
 .doc-col-stack { display: grid; gap: 0.8rem; }
-.doc-carousel {
-  position: relative;
-}
-.doc-slide {
-  display: none;
-}
-.doc-slide.active {
-  display: block;
-}
-.doc-slide .img-item img {
+.doc-col-stack .img-item img {
   aspect-ratio: auto;
   object-fit: contain;
   background: #ffffff;
   min-height: 180px;
 }
-.doc-nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
-  border: 1px solid rgba(31, 79, 114, 0.35);
-  background: rgba(255, 255, 255, 0.9);
-  color: #1f4f72;
-  border-radius: 999px;
-  font-weight: 700;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 2;
-}
-.doc-nav-btn.prev { left: 8px; }
-.doc-nav-btn.next { right: 8px; }
-.doc-counter {
-  margin-top: 0.45rem;
-  text-align: center;
-  font-size: 0.75rem;
-  color: var(--text-dim);
-}
+.doc-col-stack.playtest .img-item img { min-height: 260px; }
 .img-item img {
   width: 100%; display: block; border-radius: 8px;
   border: 1px solid var(--border); cursor: pointer;
@@ -218,8 +188,8 @@ main {
 .img-item img:hover { filter: brightness(1.05); }
 .video-wrap {
   position: relative; padding-bottom: 56.25%; height: 0;
-  width: 102%;
-  margin-left: -1%;
+  width: 103%;
+  margin-left: -1.5%;
   overflow: hidden; border-radius: 8px;
   border: 1px solid var(--border);
 }
@@ -273,7 +243,7 @@ footer p { font-size: 0.8rem; color: var(--text-dim); }
   .project-hero-content { padding: 1.6rem 1rem; }
   main { padding: 1.7rem 1rem 3rem; }
   .meta-strip { grid-template-columns: 1fr 1fr; }
-  .two-col, .two-col.wide, .img-grid-2, .img-grid-3, .doc-columns, .gameplay-points-grid { grid-template-columns: 1fr; }
+  .two-col, .two-col.wide, .img-grid-2, .img-grid-3, .doc-columns, .doc-top-row, .gameplay-points-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -351,6 +321,20 @@ footer p { font-size: 0.8rem; color: var(--text-dim); }
         </ul>
       </div>
     </div>
+    <div style="margin-top: 1.25rem;">
+      <h3 class="section-title" style="font-size: 1.2rem; margin-bottom: 0.35rem;">UI Iteration</h3>
+      <p class="section-body" style="margin: 0 auto 0.9rem; text-align: center; max-width: 1000px;">Goal: The UI represents a style centered around themes of royalty, war, and sharpness. Yellow and orange colors reflect royal gold as well as outside conditions akin to environments the player travels in. At first, my process focused mainly on functionality, then applying better visual flair once I had that down.</p>
+      <div class="img-grid-2" style="margin-top: 0;">
+        <div class="img-item">
+          <img src="David/Audio Settings ver 1.png" alt="Audio Settings Version 1" class="lightbox-trigger">
+          <p class="img-caption" style="margin-top: 0.55rem; text-align: center; font-size: 1rem;"><strong>First Image:</strong> Buttons look plain and simple, with basic grey styling and the default Unreal text font. The sliders are also much smaller and the overall layout feels less appealing.</p>
+        </div>
+        <div class="img-item">
+          <img src="David/Audio Settings ver 2.png" alt="Audio Settings Version 2" class="lightbox-trigger">
+          <p class="img-caption" style="margin-top: 0.55rem; text-align: center; font-size: 1rem;"><strong>Second Image:</strong> The button art and game font are now implemented, which already makes the UI look better. Additionally, I cleaned up the layout and formatting for easier navigation, and adjusted states for settings options and sliders so they align with our overall visual direction and how we want the game to feel.</p>
+        </div>
+      </div>
+    </div>
     <div style="max-width: 720px; margin: 1.2rem auto 0;">
       <img class="img-full" src="David/HighresScreenshot00003 - Copy.png" alt="High Resolution Screenshot">
     </div>
@@ -400,50 +384,31 @@ footer p { font-size: 0.8rem; color: var(--text-dim); }
     <p class="section-body">As Creative Director, I lead a team of six, directing the overall vision for the game while managing each department in terms of their quality. I oversee all aspects of the game’s development, including level design, gameplay mechanics, and artistic direction. I am in constant talks with the producer and leads, making sure the project vision is still in scope so that each department has a clear picture of their tasks for the week. While the producer makes sure that the team can accomplish goals in a specific amount of time, I make sure that all creative goals are met, having the final say on the result of what’s being made, including art, assets, mechanics, story, and more. I am also heavily involved in designing the documentation, including the GDD, ASG, Gantt charts, team contracts and more. Additionally, I am responsible for conducting playtesting sessions as development goes on, making playtesting reports and hearing feedback from testers and iterating that feedback into production. Here are some of my contributions as Creative Director.</p>
 
     <div class="doc-columns">
-      <div>
-        <p class="doc-col-title">Game Design Document (GDD)</p>
-        <div class="doc-col-stack doc-carousel" data-carousel="gdd">
-          <div class="doc-slide active">
+      <div class="doc-top-row">
+        <div>
+          <p class="doc-col-title">Game Design Document (GDD)</p>
+          <p class="img-caption" style="margin-top: -0.25rem; margin-bottom: 0.45rem; font-weight: 700;">Click image to view full size.</p>
+          <div class="doc-col-stack img-grid-2">
             <div class="img-item"><img src="DavidDock/GDD-1.png" alt="GDD Screenshot 1" class="lightbox-trigger"></div>
-          </div>
-          <div class="doc-slide">
             <div class="img-item"><img src="DavidDock/GDD-2.png" alt="GDD Screenshot 2" class="lightbox-trigger"></div>
           </div>
-          <button class="doc-nav-btn prev" onclick="moveDocSlide('gdd', -1)" aria-label="Previous GDD slide">&#10094;</button>
-          <button class="doc-nav-btn next" onclick="moveDocSlide('gdd', 1)" aria-label="Next GDD slide">&#10095;</button>
         </div>
-        <p class="doc-counter" id="doc-counter-gdd">1 / 2</p>
-        <p class="img-caption" style="margin-top: 0.35rem; font-weight: 700;">Click image to view full size.</p>
-      </div>
-      <div>
-        <p class="doc-col-title">Art Style Guide (ASG)</p>
-        <div class="doc-col-stack doc-carousel" data-carousel="asg">
-          <div class="doc-slide active">
+        <div>
+          <p class="doc-col-title">Art Style Guide (ASG)</p>
+          <p class="img-caption" style="margin-top: -0.25rem; margin-bottom: 0.45rem; font-weight: 700;">Click image to view full size.</p>
+          <div class="doc-col-stack img-grid-2">
             <div class="img-item"><img src="DavidDock/ASG-1.png" alt="ASG Screenshot 1" class="lightbox-trigger"></div>
-          </div>
-          <div class="doc-slide">
             <div class="img-item"><img src="DavidDock/ASG-2.png" alt="ASG Screenshot 2" class="lightbox-trigger"></div>
           </div>
-          <button class="doc-nav-btn prev" onclick="moveDocSlide('asg', -1)" aria-label="Previous ASG slide">&#10094;</button>
-          <button class="doc-nav-btn next" onclick="moveDocSlide('asg', 1)" aria-label="Next ASG slide">&#10095;</button>
         </div>
-        <p class="doc-counter" id="doc-counter-asg">1 / 2</p>
-        <p class="img-caption" style="margin-top: 0.35rem; font-weight: 700;">Click image to view full size.</p>
       </div>
       <div>
         <p class="doc-col-title">Playtesting Report</p>
-        <div class="doc-col-stack doc-carousel" data-carousel="playtest">
-          <div class="doc-slide active">
-            <div class="img-item"><img src="DavidDock/Playtest Form Screenshot 1.png" alt="Playtesting Screenshot 1" class="lightbox-trigger"></div>
-          </div>
-          <div class="doc-slide">
-            <div class="img-item"><img src="DavidDock/Playtest Form Screenshot 2.png" alt="Playtesting Screenshot 2" class="lightbox-trigger"></div>
-          </div>
-          <button class="doc-nav-btn prev" onclick="moveDocSlide('playtest', -1)" aria-label="Previous Playtesting slide">&#10094;</button>
-          <button class="doc-nav-btn next" onclick="moveDocSlide('playtest', 1)" aria-label="Next Playtesting slide">&#10095;</button>
+        <p class="img-caption" style="margin-top: -0.25rem; margin-bottom: 0.45rem; font-weight: 700;">Click image to view full size.</p>
+        <div class="doc-col-stack img-grid-2 playtest">
+          <div class="img-item"><img src="DavidDock/Playtest Form Screenshot 1.png" alt="Playtesting Screenshot 1" class="lightbox-trigger"></div>
+          <div class="img-item"><img src="DavidDock/Playtest Form Screenshot 2.png" alt="Playtesting Screenshot 2" class="lightbox-trigger"></div>
         </div>
-        <p class="doc-counter" id="doc-counter-playtest">1 / 2</p>
-        <p class="img-caption" style="margin-top: 0.35rem; font-weight: 700;">Click image to view full size.</p>
       </div>
     </div>
     <div style="max-width: 720px; margin: 1.2rem auto 0;">
@@ -493,18 +458,6 @@ footer p { font-size: 0.8rem; color: var(--text-dim); }
     if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
     if (e.key === 'Escape') lb.style.display = 'none';
   });
-
-  const docSlideIndex = { gdd: 0, asg: 0, playtest: 0 };
-  function moveDocSlide(carouselName, step) {
-    const carousel = document.querySelector(`.doc-carousel[data-carousel="${carouselName}"]`);
-    if (!carousel) return;
-    const slides = carousel.querySelectorAll('.doc-slide');
-    if (!slides.length) return;
-    docSlideIndex[carouselName] = (docSlideIndex[carouselName] + step + slides.length) % slides.length;
-    slides.forEach((slide, i) => slide.classList.toggle('active', i === docSlideIndex[carouselName]));
-    const counter = document.getElementById(`doc-counter-${carouselName}`);
-    if (counter) counter.textContent = `${docSlideIndex[carouselName] + 1} / ${slides.length}`;
-  }
 </script>
 </body>
 </html>
