@@ -34,12 +34,21 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 .section-title { font-family:'Space Grotesk',sans-serif; font-size:1.55rem; font-weight:700; color:var(--blue); margin-bottom:1rem; }
 .section-body { font-size:1rem; line-height:1.8; color:var(--text-mid); max-width:860px; }
 .two-col { display:grid; grid-template-columns:1.2fr 1fr; gap:2rem; align-items:start; }
-.video-wrap { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px; border:1px solid var(--border); }
+.video-wrap { position:relative; padding-bottom:56.25%; height:0; width:102%; margin-left:-1%; overflow:hidden; border-radius:8px; border:1px solid var(--border); }
 .video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:none; }
 .feature-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:.7rem; margin-top:1rem; }
 .feature-list li { font-size:.95rem; line-height:1.7; color:var(--text-mid); padding-left:1.2rem; position:relative; }
 .feature-list li::before { content:''; position:absolute; left:0; top:.65rem; width:5px; height:5px; border-radius:50%; background:var(--blue-bright); }
 .divider { height:1px; background:var(--border); margin:2rem 0; }
+.reflection-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue-bright);
+  border-radius: 8px;
+  padding: 1.5rem 1.8rem;
+}
+.reflection-box p { font-size: 1rem; line-height: 1.8; color: var(--text-mid); }
+.reflection-box p + p { margin-top: 1rem; }
 .doc-carousel { position:relative; max-width:980px; margin:0 auto; }
 .doc-slide { display:none; }
 .doc-slide.active { display:block; }
@@ -154,8 +163,10 @@ footer p { font-size:.8rem; color:var(--text-dim); }
 
   <div class="section">
     <p class="section-label">Reflection</p>
-    <h2 class="section-title">Reflection</h2>
-    <p class="section-body">Throughout development of Fishy Business, I'd say I've learned a great amount on project management, UI design, and how to make a mobile game. I've learned the importance of team communication and meetings, how rewarding the results can be when properly sticking to schedules and deadlines, and overall aspects of the multiple responsibilities a producer needs to juggle during production. In terms of UI design, I've learned to adjust my PC minded workflow to fit mobile users.</p>
+    <h2 class="section-title">What I Learned</h2>
+    <div class="reflection-box">
+      <p>Throughout development of Fishy Business, I'd say I've learned a great amount on project management, UI design, and how to make a mobile game. I've learned the importance of team communication and meetings, how rewarding the results can be when properly sticking to schedules and deadlines, and overall aspects of the multiple responsibilities a producer needs to juggle during production. In terms of UI design, I've learned to adjust my PC minded workflow to fit mobile users.</p>
+    </div>
   </div>
 </main>
 
