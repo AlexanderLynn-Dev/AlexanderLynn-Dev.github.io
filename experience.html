@@ -107,6 +107,37 @@
             box-shadow: none;
         }
 
+        a.exp-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        a.exp-card-link:hover {
+            border-color: #bfd3e3;
+            box-shadow: 0 4px 14px rgba(31, 79, 114, 0.08);
+        }
+        a.exp-card-link:focus-visible {
+            outline: 2px solid #3e7ea9;
+            outline-offset: 2px;
+        }
+
+        .exp-inline-link {
+            color: #3e7ea9;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .exp-inline-link:hover {
+            text-decoration: underline;
+            color: #1f4f72;
+        }
+        .exp-inline-link:focus-visible {
+            outline: 2px solid #3e7ea9;
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
         .exp-date {
             font-size: 0.72rem;
             font-weight: 800;
@@ -342,7 +373,7 @@
             </article>
 
             <article class="timeline-item">
-                <div class="exp-card">
+                <a href="David.html" class="exp-card exp-card-link" aria-label="David's Mighty Men — open project page">
                     <p class="exp-date">September 2025 — December 2025</p>
                     <div class="exp-card-top">
                         <img class="exp-logo" src="Experience/Mighty_Studios_Logo.webp" alt="Mighty Studios logo">
@@ -363,11 +394,11 @@
                         <span class="exp-tag">Combat Programming</span>
                         <span class="exp-tag">Visual Design</span>
                     </div>
-                </div>
+                </a>
             </article>
 
             <article class="timeline-item">
-                <div class="exp-card">
+                <a href="Fishy.html" class="exp-card exp-card-link" aria-label="Fishy Business — open project page">
                     <p class="exp-date">September 2025 — December 2025</p>
                     <div class="exp-card-top">
                         <img class="exp-logo" src="Experience/FishCat_Studio_Logo.webp" alt="FishCat Studios logo">
@@ -386,11 +417,11 @@
                         <span class="exp-tag">Project Management</span>
                         <span class="exp-tag">Risk Management</span>
                     </div>
-                </div>
+                </a>
             </article>
 
             <article class="timeline-item">
-                <div class="exp-card">
+                <a href="Feet.html" class="exp-card exp-card-link" aria-label="On Your Feet! — open project page">
                     <p class="exp-date">June 2025 — Present</p>
                     <div class="exp-card-top">
                         <img class="exp-logo" src="Experience/beans-and-parm-logo.png" alt="Beans and Parm Studios logo">
@@ -408,7 +439,7 @@
                         <span class="exp-tag">Level Iteration</span>
                         <span class="exp-tag">Documentation</span>
                     </div>
-                </div>
+                </a>
             </article>
 
             <article class="timeline-item">
@@ -484,7 +515,7 @@
                         <img class="exp-logo" src="Experience/grow_goodness_logo.webp" alt="Grow Goodness LLC logo">
                         <div class="exp-text-block">
                             <h2 class="exp-title">Creative Team Member, Assistant</h2>
-                            <p class="exp-company">Grow Goodness LLC — Internship — Oviedo, FL</p>
+                            <p class="exp-company"><a href="https://www.instagram.com/growgoodness/" class="exp-inline-link" target="_blank" rel="noopener noreferrer" aria-label="Grow Goodness LLC on Instagram (opens in new tab)">Grow Goodness LLC</a> — Internship — Oviedo, FL</p>
                         </div>
                     </div>
                     <p class="exp-body">
