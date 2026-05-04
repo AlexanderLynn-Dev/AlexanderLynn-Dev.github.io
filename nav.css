@@ -148,9 +148,17 @@ body > nav.navbar + .project-hero {
 @media (max-width: 900px) {
   .navbar,
   .top-nav {
+    /* Fixed nav + multi-line mobile layout will overlap page headers.
+       Sticky keeps the nav visible while staying in flow (no overlap). */
+    position: sticky;
     height: auto;
     min-height: var(--nav-bar-height);
     padding: 10px var(--nav-pad-x);
+  }
+
+  /* On mobile the nav is in-flow, so the hero should not be pushed down by a fixed-height offset. */
+  body > nav.navbar + .project-hero {
+    margin-top: 0;
   }
 
   .navbar-inner {
