@@ -5,15 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inventory System Project - Alexander Lynn</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="nav.css">
 <link rel="icon" type="image/png" href="icon.png">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root { --bg:#f3f5f7; --surface:#fff; --border:#dfe8ef; --blue:#1f4f72; --blue-bright:#3e7ea9; --text:#2f3b4a; --text-mid:#4f5f6c; --text-dim:#60707d; --white:#fff; }
 body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
-nav { padding: 1rem 2rem; border-bottom: 1px solid rgba(0,0,0,.12); display:flex; justify-content:center; position:sticky; top:0; z-index:50; background:#1f3e59; }
-.nav-links { list-style:none; display:flex; gap:.35rem; }
-.nav-links a { display:block; padding:.45rem .9rem; text-decoration:none; font-size:.85rem; font-weight:600; color:#d2e1ec; border-radius:6px; }
-.nav-links a:hover, .nav-links a.active { color:#fff; background:rgba(255,255,255,.16); }
 .project-hero { border-bottom:1px solid var(--border); overflow:hidden; position:relative; }
 .project-hero-img { width:100%; max-height:480px; object-fit:cover; display:block; filter:brightness(.63); }
 .project-hero-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(11,28,45,.82) 0%, rgba(11,28,45,.5) 45%, rgba(11,28,45,.28) 100%); }
@@ -55,25 +52,41 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 .lightbox-close { position:absolute; top:1.5rem; right:2rem; font-size:2rem; color:#fff; cursor:pointer; line-height:1; }
 .lightbox-prev,.lightbox-next { position:absolute; top:50%; transform:translateY(-50%); background:rgba(17,24,39,.9); color:#fff; border:1px solid rgba(255,255,255,.4); font-size:1.4rem; padding:.9rem 1.1rem; cursor:pointer; border-radius:6px; }
 .lightbox-prev { left:1.5rem; } .lightbox-next { right:1.5rem; }
-footer { border-top:1px solid var(--border); padding:1.2rem 2rem; display:flex; justify-content:space-between; }
-footer p { font-size:.8rem; color:var(--text-dim); }
-@media (max-width:900px) { nav,footer{padding-left:1rem;padding-right:1rem;} .project-hero-content{padding:1.6rem 1rem;} main{padding:1.7rem 1rem 3rem;} .meta-strip{grid-template-columns:1fr 1fr;} .two-col{grid-template-columns:1fr;} }
+.site-footer { width:100%; background-color:#1f3e59; color:#ffffff; margin-top:120px; }
+.footer-inner { width:min(1280px, 96%); margin:0 auto; padding:26px 24px 20px; text-align:center; }
+.footer-name { font-size:1rem; font-weight:700; margin-bottom:10px; letter-spacing:.01em; }
+.footer-links { list-style:none; display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:14px; margin-bottom:12px; }
+.footer-links a { color:#ffffff; text-decoration:none; font-size:.9rem; font-weight:500; opacity:.95; transition:opacity .2s ease; }
+.footer-links a:hover { opacity:1; text-decoration:underline; }
+.footer-social { margin-bottom:4px; }
+.footer-linkedin { display:inline-flex; align-items:center; justify-content:center; text-decoration:none; width:40px; height:40px; border-radius:999px; background:rgba(255,255,255,.12); transition:background-color .2s ease; }
+.footer-linkedin:hover { background:rgba(255,255,255,.2); }
+.footer-linkedin img { width:18px; height:18px; display:block; object-fit:contain; }
+.footer-bottom { border-top:1px solid rgba(255,255,255,.16); background:rgba(0,0,0,.08); padding:10px 24px; text-align:center; }
+.footer-copy { font-size:.78rem; opacity:.78; }
+@media (max-width:900px) { .project-hero-content{padding:1.6rem 1rem;} main{padding:1.7rem 1rem 3rem;} .meta-strip{grid-template-columns:1fr 1fr;} .two-col{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
-<nav>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Projects</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="experience.html">Experience</a></li>
-  </ul>
+<nav class="navbar w-full">
+  <div class="navbar-inner">
+    <div class="flex items-center">
+      <a href="index.html" class="navbar-brand">Alexander Lynn</a>
+    </div>
+    <div class="navbar-center-links">
+      <a href="index.html" class="navbar-link">Home</a>
+      <a href="projects.html" class="navbar-link active">Projects</a>
+      <a href="about.html" class="navbar-link">About</a>
+      <a href="experience.html" class="navbar-link">Experience</a>
+    </div>
+  </div>
 </nav>
 
 <div class="project-hero">
   <img class="project-hero-img" src="Inventory/1In_Game_HUD.webp" alt="Inventory System Project">
   <div class="project-hero-overlay"></div>
   <div class="project-hero-content">
-    <div class="breadcrumb"><a href="index.html">Projects</a><span>/</span><span>Inventory System</span></div>
+    <div class="breadcrumb"><a href="projects.html">Projects</a><span>/</span><span>Inventory System</span></div>
     <h1 class="project-title">Inventory System Project</h1>
     <div class="project-roles"><span class="role-tag">Solo Developer</span><span class="role-tag">UI/UX Design</span><span class="role-tag">Gameplay Programming</span></div>
   </div>
@@ -135,9 +148,24 @@ footer p { font-size:.8rem; color:var(--text-dim); }
   </div>
 </main>
 
-<footer>
-  <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
-  <p>Alexander Lynn - Technical Designer</p>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-name">Alexander Lynn</p>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+    </ul>
+    <div class="footer-social">
+      <a class="footer-linkedin" href="https://www.linkedin.com/in/alexanderj-lynn/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+        <img src="LinkedIn_logo_initials.png" alt="LinkedIn">
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">&copy; 2026 Alexander Lynn. All rights reserved.</p>
+  </div>
 </footer>
 
 <div class="lightbox" id="lightbox">

@@ -1,294 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Lynn - Technical Designer Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="icon.png">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f5f7;
-            color: #2f3b4a;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alexander Lynn | Technical Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="nav.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .project-card {
-            background-color: #ffffff;
-            border: 1px solid #dfe8ef;
-            border-radius: 0.75rem;
-            box-shadow: none;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-            cursor: pointer;
-            overflow: hidden;
-        }
-        .project-card:hover {
-            transform: translateY(-2px);
-            border-color: #bfd3e3;
-        }
+    :root {
+      --text: #f2f8ff;
+      --button-dark: #1d4363;
+      --button-light: #e9f1f8;
+    }
 
-        .card-content-wrapper {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
+    body {
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: url("backdrop.png") center center / cover no-repeat fixed;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-        .project-thumbnail {
-            width: 100%;
-            height: 215px;
-            border: 1px solid #dce7ef;
-            border-radius: 0.75rem 0.75rem 0 0;
-            object-fit: cover;
-            transition: transform 0.25s ease-in-out;
-            margin-right: 0;
-        }
-        
-        .project-card:hover .project-thumbnail {
-            transform: scale(1.03);
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(8, 26, 43, 0.85), rgba(8, 26, 43, 0.48) 45%, rgba(8, 26, 43, 0.62));
+      z-index: -1;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 170px 170px;
+      background-repeat: repeat;
+    }
 
-        .text-content {
-            width: 100%;
-            padding: 1.15rem 1.15rem 1.35rem;
-        }
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
 
-        .project-title {
-            padding: 0 0 0.5rem 0;
-            font-size: 1.55rem;
-            font-weight: 800;
-            color: #1f4f72;
-            text-align: left;
-        }
+    .hero {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 40px;
+      padding: 110px 0 70px;
+    }
 
-        .project-role {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #60707d;
-            margin-bottom: 0.65rem;
-        }
+    .hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #9bc0df;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
 
-        .project-description {
-            color: #4f5f6c;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-        
-        /* HEADER ANIMATION (unchanged) */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fade-in-down {
-            animation: fadeInDown 1s ease-out forwards;
-        }
+    .hero-title {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 0.95;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #1f3e59;
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
-            z-index: 1000;
-        }
-        .navbar-link {
-            color: #d2e1ec;
-            font-weight: 500;
-            padding: 0.45rem 0.85rem;
-            font-size: 0.9rem;
-            border-radius: 0.3rem;
-            transition: all 0.2s ease-in-out;
-        }
-        .navbar-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-        }
-        .navbar-link.active {
-            background-color: rgba(255, 255, 255, 0.16);
-            color: white;
-            font-size: 0.9rem;
-        }
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+      color: #d9e8f6;
+      font-weight: 500;
+      margin-bottom: 22px;
+    }
 
-        .filter-wrap {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.52rem;
-            margin-bottom: 2rem;
-        }
+    .hero-description {
+      max-width: 560px;
+      color: #c4d7e9;
+      line-height: 1.8;
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
 
-        .filter-btn {
-            background-color: #eff4f8;
-            color: #355971;
-            border: 2px solid #8fb2cc;
-            border-radius: 999px;
-            padding: 0.4rem 0.9rem;
-            font-size: 0.78rem;
-            font-weight: 600;
-            line-height: 1.1;
-            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.75) inset;
-            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-        }
+    .hero-quote {
+      max-width: 540px;
+      border-left: 3px solid rgba(138, 186, 221, 0.75);
+      padding-left: 14px;
+      color: #cce0f1;
+      font-style: italic;
+      margin-bottom: 30px;
+      line-height: 1.65;
+    }
 
-        .filter-btn:hover {
-            background-color: #3e7ea9;
-            border-color: #3e7ea9;
-            color: #ffffff;
-            box-shadow: none;
-        }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
 
-        .filter-btn.active {
-            background-color: #1f4f72;
-            border-color: #1f4f72;
-            color: #ffffff;
-            box-shadow: 0 0 0 2px rgba(31, 79, 114, 0.25);
-        }
+    .btn {
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: transform 0.18s ease, filter 0.18s ease, background-color 0.18s ease;
+    }
 
-        .hidden-project {
-            display: none;
-        }
+    .btn-primary {
+      background: var(--button-light);
+      color: #173754;
+      border-color: rgba(220, 238, 254, 0.85);
+    }
 
-        header h2 {
-            color: #1f4f72 !important;
-        }
+    .btn-secondary {
+      background: var(--button-dark);
+      color: #f0f7ff;
+      border-color: rgba(160, 203, 234, 0.35);
+    }
 
-        header p {
-            color: #6b7b88 !important;
-            font-size: 1rem !important;
-            font-weight: 500 !important;
-        }
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
 
-        .portfolio-title {
-            color: #1f4f72;
-        }
+    .hero-photo-wrap {
+      display: grid;
+      place-items: center;
+    }
 
-        @media (max-width: 900px) {
-            .project-thumbnail {
-                height: 200px;
-            }
-        }
-    </style>
+    .photo-ring {
+      width: min(460px, 90vw);
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      padding: 14px;
+      background: radial-gradient(circle at 30% 30%, rgba(130, 185, 222, 0.32), rgba(31, 76, 109, 0.52));
+      border: 2px solid rgba(138, 186, 221, 0.55);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.34), inset 0 0 40px rgba(31, 76, 109, 0.45);
+    }
+
+    .photo-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(204, 227, 245, 0.55);
+    }
+
+    .site-footer {
+      background-color: #ffffff;
+      color: #1f2d3d;
+      margin-top: 120px;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    .footer-inner {
+      width: min(1280px, 96%);
+      margin: 0 auto;
+      padding: 26px 24px 20px;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+      color: #0f2640;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #2a4560;
+      background-color: transparent;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+      border-radius: 0.3rem;
+      transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+
+    .footer-links a:hover {
+      background-color: rgba(23, 55, 84, 0.1);
+      color: #0f2640;
+    }
+    .footer-social {
+      margin-bottom: 4px;
+    }
+    .footer-linkedin {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(23, 55, 84, 0.08);
+      transition: background-color 0.2s ease;
+    }
+    .footer-linkedin:hover { background: rgba(23, 55, 84, 0.14); }
+    .footer-linkedin img {
+      width: 18px;
+      height: 18px;
+      display: block;
+      object-fit: contain;
+    }
+    .footer-bottom {
+      border-top: 1px solid #e5ebf1;
+      background: #f3f5f7;
+      padding: 10px 24px;
+      text-align: center;
+    }
+    .footer-copy {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #3d4f5f;
+    }
+
+    /* White nav bar on landing page (nav.css defaults .top-nav to site blue). */
+    .top-nav {
+      background-color: #ffffff;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+      backdrop-filter: none;
+    }
+    .top-nav .logo {
+      color: #173754;
+    }
+    .top-nav .logo:hover {
+      color: #173754;
+    }
+    .top-nav .nav-links a {
+      color: #355971;
+    }
+    .top-nav .nav-links a:hover {
+      background-color: rgba(23, 55, 84, 0.08);
+      color: #0f2640;
+    }
+    .top-nav .nav-links a.active {
+      background-color: rgba(23, 55, 84, 0.12);
+      color: #0f2640;
+    }
+
+    @media (max-width: 980px) {
+      .nav-card {
+        justify-content: center;
+        gap: 10px;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        position: static;
+        transform: none;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 20px;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
-<body class="antialiased">
-    <div class="min-h-screen flex flex-col items-center py-10 px-4 sm:px-6 lg:px-8">
-
-        <nav class="navbar w-full py-4 px-6 flex justify-center">
-            <div class="flex space-x-6">
-                <a href="index.html" class="navbar-link active">Projects</a>
-                <a href="about.html" class="navbar-link">About</a>
-                <a href="experience.html" class="navbar-link">Experience</a>
-            </div>
-        </nav>
-
-        <header class="text-center mb-12 w-full max-w-4xl animate-fade-in-down mt-20">
-            <h2 class="text-2xl sm:text-5xl font-extrabold text-gray-900 mb-4 leading-tight tracking-tight">
-                Alexander Lynn - Technical Designer
-            </h2>
-            <p class="mt-8 text-lg text-gray-700 leading-relaxed font-semibold">
-                Specializing in UI/UX Design, Gameplay Programming, and Project Management
-            </p>
-        </header>
-
-        <main class="w-full max-w-7xl">
-            <section>
-                <p class="mt-2 mb-8 text-xl text-gray-700 leading-relaxed font-semibold text-center max-w-5xl mx-auto">I design and build the systems players interact with — from menus and interfaces to gameplay mechanics and production pipelines. Based at UCF, I lead teams and ship polished, player-focused experiences. Check out my projects down below.</p>
-
-                <div class="filter-wrap" id="projectFilters">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="ui-ux-design">UI/UX Design</button>
-                    <button class="filter-btn" data-filter="gameplay-programming">Gameplay Programming</button>
-                    <button class="filter-btn" data-filter="project-management">Project Management</button>
-                    <button class="filter-btn" data-filter="solo-projects">Solo Projects</button>
-                </div>
-                
-                <div class="project-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                    <a href="David.html" class="project-card group" data-roles="ui-ux-design gameplay-programming project-management">
-                        <div class="card-content-wrapper">
-                            <img src="David/High Res Screenshot.png" alt="Thumbnail for David's Mighty Men" class="project-thumbnail">
-                            <div class="text-content">
-                                <h3 class="project-title">David's Mighty Men</h3>
-                                <h4 class="project-role">Role: Creative Director, UI/UX Designer, Programmer</h4>
-                                <p class="project-description">
-                                    David's Mighty Men is a 3D Hack N' Slash set in biblical times. I led a team of six during the game's first three months of development up until vertical slice.
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="Feet.html" class="project-card group" data-roles="project-management">
-                        <div class="card-content-wrapper">
-                            <img src="Thumbnails/Feet.png" alt="Thumbnail for On Your Feet!" class="project-thumbnail">
-                            <div class="text-content">
-                                <h3 class="project-title">On Your Feet! (WIP)</h3>
-                                <h4 class="project-role">Role: Creative Director, Level Designer</h4>
-                                <p class="project-description">
-                                    On Your Feet! is a 2D Platformer, Sports game currently in progress. I am
-                                    the leader of the project and it is set to release in June 2026.
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="Fishy.html" class="project-card group" data-roles="ui-ux-design project-management">
-                        <div class="card-content-wrapper">
-                            <img src="Fishy/FB-Square-Poster.png" alt="Thumbnail for Fishy Business" class="project-thumbnail">
-                            <div class="text-content">
-                                <h3 class="project-title">Fishy Business</h3>
-                                <h4 class="project-role">Role: Producer, UI/UX Designer</h4>
-                                <p class="project-description">
-                                    Fishy Business is a Tower Defense mobile game. I worked as the Producer on a seven person team and it released in December 2025.
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="Inventory.html" class="project-card group" data-roles="solo-projects gameplay-programming ui-ux-design">
-                        <div class="card-content-wrapper">
-                            <img src="Inventory/4Item_Hover_Descriptions.webp" alt="Thumbnail for Inventory System Project" class="project-thumbnail">
-                            <div class="text-content">
-                                <h3 class="project-title">Inventory System Project</h3>
-                                <h4 class="project-role">Role: Solo Developer</h4>
-                                <p class="project-description">
-                                    A personal project I worked on featuring dynamic gameplay interfaces, an RPG-style inventory system, third-person combat, and more.
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    
-                </div>
-            </section>
-        </main>
-
-        <footer class="mt-12 text-center text-gray-600 text-sm" style="color:rgba(0, 0, 0, 1)">
-            <p>&copy; 2026 Alexander Lynn. All rights reserved.</p>
-            <p>Alexander Lynn - Technical Designer</p>
-        </footer>
+<body>
+  <header class="top-nav">
+    <div class="navbar-inner">
+      <a class="logo" href="index.html">Alexander Lynn</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="experience.html">Experience</a></li>
+      </ul>
     </div>
-    <script>
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
+  </header>
 
-        filterButtons.forEach((button) => {
-            button.addEventListener('click', () => {
-                const selected = button.dataset.filter;
+  <main class="container hero">
+    <section>
+      <p class="hero-eyebrow">Welcome to my portfolio</p>
+      <h1 class="hero-title">Alexander<br>Lynn</h1>
+      <p class="hero-subtitle">I'm a Technical Designer</p>
+      <p class="hero-description">
+        Specializing in UI/UX Design, Gameplay Programming, and Project Management
+      </p>
+      <p class="hero-description">
+        I design and build the systems players interact with — from menus and interfaces to gameplay mechanics and production pipelines. Based at UCF, I lead teams and ship polished, player-focused experiences.
+      </p>
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="projects.html">View My Work</a>
+        <a class="btn btn-secondary" href="about.html">Contact Me</a>
+      </div>
+    </section>
 
-                filterButtons.forEach((btn) => btn.classList.remove('active'));
-                button.classList.add('active');
+    <section class="hero-photo-wrap">
+      <div class="photo-ring">
+        <img src="homephoto.png" alt="Portrait photo">
+      </div>
+    </section>
+  </main>
 
-                projectCards.forEach((card) => {
-                    const roles = (card.dataset.roles || '').split(' ');
-                    const show = selected === 'all' || roles.includes(selected);
-                    card.classList.toggle('hidden-project', !show);
-                });
-            });
-        });
-    </script>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-name">Alexander Lynn</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+      </ul>
+      <div class="footer-social">
+        <a class="footer-linkedin" href="https://www.linkedin.com/in/alexanderj-lynn/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+          <img src="LinkedIn_logo_initials.png" alt="LinkedIn">
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Alexander Lynn. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
+
