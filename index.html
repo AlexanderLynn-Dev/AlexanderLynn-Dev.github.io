@@ -161,6 +161,25 @@
       border: 2px solid rgba(204, 227, 245, 0.55);
     }
 
+    .photo-slideshow {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .photo-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .photo-slide.active {
+      opacity: 1;
+    }
+
     .site-footer {
       background-color: #ffffff;
       color: #1f2d3d;
@@ -328,7 +347,13 @@
 
     <section class="hero-photo-wrap">
       <div class="photo-ring">
-        <img src="homephoto.png" alt="Portrait photo">
+        <div class="photo-slideshow" id="homePhotoSlideshow">
+          <img class="photo-slide active" src="homephoto.png" alt="Portrait photo 1">
+          <img class="photo-slide" src="homephoto (1).png" alt="Portrait photo 2">
+          <img class="photo-slide" src="homephoto (2).png" alt="Portrait photo 3">
+          <img class="photo-slide" src="homephoto (3).png" alt="Portrait photo 4">
+          <img class="photo-slide" src="homephoto (4).png" alt="Portrait photo 5">
+        </div>
       </div>
     </section>
   </main>
@@ -352,6 +377,21 @@
       <p class="footer-copy">&copy; 2026 Alexander Lynn. All rights reserved.</p>
     </div>
   </footer>
+  <script>
+    (function runHomePhotoSlideshow() {
+      const slides = document.querySelectorAll("#homePhotoSlideshow .photo-slide");
+      if (!slides.length) return;
+
+      let currentIndex = 0;
+      const intervalMs = 3000;
+
+      window.setInterval(() => {
+        slides[currentIndex].classList.remove("active");
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add("active");
+      }, intervalMs);
+    })();
+  </script>
 </body>
 </html>
 
