@@ -290,6 +290,13 @@
     }
 
     @media (max-width: 980px) {
+      /* iOS Safari: fixed backgrounds + opacity animation can render as washed out/flickering.
+         Keep desktop fixed, but use normal scroll attachment on mobile for stable backdrop. */
+      body {
+        background-attachment: scroll;
+        background-position: center top;
+      }
+
       .nav-card {
         justify-content: center;
         gap: 10px;
