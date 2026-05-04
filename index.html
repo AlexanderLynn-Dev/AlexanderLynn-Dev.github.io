@@ -297,6 +297,20 @@
         background-position: center top;
       }
 
+      /* Mobile-only: reduce dark overlays so the backdrop image reads clearly. */
+      body::before {
+        background: linear-gradient(
+          90deg,
+          rgba(8, 26, 43, 0.58),
+          rgba(8, 26, 43, 0.30) 45%,
+          rgba(8, 26, 43, 0.42)
+        );
+      }
+
+      body::after {
+        opacity: 0.04;
+      }
+
       .nav-card {
         justify-content: center;
         gap: 10px;
