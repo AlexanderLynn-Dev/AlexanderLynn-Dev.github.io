@@ -22,11 +22,22 @@
       --button-light: #e9f1f8;
     }
 
+    html,
+    body {
+      min-height: 100%;
+    }
+
     body {
       min-height: 100vh;
+      min-height: 100svh;
+      min-height: 100dvh;
       font-family: "Inter", sans-serif;
       color: var(--text);
-      background: url("backdrop.png") center center / cover no-repeat fixed;
+      background-image: url("backdrop.png");
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       position: relative;
       overflow-x: hidden;
     }
@@ -57,6 +68,8 @@
 
     .hero {
       min-height: calc(100vh - 64px);
+      min-height: calc(100svh - 64px);
+      min-height: calc(100dvh - 64px);
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       align-items: center;
