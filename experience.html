@@ -218,6 +218,140 @@
             min-width: 0;
         }
 
+        /* S.O.R.N. card: logo + title left, preview thumbnails top-right */
+        .exp-card-top.exp-card-top-sorn {
+            display: grid;
+            grid-template-columns: 56px minmax(0, 1fr) auto;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .exp-sorn-thumbs {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.55rem;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        /* Source art is 2000×857 — preserve aspect ratio and never crop */
+        .exp-sorn-frame {
+            flex: 0 0 auto;
+            width: min(152px, 26vw);
+            aspect-ratio: 2000 / 857;
+            border-radius: 0.5rem;
+            border: 1px solid #dfe8ef;
+            background: #f0f4f8;
+            box-shadow: 0 1px 2px rgba(15, 38, 64, 0.06);
+            overflow: hidden;
+        }
+
+        .exp-sorn-frame img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            pointer-events: none;
+        }
+
+        button.exp-sorn-frame {
+            cursor: zoom-in;
+            appearance: none;
+            -webkit-appearance: none;
+            padding: 0;
+            margin: 0;
+            font: inherit;
+            color: inherit;
+            text-align: left;
+        }
+
+        button.exp-sorn-frame:focus-visible {
+            outline: 2px solid #3e7ea9;
+            outline-offset: 2px;
+        }
+
+        .sorn-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 10050;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            padding-top: max(1.25rem, env(safe-area-inset-top));
+            padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+            background: rgba(10, 18, 28, 0.9);
+            box-sizing: border-box;
+        }
+
+        .sorn-lightbox.is-open {
+            display: flex;
+        }
+
+        .sorn-lightbox-inner {
+            position: relative;
+            max-width: min(96vw, 1400px);
+            max-height: min(92vh, 92dvh);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sorn-lightbox-inner img {
+            max-width: 100%;
+            max-height: min(92vh, 92dvh);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.45);
+        }
+
+        .sorn-lb-close {
+            position: absolute;
+            top: -0.25rem;
+            right: -0.25rem;
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1f2d3d;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .sorn-lb-close:hover {
+            background: #ffffff;
+        }
+
+        .sorn-lb-close:focus-visible {
+            outline: 2px solid #3e7ea9;
+            outline-offset: 2px;
+        }
+
+        .exp-card-top.exp-card-top-sorn .exp-logo {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .exp-card-top.exp-card-top-sorn .exp-text-block {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .exp-card-top.exp-card-top-sorn .exp-sorn-thumbs {
+            grid-column: 3;
+            grid-row: 1;
+        }
+
         .exp-title {
             font-size: 1.35rem;
             font-weight: 800;
@@ -372,6 +506,19 @@
             .timeline {
                 --timeline-pad: 1.85rem;
             }
+            .exp-card-top.exp-card-top-sorn {
+                grid-template-columns: 56px minmax(0, 1fr);
+                grid-template-rows: auto auto;
+            }
+            .exp-card-top.exp-card-top-sorn .exp-sorn-thumbs {
+                grid-column: 1 / -1;
+                grid-row: 2;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+            .exp-sorn-frame {
+                width: min(160px, 44vw);
+            }
         }
     </style>
 </head>
@@ -404,15 +551,23 @@
             <article class="timeline-item">
                 <div class="exp-card">
                     <p class="exp-date">January 2026 — May 2026</p>
-                    <div class="exp-card-top">
+                    <div class="exp-card-top exp-card-top-sorn">
                         <img class="exp-logo" src="Experience/a892449c-6b2b-41ba-bb8e-0ab4e909b721.png" alt="Sentinel Games logo">
                         <div class="exp-text-block">
                             <h2 class="exp-title">S.O.R.N. — UI/UX Designer</h2>
                             <p class="exp-company">Sentinel Games — Orlando, FL</p>
                         </div>
+                        <div class="exp-sorn-thumbs">
+                            <button type="button" class="exp-sorn-frame" data-sorn-full="Sorn/overall.webp" data-sorn-alt="S.O.R.N. interface overview" aria-label="Enlarge S.O.R.N. interface overview">
+                                <img src="Sorn/overall.webp" alt="" loading="lazy" decoding="async" width="2000" height="857">
+                            </button>
+                            <button type="button" class="exp-sorn-frame" data-sorn-full="Sorn/gameplay.webp" data-sorn-alt="S.O.R.N. gameplay HUD" aria-label="Enlarge S.O.R.N. gameplay HUD">
+                                <img src="Sorn/gameplay.webp" alt="" loading="lazy" decoding="async" width="2000" height="857">
+                            </button>
+                        </div>
                     </div>
                     <p class="exp-body">
-                        Designed and implemented several interface systems highlighting player agency, dynamic visuals, accessibility, and robust customization that create a seamless, immersive player experience.
+                        Designed and implemented several interface systems for an award-winning mecha action shooter that gathered 3500+ downloads on release day and reached number two on Steam's free-to-play new and trending page. These systems highlight player agency, dynamic visuals, accessibility, and robust customization that create a seamless, immersive player experience.
                     </p>
                     <div class="exp-tags">
                         <span class="exp-tag">User Experience</span>
@@ -696,5 +851,52 @@
             <p class="footer-copy">&copy; 2026 Alexander Lynn. All rights reserved.</p>
         </div>
     </footer>
+
+    <div class="sorn-lightbox" id="sornLightbox" role="dialog" aria-modal="true" aria-label="Enlarged S.O.R.N. image" hidden>
+        <div class="sorn-lightbox-inner">
+            <button type="button" class="sorn-lb-close" id="sornLbClose" aria-label="Close enlarged image">&times;</button>
+            <img id="sornLbImg" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var lb = document.getElementById('sornLightbox');
+            var lbImg = document.getElementById('sornLbImg');
+            var closeBtn = document.getElementById('sornLbClose');
+            if (!lb || !lbImg) return;
+
+            function openLb(src, alt) {
+                lbImg.src = src;
+                lbImg.alt = alt || '';
+                lb.hidden = false;
+                lb.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+                closeBtn.focus();
+            }
+
+            function closeLb() {
+                lb.classList.remove('is-open');
+                lb.hidden = true;
+                lbImg.removeAttribute('src');
+                lbImg.alt = '';
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('.exp-sorn-thumbs button.exp-sorn-frame[data-sorn-full]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    openLb(btn.getAttribute('data-sorn-full'), btn.getAttribute('data-sorn-alt') || '');
+                });
+            });
+
+            closeBtn.addEventListener('click', closeLb);
+            lb.addEventListener('click', function (e) {
+                if (e.target === lb) closeLb();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb();
+            });
+        })();
+    </script>
 </body>
 </html>
