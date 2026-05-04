@@ -173,11 +173,16 @@
       position: absolute;
       inset: 0;
       opacity: 0;
+      z-index: 1;
+      will-change: opacity;
+      backface-visibility: hidden;
+      transform: translateZ(0);
       transition: opacity 1s ease-in-out;
     }
 
     .photo-slide.active {
       opacity: 1;
+      z-index: 2;
     }
 
     .site-footer {
@@ -386,9 +391,14 @@
       const intervalMs = 3000;
 
       window.setInterval(() => {
-        slides[currentIndex].classList.remove("active");
-        currentIndex = (currentIndex + 1) % slides.length;
-        slides[currentIndex].classList.add("active");
+        const nextIndex = (currentIndex + 1) % slides.length;
+        slides[nextIndex].classList.add("active");
+
+        // Remove previous slide after next is active to avoid a blank frame flash.
+        window.setTimeout(() => {
+          slides[currentIndex].classList.remove("active");
+          currentIndex = nextIndex;
+        }, 20);
       }, intervalMs);
     })();
   </script>
