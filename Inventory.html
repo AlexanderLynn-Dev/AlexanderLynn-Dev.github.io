@@ -34,10 +34,26 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 .two-col.wide { grid-template-columns:1fr 1fr; }
 .video-wrap { position:relative; padding-bottom:56.25%; height:0; width:103%; margin-left:-1.5%; overflow:hidden; border-radius:8px; border:1px solid var(--border); }
 .video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:none; }
+.video-stack { display:flex; flex-direction:column; gap:1rem; }
 .feature-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:.7rem; margin-top:1rem; }
 .feature-list li { font-size:.95rem; line-height:1.7; color:var(--text-mid); padding-left:1.2rem; position:relative; }
 .feature-list li::before { content:''; position:absolute; left:0; top:.65rem; width:5px; height:5px; border-radius:50%; background:var(--blue-bright); }
+.system-goals-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 1.35rem;
+}
 .divider { height:1px; background:var(--border); margin:2rem 0; }
+.reflection-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue-bright);
+  border-radius: 8px;
+  padding: 1.5rem 1.8rem;
+}
+.reflection-box p { font-size: 1rem; line-height: 1.8; color: var(--text-mid); }
+.reflection-box p + p { margin-top: 1rem; }
 .doc-carousel { position:relative; max-width:980px; margin:0 auto; }
 .doc-slide { display:none; }
 .doc-slide.active { display:block; }
@@ -104,22 +120,47 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
     <p class="section-label">Overview</p>
     <div class="two-col wide">
       <div>
-        <h2 class="section-title">System Goals</h2>
-        <p class="section-body">For this project, I wanted to learn more about RPG-style inventory systems in Unreal Engine and how to showcase my UI design skills during gameplay, and it ended up being a lot of fun to make. Here is a collection of the systems I have made so far:</p>
-        <ul class="feature-list">
-          <li>Player item HUD: Displays player health, stamina, and items.</li>
-          <li>Interaction system for items, chests, and world objects.</li>
-          <li>Inventory menu with armor, consumables, and ammo equipment.</li>
-          <li>Item hover descriptions, sorting, dropping, and chest transfer.</li>
-          <li>Campfire rest system, potion healing, and bow + arrow combat support.</li>
-          <li>Icon design/implementation and locomotion-synced equipment.</li>
-        </ul>
+        <div class="system-goals-box">
+          <h2 class="section-title">System Goals</h2>
+          <p class="section-body">For this project, I wanted to learn more about RPG-style inventory systems in Unreal Engine and how to showcase my UI design skills during gameplay, and it ended up being a lot of fun to make. Here is a collection of the systems I have made:</p>
+          <ul class="feature-list">
+            <li>Player Item HUD: Displays player health, stamina, and items.</li>
+            <li>Interaction system for items, chests, and world objects.</li>
+            <li>Inventory Menu with Armor, Consumables, and Ammo equipment.</li>
+            <li>Equipping Items and Item Descriptions.</li>
+            <li>Sort Items by Weight or Value.</li>
+            <li>Dropping Items.</li>
+            <li>Campfire Rest System.</li>
+            <li>Using Potion to Restore Health.</li>
+            <li>Icon design/implementation and locomotion-synced equipment.</li>
+            <li>Icon and widget animations for buttons, hover states, items, health bars, reticles, etc.</li>
+            <li>Bow and Arrow System.</li>
+            <li>Headshot Auto Kill.</li>
+            <li>Explosive Arrows.</li>
+            <li>Sword Attack Variations and Shielding.</li>
+            <li>Sword Stealth Attack.</li>
+            <li>Swordsman Enemy AI.</li>
+            <li>Archer Enemy AI.</li>
+            <li>Final boss fight with randomized attack patterns that put the player's skills to the ultimate test.</li>
+          </ul>
+        </div>
       </div>
       <div>
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/toTz3hfITIU?si=cujzI1sSE-EQiagK" title="Inventory System Showcase" allowfullscreen loading="lazy"></iframe>
+        <div class="video-stack">
+          <div>
+            <div class="video-wrap">
+              <iframe src="https://www.youtube.com/embed/toTz3hfITIU?si=lImtCYPs3wQ6rgAI" title="Inventory System First Iteration" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p class="carousel-caption">First Iteration Video</p>
+          </div>
+          <div>
+            <div class="video-wrap">
+              <iframe src="https://www.youtube.com/embed/RTawt7xzdkk?si=gcZEuOOSUnHmomW9" title="Inventory System Second Iteration" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p class="carousel-caption">Second Iteration Video</p>
+            <p class="section-body" style="margin-top:0.6rem;">These systems help give more juice to the UI and overall player experience. The first video below showcases my first 3 weeks working on the project and my first iterations, primarily focusing on functionality. The second video showcases my final 3 weeks working on polish, animations, and adding new features to complete my level.</p>
+          </div>
         </div>
-        <p class="carousel-caption">Inventory System Showcase</p>
       </div>
     </div>
   </div>
@@ -134,17 +175,30 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
       <div class="doc-slide"><div class="img-item"><img src="Inventory/2Interaction_System.webp" alt="Interaction System" class="lightbox-trigger"></div><p class="carousel-caption">Interaction System</p></div>
       <div class="doc-slide"><div class="img-item"><img src="Inventory/3Inventory_Empty.webp" alt="Inventory Empty" class="lightbox-trigger"></div><p class="carousel-caption">Inventory Empty</p></div>
       <div class="doc-slide"><div class="img-item"><img src="Inventory/4Item_Hover_Descriptions.webp" alt="Item Hover Descriptions" class="lightbox-trigger"></div><p class="carousel-caption">Item Hover Descriptions</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Inventory/5Armor_Section.webp" alt="Armor Section" class="lightbox-trigger"></div><p class="carousel-caption">Armor Section</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Inventory/6Consumables_Section.webp" alt="Consumables Section" class="lightbox-trigger"></div><p class="carousel-caption">Consumables Section</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Inventory/7Ammo_Section.webp" alt="Ammo Section" class="lightbox-trigger"></div><p class="carousel-caption">Ammo Section</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Inventory/8Chest_System.webp" alt="Chest System" class="lightbox-trigger"></div><p class="carousel-caption">Chest System</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Inventory/9Campfire_Rest_System.webp" alt="Campfire Rest System" class="lightbox-trigger"></div><p class="carousel-caption">Campfire Rest System</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Inventory/10Bow_and_Arrow_Targeting.webp" alt="Bow and Arrow Targeting" class="lightbox-trigger"></div><p class="carousel-caption">Bow and Arrow Targeting</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Inventory/11Dropped_Items.webp" alt="Dropped Items" class="lightbox-trigger"></div><p class="carousel-caption">Dropped Items</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/Armor_Section.webp" alt="Armor Section" class="lightbox-trigger"></div><p class="carousel-caption">Armor Section</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/Consumables_Section.webp" alt="Consumables Section" class="lightbox-trigger"></div><p class="carousel-caption">Consumables Section</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/Ammo_Section.webp" alt="Ammo Section" class="lightbox-trigger"></div><p class="carousel-caption">Ammo Section</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/Chest_System.webp" alt="Chest System" class="lightbox-trigger"></div><p class="carousel-caption">Chest System</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/Campfire_Rest_System.webp" alt="Campfire Rest System" class="lightbox-trigger"></div><p class="carousel-caption">Campfire Rest System</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/Drop_Items.webp" alt="Drop Items" class="lightbox-trigger"></div><p class="carousel-caption">Drop Items</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/Bow_and_Arrow_Targeting.webp" alt="Bow and Arrow Targeting" class="lightbox-trigger"></div><p class="carousel-caption">Bow and Arrow Targeting</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/Explosive_Arrows.webp" alt="Explosive Arrows" class="lightbox-trigger"></div><p class="carousel-caption">Explosive Arrows</p></div>
+      <div class="doc-slide"><div class="img-item"><img src="Inventory/Boss_Fight.webp" alt="Boss Fight" class="lightbox-trigger"></div><p class="carousel-caption">Boss Fight</p></div>
       <button class="doc-nav-btn prev" onclick="moveDocSlide('inventory', -1)" aria-label="Previous image">&#10094;</button>
       <button class="doc-nav-btn next" onclick="moveDocSlide('inventory', 1)" aria-label="Next image">&#10095;</button>
     </div>
-    <p class="doc-counter" id="doc-counter-inventory">1 / 11</p>
+    <p class="doc-counter" id="doc-counter-inventory">1 / 13</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <p class="section-label">Reflection</p>
+    <h2 class="section-title">What I Learned</h2>
+    <div class="reflection-box">
+      <p>Throughout my time with this project I have gained a solid understanding of RPG systems and learned what makes menus feel good to navigate. Interfaces like these are repeatedly opened several times a minute, so my designs were made with that in mind. At the beginning, I used my programming knowledge to create functional menus and a wide variety of combat systems.</p>
+      <p>As the project went on, I continued to refine and experiment with animations, icons, colors, and more. These make the difference between players getting bored at your game and wanting to come back to play again because the interfaces have life to them. I also made some programming strides with this project creating a fully functioning boss, a bow and arrow system, enemy AI, and more. After 6 weeks of hard work, I'm satisfied with how it came out in the end!</p>
+    </div>
   </div>
 </main>
 
