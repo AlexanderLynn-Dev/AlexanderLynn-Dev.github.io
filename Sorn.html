@@ -128,6 +128,13 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
+.ui-card-stage {
+  position: relative;
+}
+.ui-card-stage .doc-nav-btn {
+  top: 50%;
+  transform: translateY(-50%);
+}
 .ui-card-title {
   margin-top:.55rem;
   font-size:.95rem;
@@ -221,6 +228,10 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   align-items: start;
+}
+/* Icon Gallery: keep underlined headers, hide oval filename pills */
+.icon-showcase .media-filename {
+  display: none;
 }
 .icon-equal-frame {
   height: 280px;
@@ -461,51 +472,78 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
       <h2 class="section-title">Futuristic Jet Style Pilot Interface Made with CommonUI</h2>
     </div>
     <p class="section-body" style="text-align:center; margin-left:auto; margin-right:auto;">UI elements reflect the look of modern jet pilots Heads Up Displays with futuristic styling. With this specific style, there are a lot of elements on screen at once which can create unnecessary clutter if not designed correctly. My goal was to make sure all UI elements had a purpose to be on the screen and did not overwhelm the player, since jet HUDs are meant to only display the most important information. I also wanted to make sure all elements were easily readable and matched the rest of the game's visual style. All UI systems work fully with Keyboard and Controller.</p>
-    <div class="ui-iter-header">
-      <button type="button" class="doc-nav-btn prev" id="uiPrevIteration" aria-label="Previous UI iteration">&#10094;</button>
-      <span class="ui-iter-title" id="uiIterationTitle">1st Iteration</span>
-      <button type="button" class="doc-nav-btn next" id="uiNextIteration" aria-label="Next UI iteration">&#10095;</button>
-    </div>
-    <p class="section-body" style="margin-top:0.2rem; text-align:center; margin-left:auto; margin-right:auto;"><b>You can use the arrows to switch between 1st Iteration, Alpha, and Steam Release as production progressed.</b></p>
+    <p class="section-body" style="margin-top:0.2rem; text-align:center; margin-left:auto; margin-right:auto;"><b>Use the arrows on each video to switch between 1st Iteration, Alpha, and Steam Release.</b></p>
     <div class="ui-grid" id="uiIterationGrid">
       <article>
-        <div class="img-item"><video id="uiVideo-mainmenu" controls playsinline preload="metadata"></video></div>
-        <h4 class="ui-card-title">Main Menu</h4>
+        <div class="ui-card-stage">
+          <div class="img-item"><video id="uiVideo-mainmenu" controls playsinline preload="metadata"></video></div>
+          <button type="button" class="doc-nav-btn prev" data-ui-card="mainmenu" data-ui-step="-1" aria-label="Previous Main Menu iteration">&#10094;</button>
+          <button type="button" class="doc-nav-btn next" data-ui-card="mainmenu" data-ui-step="1" aria-label="Next Main Menu iteration">&#10095;</button>
+        </div>
+        <h4 class="ui-card-title" data-ui-title="mainmenu">Main Menu - 1st Iteration</h4>
         <p class="ui-card-desc">Central aligned typography anchors the viewport. A minimalist vertical directory occupies the lower-third. High-contrast white text prioritizes primary navigation against dynamic backgrounds.</p>
       </article>
       <article>
-        <div class="img-item"><video id="uiVideo-options" controls playsinline preload="metadata"></video></div>
-        <h4 class="ui-card-title">Options</h4>
+        <div class="ui-card-stage">
+          <div class="img-item"><video id="uiVideo-options" controls playsinline preload="metadata"></video></div>
+          <button type="button" class="doc-nav-btn prev" data-ui-card="options" data-ui-step="-1" aria-label="Previous Options iteration">&#10094;</button>
+          <button type="button" class="doc-nav-btn next" data-ui-card="options" data-ui-step="1" aria-label="Next Options iteration">&#10095;</button>
+        </div>
+        <h4 class="ui-card-title" data-ui-title="options">Options - 1st Iteration</h4>
         <p class="ui-card-desc">Horizontal tabs segment system settings into four categories. Left-aligned fields occupy a modular container. Sliders and toggles communicate hardware and accessibility values. A bottom anchored bar consolidates global Input Action prompts.</p>
       </article>
       <article>
-        <div class="img-item"><video id="uiVideo-keybinds" controls playsinline preload="metadata"></video></div>
-        <h4 class="ui-card-title">Keybind Menus</h4>
+        <div class="ui-card-stage">
+          <div class="img-item"><video id="uiVideo-keybinds" controls playsinline preload="metadata"></video></div>
+          <button type="button" class="doc-nav-btn prev" data-ui-card="keybinds" data-ui-step="-1" aria-label="Previous Keybind Menus iteration">&#10094;</button>
+          <button type="button" class="doc-nav-btn next" data-ui-card="keybinds" data-ui-step="1" aria-label="Next Keybind Menus iteration">&#10095;</button>
+        </div>
+        <h4 class="ui-card-title" data-ui-title="keybinds">Keybind Menus - 1st Iteration</h4>
         <p class="ui-card-desc">Three columns organize input configurations by action, primary input, and secondary input. Players can remap bindings to any key on Keyboard or Controller allowing unlimited freedom for varying control schemes.</p>
       </article>
       <article>
-        <div class="img-item"><video id="uiVideo-fileselect" controls playsinline preload="metadata"></video></div>
-        <h4 class="ui-card-title">File Select</h4>
+        <div class="ui-card-stage">
+          <div class="img-item"><video id="uiVideo-fileselect" controls playsinline preload="metadata"></video></div>
+          <button type="button" class="doc-nav-btn prev" data-ui-card="fileselect" data-ui-step="-1" aria-label="Previous File Select iteration">&#10094;</button>
+          <button type="button" class="doc-nav-btn next" data-ui-card="fileselect" data-ui-step="1" aria-label="Next File Select iteration">&#10095;</button>
+        </div>
+        <h4 class="ui-card-title" data-ui-title="fileselect">File Select - 1st Iteration</h4>
         <p class="ui-card-desc">Three columns segment save data into modular cards. Save data is updated based on current level, game completion percentage, and player bank. Bright blue highlights distinguish active selection from inactive states. Persistent top-left headers maintain categorical orientation.</p>
       </article>
       <article>
-        <div class="img-item"><video id="uiVideo-missionlog" controls playsinline preload="metadata"></video></div>
-        <h4 class="ui-card-title">Mission Log</h4>
+        <div class="ui-card-stage">
+          <div class="img-item"><video id="uiVideo-missionlog" controls playsinline preload="metadata"></video></div>
+          <button type="button" class="doc-nav-btn prev" data-ui-card="missionlog" data-ui-step="-1" aria-label="Previous Mission Log iteration">&#10094;</button>
+          <button type="button" class="doc-nav-btn next" data-ui-card="missionlog" data-ui-step="1" aria-label="Next Mission Log iteration">&#10095;</button>
+        </div>
+        <h4 class="ui-card-title" data-ui-title="missionlog">Mission Log - 1st Iteration</h4>
         <p class="ui-card-desc">A vertical list organizes available missions. Right aligned translucent panels overlay specific mission information. Modular text placement surrounds the character silhouette.</p>
       </article>
       <article>
-        <div class="img-item"><video id="uiVideo-shop" controls playsinline preload="metadata"></video></div>
-        <h4 class="ui-card-title">Shop</h4>
+        <div class="ui-card-stage">
+          <div class="img-item"><video id="uiVideo-shop" controls playsinline preload="metadata"></video></div>
+          <button type="button" class="doc-nav-btn prev" data-ui-card="shop" data-ui-step="-1" aria-label="Previous Shop iteration">&#10094;</button>
+          <button type="button" class="doc-nav-btn next" data-ui-card="shop" data-ui-step="1" aria-label="Next Shop iteration">&#10095;</button>
+        </div>
+        <h4 class="ui-card-title" data-ui-title="shop">Shop - 1st Iteration</h4>
         <p class="ui-card-desc">Menu where players buy equipment. Shop tabs are categorized by part type. Listing each part separately, it displays currency required and equipment stats. Equipment stats change in real time by hovering over the equipment's icon.</p>
       </article>
       <article>
-        <div class="img-item"><video id="uiVideo-equip" controls playsinline preload="metadata"></video></div>
-        <h4 class="ui-card-title">Equip</h4>
+        <div class="ui-card-stage">
+          <div class="img-item"><video id="uiVideo-equip" controls playsinline preload="metadata"></video></div>
+          <button type="button" class="doc-nav-btn prev" data-ui-card="equip" data-ui-step="-1" aria-label="Previous Equip iteration">&#10094;</button>
+          <button type="button" class="doc-nav-btn next" data-ui-card="equip" data-ui-step="1" aria-label="Next Equip iteration">&#10095;</button>
+        </div>
+        <h4 class="ui-card-title" data-ui-title="equip">Equip - 1st Iteration</h4>
         <p class="ui-card-desc">Vertical left-justified tabs group components by category. A right-aligned character model displays part configurations.</p>
       </article>
       <article>
-        <div class="img-item"><video id="uiVideo-playerhud" controls playsinline preload="metadata"></video></div>
-        <h4 class="ui-card-title">Player HUD</h4>
+        <div class="ui-card-stage">
+          <div class="img-item"><video id="uiVideo-playerhud" controls playsinline preload="metadata"></video></div>
+          <button type="button" class="doc-nav-btn prev" data-ui-card="playerhud" data-ui-step="-1" aria-label="Previous Player HUD iteration">&#10094;</button>
+          <button type="button" class="doc-nav-btn next" data-ui-card="playerhud" data-ui-step="1" aria-label="Next Player HUD iteration">&#10095;</button>
+        </div>
+        <h4 class="ui-card-title" data-ui-title="playerhud">Player HUD - 1st Iteration</h4>
         <p class="ui-card-desc">Main gameplay UI. Player health and utility ammunition count is displayed in the bottom right, with character dialogue appearing from a box in the top right. Current objective is displayed in the Mission Log on the top left. Player ammo count occupies the center of the screen with boost fuel meter just below it.</p>
       </article>
     </div>
@@ -766,14 +804,10 @@ const animationFeatures = [
 ];
 
 (function setupUiIterationGrid() {
-  const titleEl = document.getElementById('uiIterationTitle');
-  const prevBtn = document.getElementById('uiPrevIteration');
-  const nextBtn = document.getElementById('uiNextIteration');
-  if (!titleEl || !prevBtn || !nextBtn) return;
-
   const order = ['first', 'alpha', 'steam'];
   const label = { first: '1st Iteration', alpha: 'Alpha', steam: 'Steam Release' };
-  let current = 0;
+  const cardKeys = Object.keys(uiFeatureVideos);
+  const state = {};
 
   function setVideoSource(videoId, src) {
     const video = document.getElementById(videoId);
@@ -784,29 +818,31 @@ const animationFeatures = [
     video.load();
   }
 
-  function renderIteration() {
-    const iter = order[current];
-    titleEl.textContent = label[iter];
-    setVideoSource('uiVideo-mainmenu', uiFeatureVideos.mainmenu[iter]);
-    setVideoSource('uiVideo-options', uiFeatureVideos.options[iter]);
-    setVideoSource('uiVideo-keybinds', uiFeatureVideos.keybinds[iter]);
-    setVideoSource('uiVideo-fileselect', uiFeatureVideos.fileselect[iter]);
-    setVideoSource('uiVideo-missionlog', uiFeatureVideos.missionlog[iter]);
-    setVideoSource('uiVideo-shop', uiFeatureVideos.shop[iter]);
-    setVideoSource('uiVideo-equip', uiFeatureVideos.equip[iter]);
-    setVideoSource('uiVideo-playerhud', uiFeatureVideos.playerhud[iter]);
+  function renderCard(key) {
+    const idx = state[key] ?? 0;
+    const iter = order[idx];
+    setVideoSource('uiVideo-' + key, uiFeatureVideos[key][iter]);
+    const titleEl = document.querySelector('[data-ui-title="' + key + '"]');
+    if (!titleEl) return;
+    const baseTitle = titleEl.textContent.split(' - ')[0];
+    titleEl.textContent = baseTitle + ' - ' + label[iter];
   }
 
-  prevBtn.addEventListener('click', () => {
-    current = (current - 1 + order.length) % order.length;
-    renderIteration();
-  });
-  nextBtn.addEventListener('click', () => {
-    current = (current + 1) % order.length;
-    renderIteration();
+  cardKeys.forEach((key) => {
+    state[key] = 0;
+    renderCard(key);
   });
 
-  renderIteration();
+  document.querySelectorAll('button[data-ui-card][data-ui-step]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.getAttribute('data-ui-card') || '';
+      if (!(key in state)) return;
+      const step = Number(btn.getAttribute('data-ui-step') || '0');
+      if (!step) return;
+      state[key] = (state[key] + step + order.length) % order.length;
+      renderCard(key);
+    });
+  });
 })();
 
 (function setupAnimationFeatureViewer() {
