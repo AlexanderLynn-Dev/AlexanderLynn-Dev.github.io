@@ -44,6 +44,11 @@
             transition: transform 0.25s ease-in-out;
             margin-right: 0;
         }
+
+        .project-thumbnail-contain {
+            object-fit: contain;
+            background: #0f1a28;
+        }
         
         .project-card:hover .project-thumbnail {
             transform: scale(1.03);
@@ -263,6 +268,19 @@
                 </div>
                 
                 <div class="project-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <a href="Sorn.html" class="project-card group" data-roles="ui-ux-design project-management">
+                        <div class="card-content-wrapper">
+                            <img src="Sorn/Screenshots/Marketing Materials/Horizontal Banner.jpg" alt="Thumbnail for S.O.R.N." class="project-thumbnail project-thumbnail-contain">
+                            <div class="text-content">
+                                <h3 class="project-title">S.O.R.N.</h3>
+                                <h4 class="project-role">Role: UI/UX Designer</h4>
+                                <p class="project-description">
+                                    S.O.R.N. is an award-winning mecha action shooter. I designed and implemented game-ready interface systems focused on readability, accessibility, and player agency.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
                     <a href="David.html" class="project-card group" data-roles="ui-ux-design gameplay-programming project-management">
                         <div class="card-content-wrapper">
                             <img src="David/High Res Screenshot.png" alt="Thumbnail for David's Mighty Men" class="project-thumbnail">
