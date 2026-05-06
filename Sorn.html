@@ -64,7 +64,7 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 .doc-slide { display:none; }
 .doc-slide.active { display:block; }
 .img-item img, .img-item video { width:100%; display:block; border-radius:8px; border:1px solid var(--border); aspect-ratio:16/10; object-fit:cover; background:#000; }
-.img-item video { object-fit: contain; }
+.img-item video { object-fit: contain; aspect-ratio: auto; background: transparent; }
 .img-item video { cursor:pointer; }
 .doc-nav-btn { position:absolute; top:50%; transform:translateY(-50%); width:34px; height:34px; border:1px solid rgba(31,79,114,.35); background:rgba(255,255,255,.9); color:#1f4f72; border-radius:999px; font-weight:700; line-height:1; cursor:pointer; z-index:2; }
 .doc-nav-btn.prev { left:8px; } .doc-nav-btn.next { right:8px; }
@@ -73,43 +73,166 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 .ui-side-by-side { display:grid; grid-template-columns:1.15fr 0.85fr; gap:1.5rem; align-items:start; margin-top:1.2rem; }
 .ui-side-by-side .feature-list { margin-top:0; }
 .ui-side-by-side .doc-carousel { max-width:520px; margin-left:auto; margin-right:0; }
-.ui-controls { display:flex; flex-wrap:wrap; gap:.55rem; margin:1rem 0 .9rem; }
-.ui-toggle-btn, .ui-next-btn {
-  border:1px solid #c8d8e6;
-  background:#ffffff;
-  color:#1f4f72;
-  font-size:.95rem;
-  font-weight:700;
-  padding:.6rem 1.2rem;
-  border-radius:999px;
-  cursor:pointer;
-}
-.ui-toggle-btn.active {
-  background:#1f4f72;
-  color:#ffffff;
-  border-color:#1f4f72;
-}
-.ui-next-btn { background:#3d85b5; color:#fff; border-color:#3d85b5; }
 .ui-feature-title { font-family:'Space Grotesk',sans-serif; font-size:1.1rem; font-weight:700; color:var(--blue); }
 .ui-feature-desc { font-size:.96rem; line-height:1.75; color:var(--text-mid); margin-top:.45rem; }
 .ui-feature-viewer { margin-top:1.2rem; }
 .ui-feature-video-wrap { width:min(760px, 100%); margin:0 auto; }
+.anim-viewer .ui-feature-video-wrap { width:min(980px, 100%); }
 .ui-feature-info-wrap { width:min(760px, 100%); margin:.9rem auto 0; }
 .ui-feature-stage { position:relative; }
 .ui-feature-stage .doc-nav-btn { top:50%; transform:translateY(-50%); }
+.ui-title-row {
+  width:min(980px, 100%);
+  margin: 0 auto 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.8rem;
+  text-align:center;
+}
+.ui-title-row .section-title { margin-bottom:0; }
+.ui-ux-section .section-body {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 980px;
+}
+.ui-iter-header {
+  width:min(980px, 100%);
+  margin: 0 auto .85rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.8rem;
+}
+.ui-iter-header .doc-nav-btn {
+  position: static;
+  top: auto;
+  transform: none;
+  width: 48px;
+  height: 48px;
+  font-size: 1.15rem;
+}
+.ui-iter-title {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.2rem;
+  font-weight:700;
+  color:var(--blue);
+  min-width: 150px;
+  text-align:center;
+}
+.ui-grid {
+  width:min(980px, 100%);
+  margin: 0 auto;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.ui-card-title {
+  margin-top:.55rem;
+  font-size:.95rem;
+  font-weight:700;
+  color:var(--blue);
+}
+.ui-card-desc {
+  margin-top:.25rem;
+  font-size:.9rem;
+  line-height:1.6;
+  color:var(--text-mid);
+}
 .btn-primary { display:inline-block; text-decoration:none; background:#3d85b5; border:1.5px solid #3d85b5; color:#fff; font-weight:600; padding:.7rem 1.4rem; border-radius:.75rem; }
 .btn-primary:hover { background:#2f6f98; border-color:#2f6f98; }
 .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; margin-top:1.25rem; }
 .gallery-grid .img-item { background:#000; border-radius:8px; }
 .gallery-grid .img-item img { aspect-ratio:1/1; object-fit:contain; background:#000; }
 .icon-carousel-img {
-  aspect-ratio: 1 / 1;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100%;
+  max-height: none;
+  aspect-ratio: auto !important;
   object-fit: contain !important;
-  background: #000 !important;
+  background: transparent !important;
+  margin: 0 auto;
+}
+.icon-carousel-wrap .img-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  background: transparent;
+}
+.icon-carousel-wrap .img-item img {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
 }
 .icon-carousel-wrap {
   width: min(760px, 100%);
   margin: 1rem auto 0;
+}
+.icon-showcase {
+  width: min(760px, 100%);
+  margin: 1rem auto 0;
+  display: grid;
+  gap: 1rem;
+}
+.icon-group-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: 0.02em;
+  display: inline-block;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid #bfd3e3;
+  margin-bottom: 0.45rem;
+}
+.icon-group-panel {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+.icon-group-panel img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.media-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+.media-filename {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #4f738f;
+  background: #eaf2f8;
+  border: 1px solid #d7e4ee;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+}
+.icon-group-panel.grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+.icon-equal-frame {
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-equal-frame img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
 }
 .marketing-carousel-wrap {
   width: min(760px, 100%);
@@ -119,6 +242,61 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 .marketing-carousel-wrap .img-item video {
   object-fit: contain !important;
   background: #000;
+}
+.marketing-showcase {
+  width: min(760px, 100%);
+  margin: 1rem auto 0;
+  display: grid;
+  gap: 1rem;
+}
+.marketing-panel {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+.marketing-panel img,
+.marketing-panel video {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.marketing-panel.grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+.marketing-posters img {
+  width: 100%;
+  height: 560px;
+  object-fit: contain;
+}
+.marketing-banner-full img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.marketing-physical-video video {
+  width: min(52%, 320px);
+  margin: 0 auto;
+  display: block;
+  background: #000;
+  object-fit: contain;
+}
+.marketing-physical-video .media-item {
+  align-items: center;
+}
+.marketing-physical-video .media-filename {
+  margin-top: 0.5rem;
+}
+.desktop-icon-item img {
+  max-width: 72%;
+  margin: 0 auto;
+}
+.game-disc-item img {
+  max-width: 78%;
+  margin: 0 auto;
 }
 .award-tags { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.75rem; }
 .award-thumb {
@@ -136,6 +314,9 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
   padding: 0;
   cursor: zoom-in;
   border-radius: 8px;
+}
+.zoomable-image {
+  cursor: zoom-in;
 }
 .award-open-btn:focus-visible {
   outline: 2px solid #3e7ea9;
@@ -203,6 +384,13 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
   .ui-side-by-side .doc-carousel { max-width:100%; margin:0 auto; }
   .gallery-grid { grid-template-columns:repeat(2,1fr); }
   .reflection-layout { grid-template-columns: 1fr; }
+  .ui-grid { grid-template-columns: 1fr; }
+  .icon-group-panel.grid-two { grid-template-columns: 1fr; }
+  .marketing-panel.grid-two { grid-template-columns: 1fr; }
+  .ui-title-row {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>
 </head>
@@ -239,7 +427,7 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
     <div class="meta-item"><div class="meta-label">Engine</div><div class="meta-value">Unreal Engine</div></div>
   </div>
 
-  <div class="section">
+  <div class="section ui-ux-section">
     <p class="section-label">Overview</p>
     <div class="two-col wide">
       <div>
@@ -269,27 +457,57 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 
   <div class="section">
     <p class="section-label">UI/UX Design</p>
-    <h2 class="section-title">Futuristic Jet Style Pilot Interface Made with CommonUI</h2>
-    <p class="section-body">UI elements reflect the look of modern jet pilots Heads Up Displays with futuristic styling. With this specific style, there are a lot of elements on screen at once which can create unnecessary clutter if not designed correctly. My goal was to make sure all UI elements had a purpose to be on the screen and did not overwhelm the player, since jet HUDs are meant to only display the most important information. I also wanted to make sure all elements were easily readable and matched the rest of the game's visual style.</p>
-    <p class="section-body" style="margin-top:0.8rem;">All UI systems work fully with Keyboard and Controller. Below you can <b>click the buttons below to view the different iterations of my designs</b> as production progressed. <b>Videos only play when you hover over them. </b></p>
-    <div class="ui-feature-viewer">
-      <div class="ui-feature-video-wrap">
-        <div class="ui-feature-stage">
-          <div class="img-item"><video id="uiFeatureVideo" class="hover-play" muted loop playsinline preload="metadata"></video></div>
-          <button type="button" class="doc-nav-btn prev" id="uiPrevFeature" aria-label="Previous UI feature">&#10094;</button>
-          <button type="button" class="doc-nav-btn next" id="uiNextFeature" aria-label="Next UI feature">&#10095;</button>
-        </div>
-        <p class="carousel-caption" id="uiFeatureCaption">Main Menu - 1st Iteration</p>
-      </div>
-      <div class="ui-feature-info-wrap">
-        <h3 class="ui-feature-title" id="uiFeatureTitle">Main Menu</h3>
-        <p class="ui-feature-desc" id="uiFeatureDesc"></p>
-        <div class="ui-controls">
-          <button type="button" class="ui-toggle-btn active" data-ui-iter="first">1st Iteration</button>
-          <button type="button" class="ui-toggle-btn" data-ui-iter="alpha">Alpha</button>
-          <button type="button" class="ui-toggle-btn" data-ui-iter="steam">Steam Release</button>
-        </div>
-      </div>
+    <div class="ui-title-row">
+      <h2 class="section-title">Futuristic Jet Style Pilot Interface Made with CommonUI</h2>
+    </div>
+    <p class="section-body" style="text-align:center; margin-left:auto; margin-right:auto;">UI elements reflect the look of modern jet pilots Heads Up Displays with futuristic styling. With this specific style, there are a lot of elements on screen at once which can create unnecessary clutter if not designed correctly. My goal was to make sure all UI elements had a purpose to be on the screen and did not overwhelm the player, since jet HUDs are meant to only display the most important information. I also wanted to make sure all elements were easily readable and matched the rest of the game's visual style. All UI systems work fully with Keyboard and Controller.</p>
+    <div class="ui-iter-header">
+      <button type="button" class="doc-nav-btn prev" id="uiPrevIteration" aria-label="Previous UI iteration">&#10094;</button>
+      <span class="ui-iter-title" id="uiIterationTitle">1st Iteration</span>
+      <button type="button" class="doc-nav-btn next" id="uiNextIteration" aria-label="Next UI iteration">&#10095;</button>
+    </div>
+    <p class="section-body" style="margin-top:0.2rem; text-align:center; margin-left:auto; margin-right:auto;"><b>You can use the arrows to switch between 1st Iteration, Alpha, and Steam Release as production progressed.</b></p>
+    <div class="ui-grid" id="uiIterationGrid">
+      <article>
+        <div class="img-item"><video id="uiVideo-mainmenu" controls playsinline preload="metadata"></video></div>
+        <h4 class="ui-card-title">Main Menu</h4>
+        <p class="ui-card-desc">Central aligned typography anchors the viewport. A minimalist vertical directory occupies the lower-third. High-contrast white text prioritizes primary navigation against dynamic backgrounds.</p>
+      </article>
+      <article>
+        <div class="img-item"><video id="uiVideo-options" controls playsinline preload="metadata"></video></div>
+        <h4 class="ui-card-title">Options</h4>
+        <p class="ui-card-desc">Horizontal tabs segment system settings into four categories. Left-aligned fields occupy a modular container. Sliders and toggles communicate hardware and accessibility values. A bottom anchored bar consolidates global Input Action prompts.</p>
+      </article>
+      <article>
+        <div class="img-item"><video id="uiVideo-keybinds" controls playsinline preload="metadata"></video></div>
+        <h4 class="ui-card-title">Keybind Menus</h4>
+        <p class="ui-card-desc">Three columns organize input configurations by action, primary input, and secondary input. Players can remap bindings to any key on Keyboard or Controller allowing unlimited freedom for varying control schemes.</p>
+      </article>
+      <article>
+        <div class="img-item"><video id="uiVideo-fileselect" controls playsinline preload="metadata"></video></div>
+        <h4 class="ui-card-title">File Select</h4>
+        <p class="ui-card-desc">Three columns segment save data into modular cards. Save data is updated based on current level, game completion percentage, and player bank. Bright blue highlights distinguish active selection from inactive states. Persistent top-left headers maintain categorical orientation.</p>
+      </article>
+      <article>
+        <div class="img-item"><video id="uiVideo-missionlog" controls playsinline preload="metadata"></video></div>
+        <h4 class="ui-card-title">Mission Log</h4>
+        <p class="ui-card-desc">A vertical list organizes available missions. Right aligned translucent panels overlay specific mission information. Modular text placement surrounds the character silhouette.</p>
+      </article>
+      <article>
+        <div class="img-item"><video id="uiVideo-shop" controls playsinline preload="metadata"></video></div>
+        <h4 class="ui-card-title">Shop</h4>
+        <p class="ui-card-desc">Menu where players buy equipment. Shop tabs are categorized by part type. Listing each part separately, it displays currency required and equipment stats. Equipment stats change in real time by hovering over the equipment's icon.</p>
+      </article>
+      <article>
+        <div class="img-item"><video id="uiVideo-equip" controls playsinline preload="metadata"></video></div>
+        <h4 class="ui-card-title">Equip</h4>
+        <p class="ui-card-desc">Vertical left-justified tabs group components by category. A right-aligned character model displays part configurations.</p>
+      </article>
+      <article>
+        <div class="img-item"><video id="uiVideo-playerhud" controls playsinline preload="metadata"></video></div>
+        <h4 class="ui-card-title">Player HUD</h4>
+        <p class="ui-card-desc">Main gameplay UI. Player health and utility ammunition count is displayed in the bottom right, with character dialogue appearing from a box in the top right. Current objective is displayed in the Mission Log on the top left. Player ammo count occupies the center of the screen with boost fuel meter just below it.</p>
+      </article>
     </div>
   </div>
 
@@ -307,6 +525,7 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
           <button type="button" class="doc-nav-btn next" id="animNextFeature" aria-label="Next animation feature">&#10095;</button>
         </div>
         <p class="carousel-caption" id="animFeatureCaption">Boss Health Bar</p>
+        <p class="viewer-count" id="animFeatureCount">Video 1 / 10</p>
       </div>
       <div class="ui-feature-info-wrap">
         <h3 class="ui-feature-title" id="animFeatureTitle">Boss Health Bar</h3>
@@ -321,24 +540,52 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
     <p class="section-label">Icon Gallery</p>
     <h2 class="section-title">Production Icons and UI Assets</h2>
     <p class="section-body">A list of the various icons I made for the game. I utilized Figma to create these as well as menu mockups, sample designs, and more.</p>
-    <div class="icon-carousel-wrap">
-      <div class="doc-carousel" data-carousel="icon-gallery">
-      <div class="doc-slide active"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/SORN Title.png" alt="S.O.R.N. title"></div><p class="carousel-caption">S.O.R.N. Title</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/Waypoint Icon.png" alt="Waypoint icon"></div><p class="carousel-caption">Waypoint Icon</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/Auto Lock Reticle.png" alt="Auto lock reticle icon"></div><p class="carousel-caption">Auto Lock Reticle</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/Hard Lock Reticle.png" alt="Hard lock reticle icon"></div><p class="carousel-caption">Hard Lock Reticle</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/Gear Currency.png" alt="Gear currency"></div><p class="carousel-caption">Gear Currency</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/Crystal Currency.png" alt="Crystal currency"></div><p class="carousel-caption">Crystal Currency</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/Mech Icon.png" alt="Mech icon"></div><p class="carousel-caption">Mech Icon</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/Studio Logo.png" alt="Studio logo"></div><p class="carousel-caption">Studio Logo</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/KBM and Xbox Controller Icons.png" alt="Keyboard and Xbox controller icons"></div><p class="carousel-caption">KBM and Xbox Controller Icons</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/File Select Box Design.png" alt="File select box design"></div><p class="carousel-caption">File Select Box Design</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/Dialogue Box Design.png" alt="Dialogue box design"></div><p class="carousel-caption">Dialogue Box Design</p></div>
-      <div class="doc-slide"><div class="img-item"><img class="icon-carousel-img" src="Sorn/Screenshots/Icon Gallery/Universal Button Shader Material.png" alt="Universal button shader material"></div><p class="carousel-caption">Universal Button Shader Material</p></div>
-      <button class="doc-nav-btn prev" onclick="moveDocSlide('icon-gallery', -1)" aria-label="Previous icon slide">&#10094;</button>
-      <button class="doc-nav-btn next" onclick="moveDocSlide('icon-gallery', 1)" aria-label="Next icon slide">&#10095;</button>
+    <div class="icon-showcase">
+      <div>
+        <h3 class="icon-group-title">Icons</h3>
+        <div class="icon-group-panel">
+          <div class="media-item">
+            <img src="Sorn/Screenshots/Icon Gallery/Icons.png" alt="Icons sheet">
+            <p class="media-filename">Icons</p>
+          </div>
+        </div>
       </div>
-      <p class="doc-counter" id="doc-counter-icon-gallery">1 / 12</p>
+      <div>
+        <h3 class="icon-group-title">Logos</h3>
+        <div class="icon-group-panel">
+          <div class="media-item">
+            <img src="Sorn/Screenshots/Icon Gallery/Logos.png" alt="Logos sheet">
+            <p class="media-filename">Logos</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="icon-group-title">KBM and Xbox Controller Icons</h3>
+        <div class="icon-group-panel">
+          <div class="media-item">
+            <img src="Sorn/Screenshots/Icon Gallery/KBM and Xbox Controller Icons.png" alt="Keyboard and Xbox controller icons">
+            <p class="media-filename">KBM and Xbox Controller Icons</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="icon-group-panel grid-two">
+          <div class="icon-equal-card">
+            <h3 class="icon-group-title">Universal Button Shader Material</h3>
+            <div class="icon-equal-frame">
+              <img src="Sorn/Screenshots/Icon Gallery/Universal Button Shader Material.png" alt="Universal button shader material">
+            </div>
+            <p class="media-filename">Universal Button Shader Material</p>
+          </div>
+          <div class="icon-equal-card">
+            <h3 class="icon-group-title">File Select Box Design</h3>
+            <div class="icon-equal-frame">
+              <img src="Sorn/Screenshots/Icon Gallery/File Select Box Design.png" alt="File select box design">
+            </div>
+            <p class="media-filename">File Select Box Design</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -348,21 +595,66 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
     <p class="section-label">Marketing Materials</p>
     <h2 class="section-title">Marketing Materials</h2>
     <p class="section-body">Along with my work as UI/UX Designer, I was also on the marketing team, contributing to the creation of various marketing materials that needed to be ready for Steam release. Check out my contributions below.</p>
-    <div class="marketing-carousel-wrap">
-    <div class="doc-carousel" data-carousel="marketing">
-      <div class="doc-slide active"><div class="video-wrap" style="width:100%; margin-left:0;"><iframe width="560" height="315" src="https://www.youtube.com/embed/liebrezTzXM?si=9qK2K20kITG3Zg7F" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p class="carousel-caption">Gameplay Trailer</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Sorn/Screenshots/Marketing Materials/Desktop Composition.png" alt="Desktop composition"></div><p class="carousel-caption">Desktop Composition</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Sorn/Screenshots/Marketing Materials/Large Desktop Install Icon.png" alt="Large desktop install icon"></div><p class="carousel-caption">Large Desktop Install Icon</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Sorn/Screenshots/Marketing Materials/Game Disc.png" alt="Game disc"></div><p class="carousel-caption">Game Disc</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Sorn/Screenshots/Marketing Materials/S.O.R.N. Poster.png" alt="S.O.R.N. poster"></div><p class="carousel-caption">Poster</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Sorn/Screenshots/Marketing Materials/Vertical Banner.png" alt="Vertical banner"></div><p class="carousel-caption">Vertical Banner</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Sorn/Screenshots/Marketing Materials/Horizontal Banner.jpg" alt="Horizontal banner"></div><p class="carousel-caption">Horizontal Banner</p></div>
-      <div class="doc-slide"><div class="img-item"><img src="Sorn/Screenshots/Marketing Materials/Box Art (Digital).png" alt="Box art"></div><p class="carousel-caption">Box Art (Digital)</p></div>
-          <div class="doc-slide"><div class="img-item"><video controls playsinline preload="metadata"><source src="Sorn/Screenshots/Marketing Materials/SORN Physical Copy.mp4" type="video/mp4"></video></div><p class="carousel-caption">S.O.R.N. Physical Copy</p></div>
-      <button class="doc-nav-btn prev" onclick="moveDocSlide('marketing', -1)" aria-label="Previous marketing slide">&#10094;</button>
-      <button class="doc-nav-btn next" onclick="moveDocSlide('marketing', 1)" aria-label="Next marketing slide">&#10095;</button>
-    </div>
-    <p class="doc-counter" id="doc-counter-marketing">1 / 9</p>
+    <div class="marketing-showcase">
+      <div>
+        <h3 class="icon-group-title">Gameplay Trailer</h3>
+        <div class="marketing-panel">
+          <div class="media-item">
+            <div class="video-wrap" style="width:100%; margin-left:0;"><iframe width="560" height="315" src="https://www.youtube.com/embed/liebrezTzXM?si=9qK2K20kITG3Zg7F" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="icon-group-title">Desktop Assets</h3>
+        <div class="marketing-panel grid-two">
+          <div class="media-item">
+            <img src="Sorn/Screenshots/Marketing Materials/Desktop Composition.png" alt="Desktop composition">
+            <p class="media-filename">Desktop Composition</p>
+          </div>
+          <div class="media-item desktop-icon-item">
+            <img src="Sorn/Screenshots/Marketing Materials/Large Desktop Install Icon.png" alt="Large desktop install icon">
+            <p class="media-filename">Large Desktop Install Icon</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="icon-group-title">Print and Packaging</h3>
+        <div class="marketing-panel grid-two">
+          <div class="media-item game-disc-item">
+            <img src="Sorn/Screenshots/Marketing Materials/Game Disc.png" alt="Game disc">
+            <p class="media-filename">Game Disc</p>
+          </div>
+          <div class="media-item">
+            <img src="Sorn/Screenshots/Marketing Materials/Box Art (Digital).png" alt="Box art">
+            <p class="media-filename">Box Art (Digital)</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="icon-group-title">Banners and Poster</h3>
+        <div class="marketing-panel grid-two marketing-posters">
+          <div class="media-item">
+            <img src="Sorn/Screenshots/Marketing Materials/S.O.R.N. Poster.png" alt="S.O.R.N. poster">
+            <p class="media-filename">S.O.R.N. Poster</p>
+          </div>
+          <div class="media-item">
+            <img src="Sorn/Screenshots/Marketing Materials/Vertical Banner.png" alt="Vertical banner">
+            <p class="media-filename">Vertical Banner</p>
+          </div>
+        </div>
+        <div class="marketing-panel marketing-banner-full" style="margin-top:1rem;">
+          <div class="media-item">
+            <img src="Sorn/Screenshots/Marketing Materials/Horizontal Banner.jpg" alt="Horizontal banner">
+            <p class="media-filename">Horizontal Banner</p>
+          </div>
+        </div>
+        <div class="marketing-panel marketing-physical-video" style="margin-top:1rem;">
+          <div class="media-item">
+            <video controls playsinline preload="metadata"><source src="Sorn/Screenshots/Marketing Materials/SORN Physical Copy.mp4" type="video/mp4"></video>
+            <p class="media-filename">SORN Physical Copy</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -417,111 +709,48 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 </div>
 
 <script>
-const docSlideIndex = { 'icon-gallery': 0, marketing: 0 };
-function moveDocSlide(carouselName, step) {
-  const carousel = document.querySelector('.doc-carousel[data-carousel="' + carouselName + '"]');
-  if (!carousel) return;
-  const slides = carousel.querySelectorAll('.doc-slide');
-
-  // Stop any playing videos in this carousel before switching slides.
-  carousel.querySelectorAll('video').forEach((video) => {
-    video.pause();
-    video.currentTime = 0;
-  });
-
-  docSlideIndex[carouselName] = (docSlideIndex[carouselName] + step + slides.length) % slides.length;
-  slides.forEach((slide, i) => slide.classList.toggle('active', i === docSlideIndex[carouselName]));
-  const counter = document.getElementById('doc-counter-' + carouselName);
-  if (counter) counter.textContent = (docSlideIndex[carouselName] + 1) + ' / ' + slides.length;
-}
-
-document.querySelectorAll('video.hover-play').forEach((video) => {
-  video.addEventListener('mouseenter', () => {
-    const playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {});
-    }
-  });
-  video.addEventListener('mouseleave', () => {
-    video.pause();
-    video.currentTime = 0;
-  });
-});
-
-const uiFeatures = [
-  {
-    name: 'Main Menu',
-    description: 'Central aligned typography anchors the viewport. A minimalist vertical directory occupies the lower-third. High-contrast white text prioritizes primary navigation against dynamic backgrounds.',
-    videos: {
-      first: 'Sorn/Videos/Main Menu/Main Menu (1st Iteration).mp4',
-      alpha: 'Sorn/Videos/Main Menu/Main Menu (Alpha).mp4',
-      steam: 'Sorn/Videos/Main Menu/Main Menu (Steam Release).mp4'
-    }
+const uiFeatureVideos = {
+  mainmenu: {
+    first: 'Sorn/Videos/Main Menu/Main Menu (1st Iteration).mp4',
+    alpha: 'Sorn/Videos/Main Menu/Main Menu (Alpha).mp4',
+    steam: 'Sorn/Videos/Main Menu/Main Menu (Steam Release).mp4'
   },
-  {
-    name: 'Options',
-    description: 'Horizontal tabs segment system settings into four categories. Left-aligned fields occupy a modular container. Sliders and toggles communicate hardware and accessibility values. A bottom anchored bar consolidates global Input Action prompts.',
-    videos: {
-      first: 'Sorn/Videos/Options/Options (1st Iteration).mp4',
-      alpha: 'Sorn/Videos/Options/Options (Alpha).mp4',
-      steam: 'Sorn/Videos/Options/Options (Steam Release).mp4'
-    }
+  options: {
+    first: 'Sorn/Videos/Options/Options (1st Iteration).mp4',
+    alpha: 'Sorn/Videos/Options/Options (Alpha).mp4',
+    steam: 'Sorn/Videos/Options/Options (Steam Release).mp4'
   },
-  {
-    name: 'Keybind Menus',
-    description: 'Three columns organize input configurations by action, primary input, and secondary input. Players can remap bindings to any key on Keyboard or Controller allowing unlimited freedom for varying control schemes.',
-    videos: {
-      first: 'Sorn/Videos/Keybind Menus/Keybind Menus (1st Iteration).mp4',
-      alpha: 'Sorn/Videos/Keybind Menus/Keybind Menus (Alpha).mp4',
-      steam: 'Sorn/Videos/Keybind Menus/Keybind Menus (Steam Release).mp4'
-    }
+  keybinds: {
+    first: 'Sorn/Videos/Keybind Menus/Keybind Menus (1st Iteration).mp4',
+    alpha: 'Sorn/Videos/Keybind Menus/Keybind Menus (Alpha).mp4',
+    steam: 'Sorn/Videos/Keybind Menus/Keybind Menus (Steam Release).mp4'
   },
-  {
-    name: 'File Select',
-    description: 'Three columns segment save data into modular cards. Save data is updated based on current level, game completion percentage, and player bank. Bright blue highlights distinguish active selection from inactive states. Persistent top-left headers maintain categorical orientation.',
-    videos: {
-      first: 'Sorn/Videos/File Select/File Select (1st Iteration).mp4',
-      alpha: 'Sorn/Videos/File Select/File Select (Alpha).mp4',
-      steam: 'Sorn/Videos/File Select/File Select (Steam Release).mp4'
-    }
+  fileselect: {
+    first: 'Sorn/Videos/File Select/File Select (1st Iteration).mp4',
+    alpha: 'Sorn/Videos/File Select/File Select (Alpha).mp4',
+    steam: 'Sorn/Videos/File Select/File Select (Steam Release).mp4'
   },
-  {
-    name: 'Mission Log',
-    description: 'A vertical list organizes available missions. Right aligned translucent panels overlay specific mission information. Modular text placement surrounds the character silhouette.',
-    videos: {
-      first: 'Sorn/Videos/Mission Log/Mission Log (1st Iteration).mp4',
-      alpha: 'Sorn/Videos/Mission Log/Mission Log (Alpha).mp4',
-      steam: 'Sorn/Videos/Mission Log/Mission Log (Steam Release).mp4'
-    }
+  missionlog: {
+    first: 'Sorn/Videos/Mission Log/Mission Log (1st Iteration).mp4',
+    alpha: 'Sorn/Videos/Mission Log/Mission Log (Alpha).mp4',
+    steam: 'Sorn/Videos/Mission Log/Mission Log (Steam Release).mp4'
   },
-  {
-    name: 'Shop',
-    description: 'Menu where players buy equipment. Shop tabs are categorized by part type. Listing each part separately, it displays currency required and equipment stats. Equipment stats change in real time by hovering over the equipment\'s icon.',
-    videos: {
-      first: 'Sorn/Videos/Shop/Shop (1st Iteration).mp4',
-      alpha: 'Sorn/Videos/Shop/Shop (Alpha).mp4',
-      steam: 'Sorn/Videos/Shop/Shop (Steam Release).mp4'
-    }
+  shop: {
+    first: 'Sorn/Videos/Shop/Shop (1st Iteration).mp4',
+    alpha: 'Sorn/Videos/Shop/Shop (Alpha).mp4',
+    steam: 'Sorn/Videos/Shop/Shop (Steam Release).mp4'
   },
-  {
-    name: 'Equip',
-    description: 'Vertical left-justified tabs group components by category. A right-aligned character model displays part configurations.',
-    videos: {
-      first: 'Sorn/Videos/Equip/Equip (1st Iteration).mp4',
-      alpha: 'Sorn/Videos/Equip/Equip (Alpha).mp4',
-      steam: 'Sorn/Videos/Equip/Equip (Steam Release).mp4'
-    }
+  equip: {
+    first: 'Sorn/Videos/Equip/Equip (1st Iteration).mp4',
+    alpha: 'Sorn/Videos/Equip/Equip (Alpha).mp4',
+    steam: 'Sorn/Videos/Equip/Equip (Steam Release).mp4'
   },
-  {
-    name: 'Player HUD',
-    description: 'Main gameplay UI. Player health and utility ammunition count is displayed in the bottom right, with character dialogue appearing from a box in the top right. Current objective is displayed in the Mission Log on the top left. Player ammo count occupies the center of the screen with boost fuel meter just below it.',
-    videos: {
-      first: 'Sorn/Videos/Player HUD/Player HUD (1st Iteration).mp4',
-      alpha: 'Sorn/Videos/Player HUD/Player HUD (Alpha).mp4',
-      steam: 'Sorn/Videos/Player HUD/Player HUD (Steam Release).mp4'
-    }
+  playerhud: {
+    first: 'Sorn/Videos/Player HUD/Player HUD (1st Iteration).mp4',
+    alpha: 'Sorn/Videos/Player HUD/Player HUD (Alpha).mp4',
+    steam: 'Sorn/Videos/Player HUD/Player HUD (Steam Release).mp4'
   }
-];
+};
 
 const animationFeatures = [
   { name: 'Auto Lock On', description: 'Animated reticle that automatically displays current targets in range.', video: 'Sorn/Videos/Additional UI Features/Auto-Lock On.mp4' },
@@ -536,64 +765,55 @@ const animationFeatures = [
   { name: 'Mission Results Screen', description: 'Animated screen that displays the mission name, mission description, player earnings, and completion status.', video: 'Sorn/Videos/Additional UI Features/Mission Results Screen.mp4' }
 ];
 
-(function setupUiFeatureViewer() {
-  const titleEl = document.getElementById('uiFeatureTitle');
-  const descEl = document.getElementById('uiFeatureDesc');
-  const captionEl = document.getElementById('uiFeatureCaption');
-  const videoEl = document.getElementById('uiFeatureVideo');
-  const prevBtn = document.getElementById('uiPrevFeature');
-  const nextBtn = document.getElementById('uiNextFeature');
-  const toggleBtns = Array.from(document.querySelectorAll('.ui-toggle-btn[data-ui-iter]'));
-  if (!titleEl || !descEl || !captionEl || !videoEl || !prevBtn || !nextBtn || !toggleBtns.length) return;
+(function setupUiIterationGrid() {
+  const titleEl = document.getElementById('uiIterationTitle');
+  const prevBtn = document.getElementById('uiPrevIteration');
+  const nextBtn = document.getElementById('uiNextIteration');
+  if (!titleEl || !prevBtn || !nextBtn) return;
 
-  let currentFeatureIndex = 0;
-  let currentIteration = 'first';
+  const order = ['first', 'alpha', 'steam'];
+  const label = { first: '1st Iteration', alpha: 'Alpha', steam: 'Steam Release' };
+  let current = 0;
 
-  function formatIteration(iter) {
-    if (iter === 'first') return '1st Iteration';
-    if (iter === 'alpha') return 'Alpha';
-    return 'Steam Release';
+  function setVideoSource(videoId, src) {
+    const video = document.getElementById(videoId);
+    if (!video) return;
+    video.pause();
+    video.currentTime = 0;
+    video.innerHTML = '<source src="' + src + '" type="video/mp4">';
+    video.load();
   }
 
-  function renderUiFeature() {
-    const feature = uiFeatures[currentFeatureIndex];
-    const videoSrc = feature.videos[currentIteration];
-    titleEl.textContent = feature.name;
-    descEl.textContent = feature.description;
-    captionEl.textContent = feature.name + ' - ' + formatIteration(currentIteration);
-    videoEl.pause();
-    videoEl.currentTime = 0;
-    videoEl.innerHTML = '<source src="' + videoSrc + '" type="video/mp4">';
-    videoEl.load();
-    toggleBtns.forEach((btn) => {
-      btn.classList.toggle('active', btn.getAttribute('data-ui-iter') === currentIteration);
-    });
+  function renderIteration() {
+    const iter = order[current];
+    titleEl.textContent = label[iter];
+    setVideoSource('uiVideo-mainmenu', uiFeatureVideos.mainmenu[iter]);
+    setVideoSource('uiVideo-options', uiFeatureVideos.options[iter]);
+    setVideoSource('uiVideo-keybinds', uiFeatureVideos.keybinds[iter]);
+    setVideoSource('uiVideo-fileselect', uiFeatureVideos.fileselect[iter]);
+    setVideoSource('uiVideo-missionlog', uiFeatureVideos.missionlog[iter]);
+    setVideoSource('uiVideo-shop', uiFeatureVideos.shop[iter]);
+    setVideoSource('uiVideo-equip', uiFeatureVideos.equip[iter]);
+    setVideoSource('uiVideo-playerhud', uiFeatureVideos.playerhud[iter]);
   }
-
-  toggleBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      currentIteration = btn.getAttribute('data-ui-iter') || 'first';
-      renderUiFeature();
-    });
-  });
 
   prevBtn.addEventListener('click', () => {
-    currentFeatureIndex = (currentFeatureIndex - 1 + uiFeatures.length) % uiFeatures.length;
-    renderUiFeature();
+    current = (current - 1 + order.length) % order.length;
+    renderIteration();
   });
-
   nextBtn.addEventListener('click', () => {
-    currentFeatureIndex = (currentFeatureIndex + 1) % uiFeatures.length;
-    renderUiFeature();
+    current = (current + 1) % order.length;
+    renderIteration();
   });
 
-  renderUiFeature();
+  renderIteration();
 })();
 
 (function setupAnimationFeatureViewer() {
   const titleEl = document.getElementById('animFeatureTitle');
   const descEl = document.getElementById('animFeatureDesc');
   const captionEl = document.getElementById('animFeatureCaption');
+  const countEl = document.getElementById('animFeatureCount');
   const videoEl = document.getElementById('animFeatureVideo');
   const prevBtn = document.getElementById('animPrevFeature');
   const nextBtn = document.getElementById('animNextFeature');
@@ -605,6 +825,7 @@ const animationFeatures = [
     titleEl.textContent = feature.name;
     descEl.textContent = feature.description;
     captionEl.textContent = feature.name;
+    if (countEl) countEl.textContent = 'Video ' + (currentIndex + 1) + ' / ' + animationFeatures.length;
     videoEl.pause();
     videoEl.currentTime = 0;
     videoEl.innerHTML = '<source src="' + feature.video + '" type="video/mp4">';
@@ -648,6 +869,15 @@ const animationFeatures = [
   document.querySelectorAll('.award-open-btn[data-award-full]').forEach((btn) => {
     btn.addEventListener('click', () => {
       openLb(btn.getAttribute('data-award-full'), btn.getAttribute('data-award-alt') || '');
+    });
+  });
+
+  // Make page media images open in the same lightbox.
+  document.querySelectorAll('main img').forEach((img) => {
+    if (img.closest('.award-open-btn')) return;
+    img.classList.add('zoomable-image');
+    img.addEventListener('click', () => {
+      openLb(img.getAttribute('src') || '', img.getAttribute('alt') || '');
     });
   });
 
