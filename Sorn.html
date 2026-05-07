@@ -122,11 +122,12 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
   text-align:center;
 }
 .ui-grid {
-  width:min(980px, 100%);
+  width:min(1120px, 100%);
   margin: 0 auto;
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  column-gap: 2.25rem;
+  row-gap: 2rem;
 }
 .ui-card-stage {
   position: relative;
@@ -443,7 +444,7 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
     <div class="two-col wide">
       <div>
         <h2 class="section-title">S.O.R.N.</h2>
-        <p class="section-body">S.O.R.N. is a third person action mecha shooter with fast paced combat and lots of customization. Play as J-12, a mech pilot for the PMC Haven, through three missions unraveling the mysteries of the organization. Check out my UI/UX contributions below.
+        <p class="section-body" style="text-align:left;">S.O.R.N. is a third person action mecha shooter with fast paced combat and lots of customization. Play as J-12, a mech pilot for the PMC Haven, through three missions unraveling the mysteries of the organization. Check out my UI/UX contributions below.
         </p>
         <p style="margin-top:1rem;"><a href="https://store.steampowered.com/app/4606740/SORN/" target="_blank" rel="noopener noreferrer" class="btn-primary">View on Steam</a></p>
         <div class="award-tags">
@@ -468,11 +469,11 @@ main { max-width:1200px; margin:0 auto; padding:2.5rem 2rem 4rem; }
 
   <div class="section">
     <p class="section-label">UI/UX Design</p>
-    <div class="ui-title-row">
+    <div class="ui-title-row" style="width:100%; margin:0 0 1rem 0; justify-content:flex-start; text-align:left;">
       <h2 class="section-title">Futuristic Jet Style Pilot Interface Made with CommonUI</h2>
     </div>
-    <p class="section-body" style="text-align:center; margin-left:auto; margin-right:auto;">UI elements reflect the look of modern jet pilots Heads Up Displays with futuristic styling. With this specific style, there are a lot of elements on screen at once which can create unnecessary clutter if not designed correctly. My goal was to make sure all UI elements had a purpose to be on the screen and did not overwhelm the player, since jet HUDs are meant to only display the most important information. I also wanted to make sure all elements were easily readable and matched the rest of the game's visual style. All UI systems work fully with Keyboard and Controller.</p>
-    <p class="section-body" style="margin-top:0.2rem; text-align:center; margin-left:auto; margin-right:auto;"><b>Use the arrows on each video to switch between 1st Iteration, Alpha, and Steam Release.</b></p>
+    <p class="section-body" style="text-align:left; margin-left:0; margin-right:0;">UI elements reflect the look of modern jet pilots Heads Up Displays with futuristic styling. With this specific style, there are a lot of elements on screen at once which can create unnecessary clutter if not designed correctly. My goal was to make sure all UI elements had a purpose to be on the screen and did not overwhelm the player, since jet HUDs are meant to only display the most important information. I also wanted to make sure all elements were easily readable and matched the rest of the game's visual style. <b>All UI systems work fully with Keyboard and Controller.</b></p>
+    <p class="section-body" style="margin-top:0.2rem; text-align:left; margin-left:0; margin-right:0;"><b>Use the arrows on each video to switch between 1st Iteration, Alpha, and Steam Release.</b></p>
     <div class="ui-grid" id="uiIterationGrid">
       <article>
         <div class="ui-card-stage">
