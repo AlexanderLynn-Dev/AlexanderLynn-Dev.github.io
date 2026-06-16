@@ -66,15 +66,111 @@
       margin: 0 auto;
     }
 
-    .hero {
+    .home-first-screen {
+      height: calc(100vh - 64px);
+      height: calc(100svh - 64px);
+      height: calc(100dvh - 64px);
       min-height: calc(100vh - 64px);
-      min-height: calc(100svh - 64px);
-      min-height: calc(100dvh - 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .hero {
+      flex: 1;
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       align-items: center;
       gap: 40px;
-      padding: 110px 0 70px;
+      padding: 60px 0 12px;
+      min-height: 0;
+    }
+
+    .home-recommendations {
+      padding: 3rem 0 80px;
+      margin-top: 1.25rem;
+    }
+    .home-recommendations-header {
+      text-align: center;
+      padding: 1.1rem 0 0.65rem;
+      flex-shrink: 0;
+    }
+    .home-recommendations-title {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 800;
+      color: #f2f8ff;
+      margin-bottom: 0.5rem;
+    }
+    .home-recommendations-link {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #9bc0df;
+      text-decoration: none;
+    }
+    .home-recommendations-link:hover {
+      color: #cce0f1;
+      text-decoration: underline;
+    }
+    .home-recommendations-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+    .home-rec-card {
+      border: 1px solid #dce7ef;
+      border-radius: 0.85rem;
+      padding: 1.25rem 1.35rem;
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    .home-rec-header {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+    .home-rec-photo {
+      width: 64px;
+      height: 64px;
+      border-radius: 9999px;
+      border: 2px solid #dce7ef;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .home-rec-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1f2d3d;
+      margin-bottom: 0.15rem;
+    }
+    .home-rec-name a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .home-rec-name a:hover {
+      color: #1f4f72;
+      text-decoration: underline;
+    }
+    .home-rec-role {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #4f5f6c;
+      line-height: 1.4;
+    }
+    .home-rec-meta {
+      font-size: 0.78rem;
+      color: #6b7b88;
+      margin-bottom: 0.65rem;
+      font-style: italic;
+    }
+    .home-rec-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #2f3b4a;
+    }
+    .home-rec-text + .home-rec-text {
+      margin-top: 0.65rem;
     }
 
     .hero-eyebrow {
@@ -335,6 +431,13 @@
         grid-template-columns: 1fr;
         text-align: center;
         padding-top: 20px;
+        padding-bottom: 8px;
+      }
+
+      .home-first-screen {
+        height: auto;
+        min-height: calc(100vh - 64px);
+        overflow: visible;
       }
 
       .hero-description {
@@ -344,6 +447,10 @@
 
       .hero-buttons {
         justify-content: center;
+      }
+
+      .home-recommendations-list {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -361,32 +468,95 @@
     </div>
   </header>
 
-  <main class="container hero">
-    <section>
-      <p class="hero-eyebrow">Welcome to my portfolio</p>
-      <h1 class="hero-title">Alexander<br>Lynn</h1>
-      <p class="hero-subtitle">I'm a Technical Designer</p>
-      <p class="hero-description">
-        Specializing in UI/UX Design, Gameplay Programming, and Project Management
-      </p>
-      <p class="hero-description">
-        I design and build the systems players interact with — from menus and interfaces to gameplay mechanics and production pipelines. Based at UCF, I lead teams and ship polished, player-focused experiences.
-      </p>
-      <div class="hero-buttons">
-        <a class="btn btn-primary" href="projects.html">View My Work</a>
-        <a class="btn btn-secondary" href="about.html">Contact Me</a>
-      </div>
-    </section>
-
-    <section class="hero-photo-wrap">
-      <div class="photo-ring">
-        <div class="photo-slideshow" id="homePhotoSlideshow">
-          <img class="photo-slide active" src="homephoto.png" alt="Portrait photo 1">
-          <img class="photo-slide" src="homephoto (1).png" alt="Portrait photo 2">
-          <img class="photo-slide" src="homephoto (2).png" alt="Portrait photo 3">
-          <img class="photo-slide" src="homephoto (3).png" alt="Portrait photo 4">
-          <img class="photo-slide" src="homephoto (4).png" alt="Portrait photo 5">
+  <main class="container">
+    <div class="home-first-screen">
+      <section class="hero">
+        <div>
+          <p class="hero-eyebrow">Welcome to my portfolio</p>
+          <h1 class="hero-title">Alexander<br>Lynn</h1>
+          <p class="hero-subtitle">I'm a Technical Designer</p>
+          <p class="hero-description">
+            Specializing in UI/UX Design, Gameplay Programming, and Project Management
+          </p>
+          <p class="hero-description">
+            I design and build the systems players interact with — from menus and interfaces to gameplay mechanics and production pipelines. Based at UCF, I lead teams and ship polished, player-focused experiences.
+          </p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="projects.html">View My Work</a>
+            <a class="btn btn-secondary" href="about.html">Contact Me</a>
+          </div>
         </div>
+
+        <div class="hero-photo-wrap">
+          <div class="photo-ring">
+            <div class="photo-slideshow" id="homePhotoSlideshow">
+              <img class="photo-slide active" src="homephoto.png" alt="Portrait photo 1">
+              <img class="photo-slide" src="homephoto (1).png" alt="Portrait photo 2">
+              <img class="photo-slide" src="homephoto (2).png" alt="Portrait photo 3">
+              <img class="photo-slide" src="homephoto (3).png" alt="Portrait photo 4">
+              <img class="photo-slide" src="homephoto (4).png" alt="Portrait photo 5">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="home-recommendations-header">
+        <h2 class="home-recommendations-title">Recommendations</h2>
+        <a href="https://www.linkedin.com/in/alexanderj-lynn/details/recommendations/?detailScreenTabIndex=0" target="_blank" rel="noopener noreferrer" class="home-recommendations-link">View all on LinkedIn</a>
+      </div>
+    </div>
+
+    <section class="home-recommendations">
+      <div class="home-recommendations-list">
+        <article class="home-rec-card">
+          <div class="home-rec-header">
+            <img src="Recommendations/David_Ely.jfif" alt="David Ely" class="home-rec-photo">
+            <div>
+              <p class="home-rec-name"><a href="https://www.linkedin.com/in/daely/?skipRedirect=true" target="_blank" rel="noopener noreferrer">David Ely</a></p>
+              <p class="home-rec-role">Connector | Developer | People-Focused</p>
+            </div>
+          </div>
+          <p class="home-rec-meta">June 11, 2026 — David worked with Alexander but they were at different companies</p>
+          <p class="home-rec-text">Alex is truly a gifted young professional whose skills, teachability, work ethic, and integrity is value-added wherever he serves. In my role with IMD Interactive as Director of Ministry, I have been privileged to work with Alex on clarifying our messaging, marketing our products, and building a robust and engaged online community.</p>
+          <p class="home-rec-text">In game design, he is a consummate team-player and technician. I heartily recommend Alex to any senior developer, product manager, or game designer — and whatever you invest in Alex, you will see multiplied returns.</p>
+          <p class="home-rec-text">What you get with Alex is a young man whose emotional maturity and personal ethics, combined with his skill as a technician, will help build a healthy culture on any team or in any group.</p>
+        </article>
+        <article class="home-rec-card">
+          <div class="home-rec-header">
+            <img src="Recommendations/scott_jacobson.jfif" alt="Scott Jacobson" class="home-rec-photo">
+            <div>
+              <p class="home-rec-name"><a href="https://www.linkedin.com/in/jacobson42/?skipRedirect=true" target="_blank" rel="noopener noreferrer">Scott Jacobson</a></p>
+              <p class="home-rec-role">Semi-retired high school game design instructor offering free prototyping services for worthy causes and collaborations</p>
+            </div>
+          </div>
+          <p class="home-rec-meta">May 15, 2026 — Scott was Alexander's mentor</p>
+          <p class="home-rec-text">We connected in a regular indie studio meetup for a "Project Show &amp; Tell". Alexander always impressed me with his knowledge, skills, professionalism and enthusiasm. Will definitely consider him on future projects!</p>
+        </article>
+        <article class="home-rec-card">
+          <div class="home-rec-header">
+            <img src="Recommendations/John_Fairchild.jfif" alt="John Fairchild" class="home-rec-photo">
+            <div>
+              <p class="home-rec-name"><a href="https://www.linkedin.com/in/johnfairchild/?skipRedirect=true" target="_blank" rel="noopener noreferrer">John Fairchild</a></p>
+              <p class="home-rec-role">Servant Leader, Agile Practitioner</p>
+            </div>
+          </div>
+          <p class="home-rec-meta">May 11, 2026 — John was Alexander's mentor</p>
+          <p class="home-rec-text">I'm happy to recommend Alexander Lynn for opportunities in game design, UI/UX design, technical design, and interactive media development.</p>
+          <p class="home-rec-text">Alexander is a creative, motivated, and capable emerging professional with the kind of multidisciplinary skill set that can make an immediate impact on a team. He brings strong technical curiosity, a clear eye for user experience, and the drive to keep improving his craft. He is the type of person who can contribute across creative, technical, and production needs while staying focused on the quality of the end product.</p>
+          <p class="home-rec-text">What stands out most is his initiative and versatility. Alexander has already built a strong foundation across design, development, documentation, collaboration, and project execution. He approaches work with energy, professionalism, and a problem-solving mindset that would be valuable in any game development or interactive media environment.</p>
+          <p class="home-rec-text">I strongly recommend Alexander for an entry-level or early-career role where he can contribute, grow, and continue building on his already impressive foundation.</p>
+        </article>
+        <article class="home-rec-card">
+          <div class="home-rec-header">
+            <img src="Recommendations/Daniel_Selvia.png" alt="Daniel Selvia" class="home-rec-photo">
+            <div>
+              <p class="home-rec-name"><a href="https://www.linkedin.com/in/daniel-selvia/?skipRedirect=true" target="_blank" rel="noopener noreferrer">Daniel Selvia</a></p>
+              <p class="home-rec-role">Tech Designer at Electronic Arts (EA)</p>
+            </div>
+          </div>
+          <p class="home-rec-meta">May 2, 2026 — Daniel was Alexander's mentor</p>
+          <p class="home-rec-text">Alex possesses a level of moral character and determination that is rare. His undergraduate experience showcases a clear drive to create compelling game experiences, and his passion for development is evident in everything he creates. Having followed the progress of his projects, I have been impressed by his creative vision and his willingness to tackle complex ideas. Beyond the potential for his technical skills to grow, Alex is a dedicated, principled individual who would be a culture add to any development team.</p>
+        </article>
       </div>
     </section>
   </main>

@@ -230,9 +230,87 @@
         }
 
         .about-card:nth-of-type(2),
-        .about-card:nth-of-type(3) {
+        .about-card:nth-of-type(3),
+        .about-card:nth-of-type(4) {
             background-color: #ffffff;
         }
+
+        .recommendations-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .recommendation-card {
+            border: 1px solid #dce7ef;
+            border-radius: 0.75rem;
+            padding: 1.35rem 1.5rem;
+            background: #f8fbfd;
+        }
+        .recommendation-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.85rem;
+        }
+        .rec-photo {
+            width: 72px !important;
+            height: 72px !important;
+            max-width: 72px !important;
+            max-height: 72px !important;
+            border-radius: 9999px !important;
+            border: 2px solid #dce7ef !important;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .recommendation-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1f4f72;
+            margin-bottom: 0.15rem;
+        }
+        .recommendation-name a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .recommendation-name a:hover {
+            color: #3e7ea9;
+            text-decoration: underline;
+        }
+        .recommendations-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .recommendations-header h3 {
+            margin-bottom: 0.5rem;
+        }
+        .recommendations-linkedin-link {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #3e7ea9;
+            text-decoration: none;
+        }
+        .recommendations-linkedin-link:hover {
+            text-decoration: underline;
+        }
+        .recommendation-role {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #4f738f;
+            line-height: 1.45;
+        }
+        .recommendation-meta {
+            font-size: 0.82rem;
+            color: #6b7b88;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+        }
+        .recommendation-text {
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: #4f5f6c;
+        }
+
         @media (max-width: 768px) {
             .skills-grid {
                 grid-template-columns: 1fr;
@@ -346,6 +424,65 @@
                             <span class="skill-pill">Team Leadership</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="about-card full-width-section mt-12">
+            <div class="section-inner">
+                <div class="recommendations-header">
+                    <h3 class="text-3xl font-bold" style="color: #1f4f72;">Recommendations</h3>
+                    <a href="https://www.linkedin.com/in/alexanderj-lynn/details/recommendations/?detailScreenTabIndex=0" target="_blank" rel="noopener noreferrer" class="recommendations-linkedin-link">View all on LinkedIn</a>
+                </div>
+                <div class="recommendations-list">
+                    <article class="recommendation-card">
+                        <div class="recommendation-header">
+                            <img src="Recommendations/David_Ely.jfif" alt="David Ely" class="rec-photo">
+                            <div>
+                                <p class="recommendation-name"><a href="https://www.linkedin.com/in/daely/?skipRedirect=true" target="_blank" rel="noopener noreferrer">David Ely</a></p>
+                                <p class="recommendation-role">Connector | Developer | People-Focused</p>
+                            </div>
+                        </div>
+                        <p class="recommendation-meta">June 11, 2026 — David worked with Alexander but they were at different companies</p>
+                        <p class="recommendation-text">Alex is truly a gifted young professional whose skills, teachability, work ethic, and integrity is value-added wherever he serves. In my role with IMD Interactive as Director of Ministry, I have been privileged to work with Alex on clarifying our messaging, marketing our products, and building a robust and engaged online community.</p>
+                        <p class="recommendation-text" style="margin-top:0.75rem;">In game design, he is a consummate team-player and technician. I heartily recommend Alex to any senior developer, product manager, or game designer — and whatever you invest in Alex, you will see multiplied returns.</p>
+                        <p class="recommendation-text" style="margin-top:0.75rem;">What you get with Alex is a young man whose emotional maturity and personal ethics, combined with his skill as a technician, will help build a healthy culture on any team or in any group.</p>
+                    </article>
+                    <article class="recommendation-card">
+                        <div class="recommendation-header">
+                            <img src="Recommendations/scott_jacobson.jfif" alt="Scott Jacobson" class="rec-photo">
+                            <div>
+                                <p class="recommendation-name"><a href="https://www.linkedin.com/in/jacobson42/?skipRedirect=true" target="_blank" rel="noopener noreferrer">Scott Jacobson</a></p>
+                                <p class="recommendation-role">Semi-retired high school game design instructor offering free prototyping services for worthy causes and collaborations</p>
+                            </div>
+                        </div>
+                        <p class="recommendation-meta">May 15, 2026 — Scott was Alexander's mentor</p>
+                        <p class="recommendation-text">We connected in a regular indie studio meetup for a "Project Show &amp; Tell". Alexander always impressed me with his knowledge, skills, professionalism and enthusiasm. Will definitely consider him on future projects!</p>
+                    </article>
+                    <article class="recommendation-card">
+                        <div class="recommendation-header">
+                            <img src="Recommendations/John_Fairchild.jfif" alt="John Fairchild" class="rec-photo">
+                            <div>
+                                <p class="recommendation-name"><a href="https://www.linkedin.com/in/johnfairchild/?skipRedirect=true" target="_blank" rel="noopener noreferrer">John Fairchild</a></p>
+                                <p class="recommendation-role">Servant Leader, Agile Practitioner</p>
+                            </div>
+                        </div>
+                        <p class="recommendation-meta">May 11, 2026 — John was Alexander's mentor</p>
+                        <p class="recommendation-text">I'm happy to recommend Alexander Lynn for opportunities in game design, UI/UX design, technical design, and interactive media development.</p>
+                        <p class="recommendation-text" style="margin-top:0.75rem;">Alexander is a creative, motivated, and capable emerging professional with the kind of multidisciplinary skill set that can make an immediate impact on a team. He brings strong technical curiosity, a clear eye for user experience, and the drive to keep improving his craft. He is the type of person who can contribute across creative, technical, and production needs while staying focused on the quality of the end product.</p>
+                        <p class="recommendation-text" style="margin-top:0.75rem;">What stands out most is his initiative and versatility. Alexander has already built a strong foundation across design, development, documentation, collaboration, and project execution. He approaches work with energy, professionalism, and a problem-solving mindset that would be valuable in any game development or interactive media environment.</p>
+                        <p class="recommendation-text" style="margin-top:0.75rem;">I strongly recommend Alexander for an entry-level or early-career role where he can contribute, grow, and continue building on his already impressive foundation.</p>
+                    </article>
+                    <article class="recommendation-card">
+                        <div class="recommendation-header">
+                            <img src="Recommendations/Daniel_Selvia.png" alt="Daniel Selvia" class="rec-photo">
+                            <div>
+                                <p class="recommendation-name"><a href="https://www.linkedin.com/in/daniel-selvia/?skipRedirect=true" target="_blank" rel="noopener noreferrer">Daniel Selvia</a></p>
+                                <p class="recommendation-role">Tech Designer at Electronic Arts (EA)</p>
+                            </div>
+                        </div>
+                        <p class="recommendation-meta">May 2, 2026 — Daniel was Alexander's mentor</p>
+                        <p class="recommendation-text">Alex possesses a level of moral character and determination that is rare. His undergraduate experience showcases a clear drive to create compelling game experiences, and his passion for development is evident in everything he creates. Having followed the progress of his projects, I have been impressed by his creative vision and his willingness to tackle complex ideas. Beyond the potential for his technical skills to grow, Alex is a dedicated, principled individual who would be a culture add to any development team.</p>
+                    </article>
                 </div>
             </div>
         </div>
